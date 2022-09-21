@@ -209,11 +209,11 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView3"
+                        android:id="@+id/imageViewHome"
                         android:layout_width="match_parent"
                         android:layout_height="29dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/cart_icon" />
+                        app:srcCompat="@drawable/home" />
 
                     <TextView
                         android:id="@+id/textView14"
@@ -226,18 +226,18 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/forumbt"
+                    android:id="@+id/forumbtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/imageViewForum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/cart_icon" />
+                        app:srcCompat="@drawable/forum" />
 
                     <TextView
                         android:id="@+id/textView15"
@@ -257,11 +257,11 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView5"
+                        android:id="@+id/imageViewStore"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/cart_icon" />
+                        app:srcCompat="@drawable/store" />
 
                     <TextView
                         android:id="@+id/textView16"
@@ -298,6 +298,7 @@
                         android:textSize="12sp"
                         android:visibility="invisible" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/invis1"
                     android:layout_width="0dp"
@@ -308,7 +309,7 @@
                     <ImageView
                         android:id="@+id/imageView61"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:visibility="invisible"
                         app:srcCompat="@drawable/cart_icon" />
@@ -332,11 +333,11 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView7"
+                        android:id="@+id/imageViewNotif"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/cart_icon" />
+                        app:srcCompat="@drawable/notifications" />
 
                     <TextView
                         android:id="@+id/textView18"
@@ -356,11 +357,11 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView8"
+                        android:id="@+id/imageViewChat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/cart_icon" />
+                        app:srcCompat="@drawable/chat" />
 
                     <TextView
                         android:id="@+id/textView19"
@@ -380,11 +381,11 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView9"
+                        android:id="@+id/imageViewProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/cart_icon" />
+                        app:srcCompat="@drawable/profile" />
 
                     <TextView
                         android:id="@+id/textView20"
@@ -400,15 +401,17 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/imageRecog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#006400"
             android:elevation="3dp"
-            android:src="@drawable/phone_icon"
+            android:src="@drawable/logo_flors"
             app:backgroundTint="#006400"
             app:layout_anchor="@id/app_bar"
             app:maxImageSize="38dp"
-            app:tint="#ffffff"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+            app:tint="#ffffff"
+
+            />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

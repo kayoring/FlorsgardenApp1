@@ -30,10 +30,6 @@
         <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/drawable/profile.xml" value="0.2265" />
         <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_image_recognition.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_main.xml" value="0.27447916666666666" />
-
-        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_store.xml" value="0.1265625" />
-        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/home.xml" value="0.264" />
-
         <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/home.xml" value="0.27447916666666666" />
         <entry key="..\:/github/FlorsgardenApp1/app/src/main/res/drawable/green_button.xml" value="0.3685" />
         <entry key="..\:/github/FlorsgardenApp1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3685" />
@@ -42,8 +38,8 @@
         <entry key="..\:/github/FlorsgardenApp1/app/src/main/res/drawable/wormbg1.xml" value="0.3685" />
         <entry key="..\:/github/FlorsgardenApp1/app/src/main/res/drawable/wormbg3.xml" value="0.3685" />
         <entry key="..\:/github/FlorsgardenApp1/app/src/main/res/layout/activity_cart_list.xml" value="0.11666666666666667" />
+        <entry key="..\:/github/FlorsgardenApp1/app/src/main/res/layout/activity_store.xml" value="0.371875" />
         <entry key="..\:/github/FlorsgardenApp1/app/src/main/res/layout/home.xml" value="0.23777173913043478" />
-
       </map>
     </option>
   </component>
