@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(password.length() < 6){
-            editTextPassword.setError("Min password length is 6 characters!");
+            editTextPassword.setError("Minimum password length is 6 characters!");
             editTextPassword.requestFocus();
             return;
         }
