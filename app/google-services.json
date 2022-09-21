@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "304239548372",
+    "firebase_url": "https://halalanapplication-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "halalanapplication",
+    "storage_bucket": "halalanapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304239548372:android:c39ecb43d3dee745ce2841",
+        "android_client_info": {
+          "package_name": "com.calicdan.florsgardenapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304239548372-srki5c3b4h7rnns7npdqulibktmbjlp8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUlHEG8RBZLIrI4xolwD52XyH9rOdHm6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304239548372-srki5c3b4h7rnns7npdqulibktmbjlp8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304239548372:android:345500981ff4e6f3ce2841",
+        "android_client_info": {
+          "package_name": "com.legaspi.halalanapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304239548372-srki5c3b4h7rnns7npdqulibktmbjlp8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUlHEG8RBZLIrI4xolwD52XyH9rOdHm6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304239548372-srki5c3b4h7rnns7npdqulibktmbjlp8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
