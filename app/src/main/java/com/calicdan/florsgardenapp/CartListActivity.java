@@ -29,7 +29,7 @@ public class CartListActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        recyclerViewList=findViewById(R.id.recyclerView);
+        recyclerViewList=findViewById(R.id.recycleViewWorms);
         totalFeeTxt = findViewById(R.id.totalFeeTxt);
         taxTxt = findViewById(R.id.taxTxt);
         totalTxt = findViewById(R.id.totalTxt);

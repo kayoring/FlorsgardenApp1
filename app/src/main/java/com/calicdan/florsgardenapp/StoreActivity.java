@@ -1,12 +1,11 @@
 package com.calicdan.florsgardenapp;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-
-import java.sql.Array;
 import java.util.ArrayList;
 
 import Adaptor.CategoryAdaptor;
@@ -29,7 +28,7 @@ public class StoreActivity extends AppCompatActivity {
 
     private void recyclerViewCategory(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        recyclerViewCategoryList=findViewById(R.id.recyclerView);
+        recyclerViewCategoryList=findViewById(R.id.recycleViewWorms);
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
 
         ArrayList<CategoryDomain> category = new ArrayList<>();

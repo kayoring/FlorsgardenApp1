@@ -28,9 +28,22 @@
         <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/drawable-v24/rounded_corner.xml" value="0.2265" />
         <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/drawable-v24/store.xml" value="0.2265" />
         <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/drawable/profile.xml" value="0.2265" />
+        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_image_recognition.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_login.xml" value="0.27309782608695654" />
         <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_main.xml" value="0.27447916666666666" />
+<<<<<<< Updated upstream
+=======
+        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_profile.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_register_user.xml" value="0.27309782608695654" />
+        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_store.xml" value="0.2" />
+        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/activity_worms.xml" value="0.4" />
+        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/acttivity_worms.xml" value="0.2734375" />
+>>>>>>> Stashed changes
         <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/home.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/home_item.xml" value="0.4" />
+        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/layout_one.xml" value="0.2734375" />
+        <entry key="..\:/Users/Gabrielle/Documents/GitHub/FlorsgardenApp1/app/src/main/res/layout/layout_two.xml" value="0.27447916666666666" />
         <entry key="..\:/github/FlorsgardenApp1/app/src/main/res/drawable/green_button.xml" value="0.3685" />
         <entry key="..\:/github/FlorsgardenApp1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3685" />
         <entry key="..\:/github/FlorsgardenApp1/app/src/main/res/drawable/search_background.xml" value="0.3685" />

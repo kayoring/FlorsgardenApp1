@@ -1,8 +1,5 @@
 package com.calicdan.florsgardenapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -12,12 +9,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class Login extends AppCompatActivity implements View.OnClickListener{
 
     private TextView register;
     private EditText editTextEmail, editTextPassword;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         register = (TextView) findViewById(R.id.register);
         register.setOnClickListener(this);
@@ -91,10 +91,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (task.isSuccessful()){
                     // redirect to user profile
-                    startActivity(new Intent(MainActivity.this, Home.class));
+                    startActivity(new Intent(com.calicdan.florsgardenapp.Login.this, Home.class));
 
                 }else{
-                    Toast.makeText(MainActivity.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
+                    Toast.makeText(com.calicdan.florsgardenapp.Login.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
                 }
             }
         });
