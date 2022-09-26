@@ -1,6 +1,9 @@
 package com.calicdan.florsgardenapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +27,17 @@ public class StoreActivity extends AppCompatActivity {
 
         recyclerViewCategory();
         recyclerViewProducts();
+        navigation();
+    }
+    private void navigation(){
+        ImageView cartbtn = findViewById(R.id.cartBtn);
+        cartbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(StoreActivity.this,CartListActivity.class));
+            }
+        });
+
     }
 
     private void recyclerViewCategory(){

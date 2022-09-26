@@ -58,5 +58,12 @@ public class ManagementCart {
         changeNumberProductsListener.changed();
     }
 
-    //public Double
+    public Double getTotalfee(){
+        ArrayList<ProductsDomain> listorder = getListCart();
+        double fee = 0;
+        for (int i = 0; i < listorder.size(); i ++){
+            fee = fee + (listorder.get(i).getFee() * listorder.get(i).getNumberInCart());
+        }
+        return fee;
+    }
 }

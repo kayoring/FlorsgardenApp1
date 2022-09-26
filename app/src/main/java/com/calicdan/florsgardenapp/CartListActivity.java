@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import Adaptor.CartListAdaptor;
 import Helper.ManagementCart;
+import Interface.ChangeNumberProductsListener;
 
 public class CartListActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
@@ -26,8 +31,21 @@ public class CartListActivity extends AppCompatActivity {
         managementCart = new ManagementCart(this);
 
         initView();
+        initList();
+        CalculateCart();
+        navigation();
     }
 
+    private void navigation(){
+        ImageView cartbtn = findViewById(R.id.cartBtn);
+        cartbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CartListActivity.this,CartListActivity.class));
+            }
+        });
+
+    }
     private void initView() {
         recyclerViewList=findViewById(R.id.recycleViewWorms);
         totalFeeTxt = findViewById(R.id.totalFeeTxt);
@@ -40,6 +58,31 @@ public class CartListActivity extends AppCompatActivity {
     private void initList(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerViewList.setLayoutManager(linearLayoutManager);
-        //adapter =
+        adapter = new CartListAdaptor(managementCart.getListCart(),this, new ChangeNumberProductsListener() {
+            @Override
+            public void changed() {
+                CalculateCart();
+            }
+        });
+
+        recyclerViewList.setAdapter(adapter);
+        if(managementCart.getListCart().isEmpty()){
+            emptyTxt.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+
+        }else{
+            emptyTxt.setVisibility(View.GONE);
+            scrollView.setVisibility(View.INVISIBLE);
+        }
+    }
+    private void CalculateCart(){
+        double percentTax = 0.02;
+        tax = Math.round((managementCart.getTotalfee()*percentTax) * 100)/100;
+        double total = Math.round((managementCart.getTotalfee()+tax)*100)/100;
+        double itemTotal = Math.round(managementCart.getTotalfee()*100)/100;
+
+        totalFeeTxt.setText("₱"+itemTotal);
+        taxTxt.setText("₱"+tax);
+        totalTxt.setText("₱"+total);
     }
 }
