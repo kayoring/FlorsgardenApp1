@@ -1,69 +1,65 @@
 package com.calicdan.florsgardenapp;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.ArrayList;
 
-public class HomeAdapter extends FirebaseRecyclerAdapter<HomeModel,HomeAdapter.myViewHolder>{
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
-    public HomeAdapter(@NonNull FirebaseRecyclerOptions<HomeModel> options) {
-        super(options);
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder>{
+
+    Context context;
+    ArrayList<HomeModel> wormList;
+
+    public HomeAdapter(Context context, ArrayList<HomeModel> wormList) {
+        this.context = context;
+        this.wormList = wormList;
     }
-
-    @Override
-    protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull HomeModel model) {
-
-        holder.nameText.setText(model.getName());
-        holder.descriptionText.setText(model.getDescription());
-
-        Glide.with(holder.profileImage.getContext())
-                .load(model.getSurl())
-                .placeholder(R.drawable.common_google_signin_btn_icon_dark)
-                .circleCrop()
-                .error(R.drawable.common_google_signin_btn_icon_dark_normal)
-                .into(holder.profileImage);
-
-    }
-
     @NonNull
     @Override
-    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item,parent,false);
-        return new myViewHolder(view);
-
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+       View v = LayoutInflater.from(context).inflate(R.layout.home_item, parent, false);
+       return new MyViewHolder(v);
     }
 
-    class myViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView profileImage;
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+        HomeModel HomeModel = wormList.get(position);
+        holder.nameText.setText(HomeModel.getName());
+        holder.descriptionText.setText(HomeModel.getDescription());
+
+        Glide.with(holder.itemView.getContext())
+                .load(wormList.get(position).getSurl())
+                .into(holder.profileImage);
+    }
+
+    @Override
+    public int getItemCount() {
+        return wormList.size();
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nameText;
         TextView descriptionText;
+        ImageView profileImage;
 
-        public myViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            profileImage = (CircleImageView)itemView.findViewById(R.id.profileImage);
-
-            nameText = (TextView)itemView.findViewById(R.id.nameText);
-
-            descriptionText = (TextView)itemView.findViewById(R.id.descriptionText);
-
-
-      }
-
+            nameText = itemView.findViewById(R.id.nameText);
+            descriptionText = itemView.findViewById(R.id.descriptionText);
+            profileImage = itemView.findViewById(R.id.profileImage);
+        }
     }
+
+
 }

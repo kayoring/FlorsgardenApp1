@@ -61,10 +61,10 @@ public class StoreActivity extends AppCompatActivity {
         recyclerViewProductsList.setLayoutManager(linearLayoutManager);
 
         ArrayList<ProductsDomain> productsList = new ArrayList<>();
-        productsList.add(new ProductsDomain("Worm 1","worms1","worms number 1",100.00));
-        productsList.add(new ProductsDomain("Worm 2","worm2","worms number 2",149.99));
-        productsList.add(new ProductsDomain("Worm 3","worm2","worms number 3",89.99));
-        productsList.add(new ProductsDomain("Worm 4","worms1","worms number 4",149.99));
+        productsList.add(new ProductsDomain("Worm","worms1","worms number 1",100.00));
+        productsList.add(new ProductsDomain("Worm","worm2","worms number 2",149.99));
+        productsList.add(new ProductsDomain("Worm","worm2","worms number 3",89.99));
+        productsList.add(new ProductsDomain("Worm","worms1","worms number 4",149.99));
 
         adapter1=new ProductsAdaptor(productsList);
         recyclerViewProductsList.setAdapter(adapter1);
