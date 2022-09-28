@@ -32,7 +32,7 @@ public class StoreActivity extends AppCompatActivity {
         navigation();
     }
     private void navigation(){
-        ImageView cartbtn = findViewById(R.id.cartBtn);
+        View cartbtn = findViewById(R.id.cartBtn);
         cartbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

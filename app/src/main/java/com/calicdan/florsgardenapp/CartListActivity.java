@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import Adaptor.CartListAdaptor;
 import Helper.ManagementCart;
@@ -33,19 +36,67 @@ public class CartListActivity extends AppCompatActivity {
         initView();
         initList();
         CalculateCart();
-        navigation();
     }
 
-    private void navigation(){
-        ImageView cartbtn = findViewById(R.id.cartBtn);
-        cartbtn.setOnClickListener(new View.OnClickListener() {
+    private void buttons() {
+        View homebtn = findViewById(R.id.homebtn);
+        View forumbtn = findViewById(R.id.forumbtn);
+        View storebtn = findViewById(R.id.storebtn);
+
+        FloatingActionButton imageRecog = (FloatingActionButton) findViewById(R.id.imageRecog);
+        View notificationbtn = findViewById(R.id.notificationbtn);
+        View chatbtn = findViewById(R.id.chatbtn);
+        View profilebtn = findViewById(R.id.profilebtn);
+
+        homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CartListActivity.this,CartListActivity.class));
+            public void onClick(View v) {
+                startActivity(new Intent(CartListActivity.this, Home.class));
+
             }
         });
 
+        forumbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CartListActivity.this, StoreActivity.class));
+
+            }
+        });
+
+        storebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CartListActivity.this, StoreActivity.class));
+
+            }
+        });
+
+
+        View btnWorms = findViewById(R.id.btnWorms);
+
+        imageRecog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CartListActivity.this, ImageRecognition.class));
+            }
+        });
+
+        notificationbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CartListActivity.this, StoreActivity.class));
+
+            }
+        });
+        btnWorms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CartListActivity.this, Worms.class));
+            }
+        });
     }
+
     private void initView() {
         recyclerViewList=findViewById(R.id.recycleViewWorms);
         totalFeeTxt = findViewById(R.id.totalFeeTxt);
@@ -73,7 +124,7 @@ public class CartListActivity extends AppCompatActivity {
 
         }else{
             emptyTxt.setVisibility(View.GONE);
-            scrollView.setVisibility(View.INVISIBLE);
+            scrollView.setVisibility(View.VISIBLE);
         }
     }
     private void CalculateCart(){
