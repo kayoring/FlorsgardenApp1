@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btnOrganicWaste"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home">
@@ -16,7 +17,7 @@
         android:text="Worms"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
@@ -24,40 +25,49 @@
         android:id="@+id/btnFlorsGarden"
         android:layout_width="121dp"
         android:layout_height="39dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"
         android:text="Flor's Garden Website"
         android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <Button
         android:id="@+id/btnVermicast"
         android:layout_width="105dp"
         android:layout_height="38dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="48dp"
         android:background="@drawable/rounded_corner"
         android:text="Vermicast"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <Button
         android:id="@+id/btnVermiculture"
         android:layout_width="123dp"
         android:layout_height="34dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"
         android:text="Vermiculture"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnVermicast" />
+        app:layout_constraintTop_toBottomOf="@+id/btnFlorsGarden" />
+
+    <Button
+        android:id="@+id/btnVermiculture2"
+        android:layout_width="123dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_corner"
+        android:text="Organic Waste"
+        android:textSize="8sp"
+        app:layout_constraintStart_toEndOf="@+id/btnVermiculture"
+        app:layout_constraintTop_toBottomOf="@+id/btnWorms" />
 
     <TextView
         android:id="@+id/textView11"
@@ -144,20 +154,20 @@
 
         <TextView
             android:id="@+id/textView9"
-            android:layout_width="205dp"
-            android:layout_height="44dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="188dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="8dp"
             android:text="Search or select from our categories"
             android:textAlignment="textStart"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

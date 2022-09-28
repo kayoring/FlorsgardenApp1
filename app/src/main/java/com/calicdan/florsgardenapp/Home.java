@@ -3,23 +3,20 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-<<<<<<< Updated upstream
-=======
+
 import android.widget.Button;
 
->>>>>>> Stashed changes
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Home extends AppCompatActivity {
-<<<<<<< Updated upstream
+
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,profilebtn;
     FloatingActionButton imageRecog;
-=======
 
-    View storebtn;
+
     Button btnWorms;
->>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +30,7 @@ public class Home extends AppCompatActivity {
         homebtn = findViewById(R.id.homebtn);
         forumbtn = findViewById(R.id.forumbtn);
         storebtn = findViewById(R.id.storebtn);
-<<<<<<< Updated upstream
+
         imageRecog = (FloatingActionButton) findViewById(R.id.imageRecog);
         notificationbtn = findViewById(R.id.notificationbtn);
         chatbtn = findViewById(R.id.chatbtn);
@@ -63,9 +60,9 @@ public class Home extends AppCompatActivity {
             }
         });
 
-=======
+
         btnWorms = findViewById(R.id.btnWorms);
->>>>>>> Stashed changes
+
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +95,6 @@ public class Home extends AppCompatActivity {
         });
     }
         public void clicked_button(String url){
-
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));

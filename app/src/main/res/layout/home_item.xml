@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="411dp"
-        android:layout_height="187dp"
+        android:layout_height="221dp"
         android:padding="15dp">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,11 +33,11 @@
 
         <TextView
             android:id="@+id/descriptionText"
-            android:layout_width="352dp"
-            android:layout_height="302dp"
+            android:layout_width="275dp"
+            android:layout_height="126dp"
             android:layout_below="@id/nameText"
-            android:layout_marginLeft="-96dp"
-            android:layout_marginTop="41dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
             android:layout_toRightOf="@+id/profileImage"
             android:text="Description"
             android:textColor="#000000"

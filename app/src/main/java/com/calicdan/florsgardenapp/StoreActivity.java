@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 import Adaptor.CategoryAdaptor;
@@ -66,5 +68,26 @@ public class StoreActivity extends AppCompatActivity {
 
         adapter1=new ProductsAdaptor(productsList);
         recyclerViewProductsList.setAdapter(adapter1);
+
+
+        ImageView imageViewHome = (ImageView) findViewById(R.id. imageViewHome);
+
+        imageViewHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StoreActivity.this, Home.class));
+
+            }
+        });
+
+        FloatingActionButton imageRecog = (FloatingActionButton)findViewById(R.id.imageRecog);
+
+        imageRecog.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(StoreActivity.this, ImageRecognition.class));
+            }
+        });
     }
 }
