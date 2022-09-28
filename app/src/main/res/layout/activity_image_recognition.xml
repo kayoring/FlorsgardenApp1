@@ -99,4 +99,14 @@
         android:layout_marginBottom="217dp"
         app:srcCompat="@drawable/ic_round_cancel_24" />
 
+    <ImageView
+        android:id="@+id/imgViewBack"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="358dp"
+        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_left_24" />
+
 </RelativeLayout>

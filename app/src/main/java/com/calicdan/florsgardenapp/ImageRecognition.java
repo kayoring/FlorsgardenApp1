@@ -79,6 +79,15 @@ public class ImageRecognition extends AppCompatActivity {
             }
         });
 
+        ImageView imgViewBack = (ImageView)findViewById(R.id.imgViewBack);
+
+        imgViewBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ImageRecognition.this, Home.class));
+            }
+            
+        });
 
 
     }

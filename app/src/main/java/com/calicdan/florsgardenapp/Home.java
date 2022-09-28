@@ -95,7 +95,6 @@ public class Home extends AppCompatActivity {
         });
     }
         public void clicked_button(String url){
-
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);

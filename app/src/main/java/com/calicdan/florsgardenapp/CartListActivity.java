@@ -1,18 +1,22 @@
 package com.calicdan.florsgardenapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+<<<<<<< Updated upstream
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+=======
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+>>>>>>> Stashed changes
 
 import Adaptor.CartListAdaptor;
 import Helper.ManagementCart;
@@ -36,6 +40,7 @@ public class CartListActivity extends AppCompatActivity {
         initView();
         initList();
         CalculateCart();
+<<<<<<< Updated upstream
     }
 
     private void buttons() {
@@ -97,6 +102,12 @@ public class CartListActivity extends AppCompatActivity {
         });
     }
 
+=======
+
+    }
+
+
+>>>>>>> Stashed changes
     private void initView() {
         recyclerViewList=findViewById(R.id.recycleViewWorms);
         totalFeeTxt = findViewById(R.id.totalFeeTxt);
