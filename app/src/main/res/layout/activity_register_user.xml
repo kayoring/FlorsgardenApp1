@@ -38,24 +38,14 @@
             app:srcCompat="@drawable/logo_flors"
             tools:layout_editor_absoluteY="37dp" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Register"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
         <EditText
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="Enter name"
+            android:hint="User Name"
             android:inputType="textPersonName" />
 
         <EditText
@@ -63,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:maxLines="1"
             android:ems="10"
             android:hint="Contact Number"
             android:inputType="number" />
@@ -72,8 +63,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:maxLines="1"
             android:ems="10"
-            android:hint="Enter email"
+            android:hint="Email"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -82,7 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:ems="10"
-            android:hint="Enter password"
+            android:maxLines="1"
+            android:hint="Password"
             android:inputType="textPassword" />
 
         <EditText
@@ -90,9 +83,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:maxLines="1"
             android:ems="10"
             android:hint="Confirm password"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/register"
@@ -107,9 +101,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:textStyle="bold"
-            android:textSize="14sp"
             android:text="Already registered? Click here"
-            android:textColor="#F9A825" />
+            android:textColor="#F9A825"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

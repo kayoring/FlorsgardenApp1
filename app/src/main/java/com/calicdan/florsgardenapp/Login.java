@@ -2,10 +2,15 @@ package com.calicdan.florsgardenapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,9 +26,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
-    private TextView register;
+    private TextView register, forgotPass;
     private EditText editTextEmail, editTextPassword;
     private Button Login;
+    private CheckBox showPass;
 
     private FirebaseAuth mAuth;
 
@@ -40,13 +46,29 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         register = (TextView) findViewById(R.id.register);
         register.setOnClickListener(this);
 
+        forgotPass = (TextView) findViewById(R.id.forgotPass);
+        forgotPass.setOnClickListener(this);
+
         Login = (Button) findViewById(R.id.login);
         Login.setOnClickListener(this);
+
+        showPass = (CheckBox) findViewById(R.id.showPass);
 
         editTextEmail = (EditText) findViewById(R.id.email);
         editTextPassword = (EditText) findViewById(R.id.password);
 
         mAuth = FirebaseAuth.getInstance();
+
+        showPass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
+                if(!b) {
+                    editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
     }
 
     @Override
@@ -54,6 +76,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.register:
                 startActivity(new Intent(this, RegisterUser.class));
+                break;
+            case R.id.forgotPass:
+                startActivity(new Intent(this, ResetPasswordActivity.class));
                 break;
             case R.id.login:
                 String email = editTextEmail.getText().toString().trim();

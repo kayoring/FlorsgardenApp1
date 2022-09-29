@@ -14,7 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlorsgardenApp">
         <activity
-            android:name=".StartActivity"
+            android:name=".ResetPasswordActivity"
+            android:exported="false"
+            android:parentActivityName=".Login"/>
+        <activity
+            android:name=".ChatActivity"
             android:exported="false" />
         <activity
             android:name=".CartListActivity"
@@ -31,7 +35,7 @@
         <activity
             android:name=".RegisterUser"
             android:exported="true"
-            android:parentActivityName=".Login"/>
+            android:parentActivityName=".Login" />
         <activity
             android:name=".Home"
             android:exported="true" />

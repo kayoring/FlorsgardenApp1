@@ -35,7 +35,8 @@ public class Home extends AppCompatActivity {
         notificationbtn = findViewById(R.id.notificationbtn);
         chatbtn = findViewById(R.id.chatbtn);
         profilebtn = findViewById(R.id.profilebtn);
-        
+
+        btnWorms = findViewById(R.id.btnWorms);
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,9 +61,6 @@ public class Home extends AppCompatActivity {
             }
         });
 
-
-        btnWorms = findViewById(R.id.btnWorms);
-
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +75,7 @@ public class Home extends AppCompatActivity {
 
             }
         });
+
         btnWorms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,6 +91,8 @@ public class Home extends AppCompatActivity {
 
         }
 
+
+
         });
     }
         public void clicked_button(String url){
@@ -102,15 +103,14 @@ public class Home extends AppCompatActivity {
         chatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, StoreActivity.class));
+                startActivity(new Intent(Home.this, ChatActivity.class));
 
             }
         });
-
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, StoreActivity.class));
+                startActivity(new Intent(Home.this, ProfileActivity.class));
 
             }
         });
