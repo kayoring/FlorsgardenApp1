@@ -67,7 +67,13 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(Home.this, ImageRecognition.class));
             }
         });
+        chatbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this, ChatActivity.class));
 
+            }
+        });
         notificationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,13 +106,7 @@ public class Home extends AppCompatActivity {
         intent.setData(Uri.parse(url));
         startActivity(intent);
 
-        chatbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Home.this, ChatActivity.class));
 
-            }
-        });
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
