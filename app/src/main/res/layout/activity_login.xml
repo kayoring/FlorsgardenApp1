@@ -39,15 +39,6 @@
             tools:layout_editor_absoluteY="37dp" />
 
         <EditText
-            android:id="@+id/password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:ems="10"
-            android:hint="Enter password"
-            android:inputType="textPassword" />
-
-        <EditText
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,6 +46,15 @@
             android:ems="10"
             android:hint="Enter e-mail"
             android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:ems="10"
+            android:hint="Enter password"
+            android:inputType="textPassword" />
 
         <CheckBox
             android:id="@+id/checkBox"

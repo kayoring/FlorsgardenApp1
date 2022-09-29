@@ -30,7 +30,8 @@
             android:exported="false" />
         <activity
             android:name=".RegisterUser"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Login"/>
         <activity
             android:name=".Home"
             android:exported="true" />

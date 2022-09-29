@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
     private TextView banner, registerUser;
-    private EditText editTextFullName, editTextEmail, editContactNumber, editTextPassword;
+    private EditText editTextFullName, editTextEmail, editContactNumber, editTextPassword, editTextConfirmPass;
     private DatabaseReference reference;
     private FirebaseAuth mAuth;
 
@@ -53,12 +53,13 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextEmail = (EditText) findViewById(R.id.emailA);
         editContactNumber = (EditText) findViewById(R.id.contacNo);
         editTextPassword = (EditText) findViewById(R.id.passwordA);
+        editTextConfirmPass = (EditText) findViewById(R.id.confirmPass);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.textView6:
+            case R.id.loginA:
                 startActivity(new Intent(this, Login.class));
                 break;
 
@@ -67,8 +68,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 String password= editTextPassword.getText().toString().trim();
                 String fullName= editTextFullName.getText().toString().trim();
                 String contact= editContactNumber.getText().toString().trim();
+                String confirmPass= editTextConfirmPass.getText().toString().trim();
 
-                if (fullName.isEmpty() || contact.isEmpty() || email.isEmpty() ||password.isEmpty()){
+                if (fullName.isEmpty() || contact.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPass.isEmpty()){
                     if (fullName.isEmpty()) {
                         editTextFullName.requestFocus();
                     } else if (contact.isEmpty()) {
@@ -77,12 +79,16 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         editTextEmail.requestFocus();
                     } else if (password.isEmpty()) {
                         editTextPassword.requestFocus();
+                    } else if (confirmPass.isEmpty()) {
+                        editTextConfirmPass.requestFocus();
                     }
-                    Toast.makeText(RegisterUser.this, "All fields are required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterUser.this, "All fields are required!", Toast.LENGTH_SHORT).show();
                 } else if (password.length() < 6 ){
                     Toast.makeText(RegisterUser.this, "Minimum password length is 6 characters!", Toast.LENGTH_SHORT).show();
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     Toast.makeText(RegisterUser.this, "Please provide valid email!", Toast.LENGTH_SHORT).show();
+                } else if (!confirmPass.equals(password)){
+                    Toast.makeText(RegisterUser.this, "Password do not match!", Toast.LENGTH_SHORT).show();
                 } else {
                     registerUser(fullName, email, password, contact);
                 }
