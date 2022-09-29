@@ -2,6 +2,7 @@ package com.calicdan.florsgardenapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -11,25 +12,34 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
     private TextView banner, registerUser;
     private EditText editTextFullName, editTextEmail, editContactNumber, editTextPassword;
-
-
+    private DatabaseReference reference;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -51,82 +61,69 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             case R.id.textView6:
                 startActivity(new Intent(this, Login.class));
                 break;
-            case R.id.register:
-                registerUser();
-                break;
 
+            case R.id.register:
+                String email= editTextEmail.getText().toString().trim();
+                String password= editTextPassword.getText().toString().trim();
+                String fullName= editTextFullName.getText().toString().trim();
+                String contact= editContactNumber.getText().toString().trim();
+
+                if (fullName.isEmpty() || contact.isEmpty() || email.isEmpty() ||password.isEmpty()){
+                    if (fullName.isEmpty()) {
+                        editTextFullName.requestFocus();
+                    } else if (contact.isEmpty()) {
+                        editContactNumber.requestFocus();
+                    } else if (email.isEmpty()) {
+                        editTextEmail.requestFocus();
+                    } else if (password.isEmpty()) {
+                        editTextPassword.requestFocus();
+                    }
+                    Toast.makeText(RegisterUser.this, "All fields are required", Toast.LENGTH_SHORT).show();
+                } else if (password.length() < 6 ){
+                    Toast.makeText(RegisterUser.this, "Minimum password length is 6 characters!", Toast.LENGTH_SHORT).show();
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    Toast.makeText(RegisterUser.this, "Please provide valid email!", Toast.LENGTH_SHORT).show();
+                } else {
+                    registerUser(fullName, email, password, contact);
+                }
+                break;
         }
     }
 
-    private void registerUser() {
-        String email= editTextEmail.getText().toString().trim();
-        String password= editTextPassword.getText().toString().trim();
-        String fullName= editTextFullName.getText().toString().trim();
-        String contact= editContactNumber.getText().toString().trim();
-
-        if(fullName.isEmpty()){
-            editTextFullName.setError("Full name is required!");
-            editTextFullName.requestFocus();
-            return;
-        }
-
-        if(contact.isEmpty()){
-            editContactNumber.setError("Contact Number is requried!");
-            editContactNumber.requestFocus();
-            return;
-        }
-
-        if(email.isEmpty()){
-            editTextEmail.setError("Email is requried!");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            editTextEmail.setError("Please provide valid email!");
-            editTextEmail.requestFocus();
-            return;
-
-        }
-
-        if(password.isEmpty()){
-            editTextPassword.setError("Password is requried!");
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        if(password.length() < 6){
-            editTextPassword.setError("Min password length should be 6 characters!");
-            editTextPassword.requestFocus();
-            return;
-        }
-
+    private void registerUser(final String fullName, String email, String password, String contact) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
                         if(task.isSuccessful()){
-                            User user = new User(fullName, contact, email);
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            //User user = new User(fullName, contact, email);
+                            assert firebaseUser != null;
+                            String userid = firebaseUser.getUid();
 
-                            FirebaseDatabase.getInstance().getReference("Users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
+                            reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
-                                            if(task.isSuccessful()) {
-                                                Toast.makeText(RegisterUser.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
-                                            }else{
-                                                Toast.makeText(RegisterUser.this,"Failed to register! Try again!", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-                                    });
-                        }else{
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("id", userid);
+                            hashMap.put("username", fullName);
+                            hashMap.put("contact", contact);
+                            hashMap.put("email", email);
+                            hashMap.put("imageURL", "default");
+
+                            reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Intent intent = new Intent(RegisterUser.this, Login.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                    Toast.makeText(RegisterUser.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        } else {
                             Toast.makeText(RegisterUser.this,"Failed to register! Try again!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-
     }
 }
