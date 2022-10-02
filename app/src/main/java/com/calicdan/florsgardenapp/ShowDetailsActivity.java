@@ -2,6 +2,7 @@ package com.calicdan.florsgardenapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
+
+import java.util.Timer;
 
 import Domain.ProductsDomain;
 import Helper.ManagementCart;
@@ -21,6 +24,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
     private ProductsDomain object;
     int numberOrder = 1;
     private ManagementCart managementCart;
+    Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 object.setNumberInCart(numberOrder);
                 managementCart.insertProduct(object);
+                startActivity(new Intent(ShowDetailsActivity.this, StoreActivity.class));
             }
         });
     }
