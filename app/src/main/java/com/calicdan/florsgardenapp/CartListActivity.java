@@ -34,6 +34,7 @@ public class CartListActivity extends AppCompatActivity {
         initView();
         initList();
         CalculateCart();
+        buttons();
 
     }
 
@@ -72,7 +73,6 @@ public class CartListActivity extends AppCompatActivity {
         });
 
 
-        View btnWorms = findViewById(R.id.btnWorms);
 
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,12 +88,7 @@ public class CartListActivity extends AppCompatActivity {
 
             }
         });
-        btnWorms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CartListActivity.this, Worms.class));
-            }
-        });
+
     }
 
 
