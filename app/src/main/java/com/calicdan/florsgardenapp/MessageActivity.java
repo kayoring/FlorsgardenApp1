@@ -147,8 +147,11 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
-    private void sendMessage(String sender, String receiver, String message) {
 
+
+
+    private void sendMessage(String sender, String receiver, String message) {
+        String userid=intent.getStringExtra("userid");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -159,10 +162,8 @@ public class MessageActivity extends AppCompatActivity {
 
         reference.child("Chats").push().setValue(hashMap);
 
-
         // add user to chat fragment
-        /*
-        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
+        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
                 .child(fuser.getUid())
                 .child(userid);
 
@@ -178,7 +179,7 @@ public class MessageActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        }); */
+        });
     }
 
     private void readMesagges(String myid, String userid, String imageurl) {
