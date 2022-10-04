@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
@@ -116,6 +117,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                             hashMap.put("email", email);
                             hashMap.put("password", password);
                             hashMap.put("imageURL", "default");
+                            hashMap.put("status", "offline");
+                            hashMap.put("search", fullName.toLowerCase());
 
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
