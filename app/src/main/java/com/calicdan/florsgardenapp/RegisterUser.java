@@ -114,6 +114,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                             hashMap.put("username", fullName);
                             hashMap.put("contact", contact);
                             hashMap.put("email", email);
+                            hashMap.put("password", password);
                             hashMap.put("imageURL", "default");
 
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
