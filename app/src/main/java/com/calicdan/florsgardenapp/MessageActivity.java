@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
@@ -53,6 +54,8 @@ public class MessageActivity extends AppCompatActivity {
 
     ValueEventListener seenListener;
 
+    String userid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +84,7 @@ public class MessageActivity extends AppCompatActivity {
         text_send = findViewById(R.id.text_send);
 
         intent = getIntent();
-        String userid = intent.getStringExtra("userid");
+        userid = intent.getStringExtra("userid");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
         btn_send.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +166,7 @@ public class MessageActivity extends AppCompatActivity {
         reference.child("Chats").push().setValue(hashMap);
 
         // add user to chat fragment
-        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
+        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
                 .child(fuser.getUid())
                 .child(userid);
 
@@ -208,6 +211,11 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
     }
+    private void currentUser(String userid){
+        SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+        editor.putString("currentuser", userid);
+        editor.apply();
+    }
 
     private void status(String status){
         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
@@ -222,6 +230,7 @@ public class MessageActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         status("online");
+        currentUser(userid);
     }
 
     @Override
@@ -229,5 +238,6 @@ public class MessageActivity extends AppCompatActivity {
         super.onPause();
         reference.removeEventListener(seenListener);
         status("offline");
+        currentUser("none");
     }
 }
