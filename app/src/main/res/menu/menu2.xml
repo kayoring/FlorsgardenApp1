@@ -7,8 +7,8 @@
         android:title="logout"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/adminChat"
-        android:title="Chat with admin"
+        android:id="@+id/chatbot"
+        android:title="Chat Bot"
         app:showAsAction="never"/>
     <item
         android:id="@+id/home"
