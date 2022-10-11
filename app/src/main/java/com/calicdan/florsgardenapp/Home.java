@@ -12,7 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Home extends AppCompatActivity {
 
-    View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,profilebtn;
+    View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
     FloatingActionButton imageRecog;
 
     Button btnWorms, btnVermicast, btnVermiculture, btnOrganic;
@@ -32,7 +32,7 @@ public class Home extends AppCompatActivity {
         imageRecog = findViewById(R.id.imageRecog);
         notificationbtn = findViewById(R.id.notificationbtn);
         chatbtn = findViewById(R.id.chatbtn);
-        profilebtn = findViewById(R.id.profilebtn);
+        imageViewProfile = findViewById(R.id.imageViewProfile);
 
         btnWorms = findViewById(R.id.btnWorms);
 
@@ -114,7 +114,7 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
 
 
-        profilebtn.setOnClickListener(new View.OnClickListener() {
+            imageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this, ProfileActivity.class));
