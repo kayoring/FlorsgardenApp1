@@ -107,6 +107,14 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(Home.this, Vermiculture.class));
             }
         });
+
+        imageViewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this, ProfileActivity.class));
+
+            }
+        });
     }
         public void clicked_button(String url){
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -114,12 +122,5 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
 
 
-            imageViewProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Home.this, ProfileActivity.class));
-
-            }
-        });
     }
 }

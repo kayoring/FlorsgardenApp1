@@ -10,12 +10,15 @@
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:icon="@drawable/logo_flors"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FlorsgardenApp">
+        android:theme="@style/Theme.FlorsgardenApp"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ProfileSettings"
+            android:exported="false" />
         <activity
             android:name=".ChatbotActivity"
             android:exported="true">
@@ -54,11 +57,9 @@
             android:exported="true"
             android:parentActivityName=".Login" />
         <activity
-        android:name=".OrganicWaste"
-        android:exported="true" />
-        <activity
-            android:name=".Vermiculture" />
+            android:name=".OrganicWaste"
             android:exported="true" />
+        <activity android:name=".Vermiculture" />
         <activity
             android:name=".Home"
             android:exported="true" />
@@ -77,7 +78,6 @@
         <activity
             android:name=".Worms"
             android:exported="true" />
-
     </application>
 
 </manifest>
