@@ -10,19 +10,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.calicdan.florsgardenapp.Domain.FoodDomain;
+import com.calicdan.florsgardenapp.Helper.TinyDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.calicdan.florsgardenapp.Adaptor.CartListAdaptor;
 import com.calicdan.florsgardenapp.Helper.ManagementCart;
+
+import java.util.ArrayList;
+
 import Interface.ChangeNumberProductsListener;
 
 public class CartListActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewList;
     private ManagementCart managementCart;
-    TextView totalFeeTxt, taxTxt, totalTxt, emptyTxt;
+    TextView totalFeeTxt, taxTxt, totalTxt,emptyTxt,checkOutBtn;
     private double tax;
     private ScrollView scrollView;
+    private TinyDB tinyDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +85,13 @@ public class CartListActivity extends AppCompatActivity {
 
             }
         });
+        profilebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CartListActivity.this, ProfileActivity.class));
+
+            }
+        });
 
     }
 
@@ -90,6 +103,7 @@ public class CartListActivity extends AppCompatActivity {
         emptyTxt = findViewById(R.id.emptyTxt);
         scrollView = findViewById(R.id.scrollView3);
         recyclerViewList = findViewById(R.id.cartView);
+        checkOutBtn = findViewById(R.id.checkOutBtn);
 
     }
     private void initList(){
@@ -111,6 +125,17 @@ public class CartListActivity extends AppCompatActivity {
             emptyTxt.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
         }
+
+        checkOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CartListActivity.this,checkOutActivity.class);
+                CartListActivity.this.startActivity(i);
+            }
+        });
+    }
+    public ArrayList<FoodDomain> getListCart(){
+        return tinyDB.getListObject("CartList");
     }
     private void CalculateCart(){
         double percentTax = 0.12;

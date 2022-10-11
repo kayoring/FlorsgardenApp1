@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,19 +19,87 @@ import com.calicdan.florsgardenapp.Adaptor.CategoryAdaptor;
 import com.calicdan.florsgardenapp.Adaptor.ProductsAdaptor;
 import com.calicdan.florsgardenapp.Domain.CategoryDomain;
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class StoreActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter,adapter1;
     private RecyclerView recyclerViewCategoryList,recyclerViewProductsList;
+    TextView introUser;
+    ScrollView storeScrollView;
+    String name, email,uid;
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference fdb = db.getReference().child("Users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            name = user.getDisplayName();
+            email = user.getEmail();
+            uid = user.getUid();
+        }
+        introUser = findViewById(R.id.introUser);
+        introUser.setText("Hi " + email);
+
         recyclerViewCategory();
         recyclerViewProducts();
         navigation();
+        buttons();
+    }
+    private void buttons() {
+        View homebtn = findViewById(R.id.homebtn);
+        View forumbtn = findViewById(R.id.forumbtn);
+        View storebtn = findViewById(R.id.storebtn);
+
+        FloatingActionButton imageRecog = (FloatingActionButton) findViewById(R.id.imageRecog);
+        View notificationbtn = findViewById(R.id.notificationbtn);
+        View chatbtn = findViewById(R.id.chatbtn);
+        View profilebtn = findViewById(R.id.profilebtn);
+
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StoreActivity.this, Home.class));
+            }
+        });
+        forumbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StoreActivity.this, StoreActivity.class));
+            }
+        });
+        storebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StoreActivity.this, StoreActivity.class));
+            }
+        });
+        imageRecog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(StoreActivity.this, ImageRecognition.class));
+            }
+        });
+        notificationbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StoreActivity.this, StoreActivity.class));
+
+            }
+        });
+        profilebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StoreActivity.this, ProfileActivity.class));
+
+            }
+        });
     }
     private void navigation(){
         View cartbtn = findViewById(R.id.cartBtn);
@@ -37,6 +107,7 @@ public class StoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(StoreActivity.this,CartListActivity.class));
+
             }
         });
 

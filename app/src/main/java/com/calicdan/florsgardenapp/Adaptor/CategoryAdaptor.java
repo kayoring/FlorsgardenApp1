@@ -1,9 +1,11 @@
 package com.calicdan.florsgardenapp.Adaptor;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,8 @@ import com.calicdan.florsgardenapp.R;
 import java.util.ArrayList;
 
 import com.calicdan.florsgardenapp.Domain.CategoryDomain;
+import com.calicdan.florsgardenapp.ShowDetailsActivity;
+import com.calicdan.florsgardenapp.WormsCategory;
 
 public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHolder> {
     ArrayList<CategoryDomain> categoryDomains;
@@ -53,6 +57,15 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHo
     Glide.with(holder.itemView.getContext())
             .load(drawableResourceId)
             .into(holder.categoryPic);
+
+        String finalPicUrl = picUrl;
+        holder.storeLayout.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(holder.itemView.getContext(), WormsCategory.class);
+            holder.itemView.getContext().startActivity(intent);
+        }
+    });
     }
 
     @Override

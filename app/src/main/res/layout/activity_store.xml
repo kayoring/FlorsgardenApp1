@@ -10,7 +10,7 @@
     tools:context=".StoreActivity">
 
     <ScrollView
-        android:id="@+id/scrollview"
+        android:id="@+id/storeScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="50dp"
@@ -32,7 +32,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/introUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -52,8 +52,8 @@
                     android:text="Vermiculture Store"
                     android:textColor="#000000"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="@+id/textView5"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                    app:layout_constraintStart_toStartOf="@+id/introUser"
+                    app:layout_constraintTop_toBottomOf="@+id/introUser" />
 
                 <ImageView
                     android:id="@+id/cartBtn"
@@ -62,11 +62,11 @@
                     android:layout_marginEnd="24dp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView7"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="@+id/introUser"
                     app:srcCompat="@drawable/cart_icon" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName"
+                    android:id="@+id/storeSearchBar"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="32dp"
@@ -94,7 +94,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+                    app:layout_constraintTop_toBottomOf="@+id/storeSearchBar">
 
                     <ImageView
                         android:id="@+id/imageView"

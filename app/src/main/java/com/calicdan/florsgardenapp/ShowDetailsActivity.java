@@ -12,6 +12,13 @@ import com.bumptech.glide.Glide;
 
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.calicdan.florsgardenapp.Helper.ManagementCart;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class ShowDetailsActivity extends AppCompatActivity {
     private TextView addToCartBtn;
@@ -21,12 +28,14 @@ public class ShowDetailsActivity extends AppCompatActivity {
     int numberOrder = 1;
     private ManagementCart managementCart;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_details);
 
         managementCart = new ManagementCart(this);
+
         initView();
         getBundle();
     }
@@ -64,7 +73,6 @@ public class ShowDetailsActivity extends AppCompatActivity {
         addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 object.setNumberInCart(numberOrder);
                 managementCart.insertProduct(object);
                 startActivity(new Intent(ShowDetailsActivity.this, StoreActivity.class));

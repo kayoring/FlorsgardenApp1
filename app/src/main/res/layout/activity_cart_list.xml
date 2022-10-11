@@ -249,7 +249,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.176">
+        app:layout_constraintVertical_bias="0.176"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -314,7 +315,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tax:"
+                    android:text="Value Added Tax(VAT):"
                     android:textColor="#000000"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -357,13 +358,13 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/checkOutBtn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="16dp"
                 android:background="@drawable/green_button"
                 android:gravity="center"
-                android:text="CheckOut"
+                android:text="Check-Out"
                 android:textColor="#ffffff"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -374,13 +375,19 @@
         android:id="@+id/emptyTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="312dp"
+        android:layout_marginEnd="139dp"
+        android:layout_marginBottom="297dp"
+        android:gravity="center"
         android:text="Your Cart is Empty"
+        android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView3"
-        app:layout_constraintStart_toStartOf="@+id/scrollView3"
-        app:layout_constraintTop_toTopOf="@+id/scrollView3" />
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

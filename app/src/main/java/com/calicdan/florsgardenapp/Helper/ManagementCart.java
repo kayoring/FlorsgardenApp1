@@ -2,13 +2,28 @@ package com.calicdan.florsgardenapp.Helper;
 
 import android.content.Context;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import Interface.ChangeNumberProductsListener;
 
 public class ManagementCart {
     private Context context;
     private TinyDB tinyDB;
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference fdb = db.getReference().child("Users").child("Cart");
+    String uid,email,productID;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String date;
 
     public ManagementCart(Context context) {
         this.context = context;
@@ -16,6 +31,15 @@ public class ManagementCart {
 
     }
     public void insertProduct(FoodDomain item){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            uid = user.getUid();
+            email = user.getEmail();
+        }
+        calendar = Calendar.getInstance();
+        dateFormat = new SimpleDateFormat("MMddyyyyHH");
+        date = dateFormat.format(calendar.getTime());
+
         ArrayList<FoodDomain> listProducts = getListCart();
         boolean existAlready = false;
         int n=0;
@@ -32,6 +56,7 @@ public class ManagementCart {
         } else {
             listProducts.add(item);
         }
+        fdb.child(uid).child(date).child(item.getTitle()).setValue(item);
         tinyDB.putListObject("CartList",listProducts);
         Toast.makeText(context,"Added to your Cart", Toast.LENGTH_SHORT).show();
     }
@@ -41,16 +66,35 @@ public class ManagementCart {
     }
 
     public void plusNumberProduct(ArrayList<FoodDomain>listProduct, int position, ChangeNumberProductsListener changeNumberProductsListener){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            uid = user.getUid();
+            email = user.getEmail();
+        }
+        calendar = Calendar.getInstance();
+        dateFormat = new SimpleDateFormat("MMddyyyyHH");
+        date = dateFormat.format(calendar.getTime());
         listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart()+1);
+        fdb.child(uid).child(date).child(listProduct.get(position).getTitle()).child("numberInCart").setValue(listProduct.get(position).getNumberInCart());
         tinyDB.putListObject("CartList",listProduct);
         changeNumberProductsListener.changed();
     }
 
     public void minusNumberProduct(ArrayList<FoodDomain>listProduct, int position, ChangeNumberProductsListener changeNumberProductsListener){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            uid = user.getUid();
+            email = user.getEmail();
+        }
+        calendar = Calendar.getInstance();
+        dateFormat = new SimpleDateFormat("MMddyyyyHH");
+        date = dateFormat.format(calendar.getTime());
         if(listProduct.get(position).getNumberInCart()==1){
+            fdb.child(uid).child(date).child(listProduct.get(position).getTitle()).removeValue();
             listProduct.remove(position);
         }else{
             listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart()-1);
+            fdb.child(uid).child(date).child(listProduct.get(position).getTitle()).child("numberInCart").setValue(listProduct.get(position).getNumberInCart());
         }
         tinyDB.putListObject("CartList", listProduct);
         changeNumberProductsListener.changed();
