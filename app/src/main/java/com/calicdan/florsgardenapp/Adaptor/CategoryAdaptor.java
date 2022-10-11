@@ -67,9 +67,9 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            categoryName=itemView.findViewById(R.id.categoryName);
-            categoryPic=itemView.findViewById(R.id.categoryPic);
-            storeLayout=itemView.findViewById(R.id.storeLayout);
+            categoryName=itemView.findViewById(R.id.purchasesName);
+            categoryPic=itemView.findViewById(R.id.purchasesPic);
+            storeLayout=itemView.findViewById(R.id.purchasesLayout);
         }
     }
 }
