@@ -14,23 +14,24 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class OrganicWasteAdapter extends RecyclerView.Adapter<OrganicWasteAdapter.MyViewHolder>{
+public class VermicultureAdapter extends RecyclerView.Adapter<VermicultureAdapter.MyViewHolder>{
+
     Context context;
     ArrayList<HomeModel> wormList;
 
-    public OrganicWasteAdapter(Context context, ArrayList<HomeModel> wormList) {
+    public VermicultureAdapter(Context context, ArrayList<HomeModel> wormList) {
         this.context = context;
         this.wormList = wormList;
     }
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public VermicultureAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.home_item, parent, false);
-        return new OrganicWasteAdapter.MyViewHolder(v);
+        return new VermicultureAdapter.MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrganicWasteAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VermicultureAdapter.MyViewHolder holder, int position) {
 
         HomeModel HomeModel = wormList.get(position);
         holder.nameText.setText(HomeModel.getName());
@@ -59,5 +60,6 @@ public class OrganicWasteAdapter extends RecyclerView.Adapter<OrganicWasteAdapte
             profileImage = itemView.findViewById(R.id.profileImage);
         }
     }
+
 
 }
