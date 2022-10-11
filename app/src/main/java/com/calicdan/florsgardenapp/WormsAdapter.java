@@ -14,12 +14,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder>{
+public class WormsAdapter extends RecyclerView.Adapter<WormsAdapter.MyViewHolder>{
 
     Context context;
     ArrayList<HomeModel> wormList;
 
-    public HomeAdapter(Context context, ArrayList<HomeModel> wormList) {
+    public WormsAdapter(Context context, ArrayList<HomeModel> wormList) {
         this.context = context;
         this.wormList = wormList;
     }

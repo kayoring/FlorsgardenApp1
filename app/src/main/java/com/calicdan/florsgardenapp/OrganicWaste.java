@@ -3,7 +3,6 @@ package com.calicdan.florsgardenapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+public class OrganicWaste extends AppCompatActivity {
 
-public class Worms extends AppCompatActivity {
     RecyclerView recyclerView;
     WormsAdapter HomeAdapter;
     DatabaseReference database;
@@ -30,14 +29,14 @@ public class Worms extends AppCompatActivity {
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,profilebtn;
     FloatingActionButton imageRecog;
 
-    Button btnWorms;
+    //Button btnWorms;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worms);
 
         recyclerView = findViewById(R.id.recycleViewWorms);
-        database = FirebaseDatabase.getInstance().getReference("Worms");
+        database = FirebaseDatabase.getInstance().getReference("OrganicWaste");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -57,7 +56,7 @@ public class Worms extends AppCompatActivity {
         chatbtn = findViewById(R.id.chatbtn);
         profilebtn = findViewById(R.id.profilebtn);
 
-        btnWorms = findViewById(R.id.btnWorms);
+        //btnWorms = findViewById(R.id.btnWorms);
 
         database.addValueEventListener(new ValueEventListener() {
             @Override
@@ -79,7 +78,7 @@ public class Worms extends AppCompatActivity {
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Worms.this, Home.class));
+                startActivity(new Intent(OrganicWaste.this, Home.class));
 
             }
         });
@@ -87,7 +86,7 @@ public class Worms extends AppCompatActivity {
         forumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Worms.this, StoreActivity.class));
+                startActivity(new Intent(OrganicWaste.this, StoreActivity.class));
 
             }
         });
@@ -95,7 +94,7 @@ public class Worms extends AppCompatActivity {
         storebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Worms.this, StoreActivity.class));
+                startActivity(new Intent(OrganicWaste.this, StoreActivity.class));
 
             }
         });
@@ -103,20 +102,20 @@ public class Worms extends AppCompatActivity {
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Worms.this, ImageRecognition.class));
+                startActivity(new Intent(OrganicWaste.this, ImageRecognition.class));
             }
         });
         chatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Worms.this, ChatActivity.class));
+                startActivity(new Intent(OrganicWaste.this, ChatActivity.class));
 
             }
         });
         notificationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Worms.this, StoreActivity.class));
+                startActivity(new Intent(OrganicWaste.this, StoreActivity.class));
 
             }
         });
@@ -126,3 +125,4 @@ public class Worms extends AppCompatActivity {
 
 
 }
+

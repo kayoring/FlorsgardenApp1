@@ -15,14 +15,14 @@ public class Home extends AppCompatActivity {
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,profilebtn;
     FloatingActionButton imageRecog;
 
-    Button btnWorms;
+    Button btnWorms, btnVermicast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        btnVermicast = findViewById(R.id.btnOrganic);
         homebtn = findViewById(R.id.homebtn);
         forumbtn = findViewById(R.id.forumbtn);
         storebtn = findViewById(R.id.storebtn);
@@ -94,8 +94,12 @@ public class Home extends AppCompatActivity {
 
         }
 
-
-
+        });
+        btnVermicast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Home.this, OrganicWaste.class));
+            }
         });
     }
         public void clicked_button(String url){
