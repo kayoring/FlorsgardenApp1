@@ -10,21 +10,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
-import java.util.Timer;
-
-import Domain.ProductsDomain;
-import Helper.ManagementCart;
+import com.calicdan.florsgardenapp.Domain.FoodDomain;
+import com.calicdan.florsgardenapp.Helper.ManagementCart;
 
 public class ShowDetailsActivity extends AppCompatActivity {
     private TextView addToCartBtn;
     private TextView titleTxt,feeTxt,descriptionTxt,numberOrderTxt;
     private ImageView plusBtn, minusBtn, picProduct;
-    private ProductsDomain object;
+    private FoodDomain object;
     int numberOrder = 1;
     private ManagementCart managementCart;
-    Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +32,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
     }
 
     private void getBundle() {
-        object = (ProductsDomain) getIntent().getSerializableExtra("object");
+        object = (FoodDomain) getIntent().getSerializableExtra("object");
 
         int drawableResourceId = this.getResources().getIdentifier(object.getPic(), "drawable", this.getPackageName());
         Glide.with(this)
@@ -59,7 +54,9 @@ public class ShowDetailsActivity extends AppCompatActivity {
         minusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                numberOrder = numberOrder - 1;
+                if(numberOrder > 1) {
+                    numberOrder = numberOrder - 1;
+                }
                 numberOrderTxt.setText(String.valueOf(numberOrder));
             }
         });
@@ -67,6 +64,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
         addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 object.setNumberInCart(numberOrder);
                 managementCart.insertProduct(object);
                 startActivity(new Intent(ShowDetailsActivity.this, StoreActivity.class));

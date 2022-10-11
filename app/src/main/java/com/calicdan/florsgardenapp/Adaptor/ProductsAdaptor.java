@@ -1,4 +1,4 @@
-package Adaptor;
+package com.calicdan.florsgardenapp.Adaptor;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,14 +16,13 @@ import com.calicdan.florsgardenapp.ShowDetailsActivity;
 
 import java.util.ArrayList;
 
-import Domain.CategoryDomain;
-import Domain.ProductsDomain;
+import com.calicdan.florsgardenapp.Domain.FoodDomain;
 
 public class ProductsAdaptor extends RecyclerView.Adapter<ProductsAdaptor.ViewHolder> {
-    ArrayList<ProductsDomain> productsDomains;
+    ArrayList<FoodDomain> foodDomain;
 
-    public ProductsAdaptor(ArrayList<ProductsDomain> productsDomains) {
-        this.productsDomains = productsDomains;
+    public ProductsAdaptor(ArrayList<FoodDomain> foodDomains) {
+        this.foodDomain = foodDomains;
     }
 
     @Override
@@ -37,10 +34,10 @@ public class ProductsAdaptor extends RecyclerView.Adapter<ProductsAdaptor.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ProductsAdaptor.ViewHolder holder, int position) {
-    holder.title.setText(productsDomains.get(position).getTitle());
-    holder.fee.setText(String.valueOf(productsDomains.get(position).getFee()));
+    holder.title.setText(foodDomain.get(position).getTitle());
+    holder.fee.setText(String.valueOf(foodDomain.get(position).getFee()));
 
-     int drawableResourceId=holder.itemView.getContext().getResources().getIdentifier(productsDomains.get(position).getPic(),"drawable",holder.itemView.getContext().getPackageName());
+     int drawableResourceId=holder.itemView.getContext().getResources().getIdentifier(foodDomain.get(position).getPic(),"drawable",holder.itemView.getContext().getPackageName());
 
     Glide.with(holder.itemView.getContext())
             .load(drawableResourceId)
@@ -50,7 +47,7 @@ public class ProductsAdaptor extends RecyclerView.Adapter<ProductsAdaptor.ViewHo
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(holder.itemView.getContext(), ShowDetailsActivity.class);
-            intent.putExtra("object", productsDomains.get(position));
+            intent.putExtra("object", foodDomain.get(position));
             holder.itemView.getContext().startActivity(intent);
         }
     });
@@ -58,7 +55,7 @@ public class ProductsAdaptor extends RecyclerView.Adapter<ProductsAdaptor.ViewHo
 
     @Override
     public int getItemCount() {
-        return productsDomains.size();
+        return foodDomain.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -1,4 +1,4 @@
-package Adaptor;
+package com.calicdan.florsgardenapp.Adaptor;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +16,7 @@ import com.calicdan.florsgardenapp.R;
 
 import java.util.ArrayList;
 
-import Domain.CategoryDomain;
+import com.calicdan.florsgardenapp.Domain.CategoryDomain;
 
 public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHolder> {
     ArrayList<CategoryDomain> categoryDomains;

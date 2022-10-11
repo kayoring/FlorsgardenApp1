@@ -1,5 +1,6 @@
-package Adaptor;
+package com.calicdan.florsgardenapp.Adaptor;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.calicdan.florsgardenapp.R;
 
-import org.checkerframework.checker.units.qual.C;
-
 import java.util.ArrayList;
 
-import Domain.ProductsDomain;
-import Helper.ManagementCart;
+import com.calicdan.florsgardenapp.Domain.FoodDomain;
+import com.calicdan.florsgardenapp.Helper.ManagementCart;
 import Interface.ChangeNumberProductsListener;
 
 public class CartListAdaptor extends RecyclerView.Adapter<CartListAdaptor.ViewHolder> {
-    private ArrayList<ProductsDomain> productsDomain;
+    private ArrayList<FoodDomain> foodDomain;
     private ManagementCart managementCart;
     private ChangeNumberProductsListener changeNumberProductsListener;
 
-    public CartListAdaptor(ArrayList<ProductsDomain> productsDomain, Context context, ChangeNumberProductsListener changeNumberProductsListener) {
-        this.productsDomain = productsDomain;
+    public CartListAdaptor(ArrayList<FoodDomain> foodDomain, Context context, ChangeNumberProductsListener changeNumberProductsListener) {
+        this.foodDomain = foodDomain;
         this.managementCart = new ManagementCart(context);
         this.changeNumberProductsListener = changeNumberProductsListener;
     }
@@ -40,13 +39,13 @@ public class CartListAdaptor extends RecyclerView.Adapter<CartListAdaptor.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartListAdaptor.ViewHolder holder, int position) {
-        holder.title.setText(productsDomain.get(position).getTitle());
-        holder.feeEachProduct.setText(String.valueOf(productsDomain.get(position)));
-        holder.totalEachProduct.setText(String.valueOf(Math.round((productsDomain.get(position).getNumberInCart()*productsDomain.get(position).getFee())*100)/100));
-        holder.num.setText(String.valueOf(productsDomain.get(position).getNumberInCart()));
+    public void onBindViewHolder(@NonNull CartListAdaptor.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.title.setText(foodDomain.get(position).getTitle());
+        holder.feeEachProduct.setText(String.valueOf(foodDomain.get(position).getFee()));
+        holder.totalEachProduct.setText(String.valueOf(Math.round((foodDomain.get(position).getNumberInCart()* foodDomain.get(position).getFee())*100)/100));
+        holder.num.setText(String.valueOf(foodDomain.get(position).getNumberInCart()));
 
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(productsDomain.get(position).getPic(),"drawable",holder.itemView.getContext().getPackageName());
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(foodDomain.get(position).getPic(),"drawable",holder.itemView.getContext().getPackageName());
 
         Glide.with(holder.itemView.getContext())
                 .load(drawableResourceId)
@@ -55,7 +54,7 @@ public class CartListAdaptor extends RecyclerView.Adapter<CartListAdaptor.ViewHo
         holder.plusItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                managementCart.plusNumberProduct(productsDomain, position, new ChangeNumberProductsListener() {
+                managementCart.plusNumberProduct(foodDomain, position, new ChangeNumberProductsListener() {
                     @Override
                     public void changed() {
                         notifyDataSetChanged();
@@ -69,7 +68,7 @@ public class CartListAdaptor extends RecyclerView.Adapter<CartListAdaptor.ViewHo
         holder.minusItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                managementCart.minusNumberProduct(productsDomain, position, new ChangeNumberProductsListener() {
+                managementCart.minusNumberProduct(foodDomain, position, new ChangeNumberProductsListener() {
                     @Override
                     public void changed() {
                         notifyDataSetChanged();
@@ -82,7 +81,7 @@ public class CartListAdaptor extends RecyclerView.Adapter<CartListAdaptor.ViewHo
 
     @Override
     public int getItemCount() {
-        return productsDomain.size();
+        return foodDomain.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

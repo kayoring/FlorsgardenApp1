@@ -19,7 +19,7 @@
  *  and unicode 2017 that are used for separating the items in a list.
  */
 
-package Helper;
+package com.calicdan.florsgardenapp.Helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -31,8 +31,10 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+
+import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.google.gson.Gson;
-import Domain.ProductsDomain;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -325,14 +327,14 @@ public class TinyDB {
     }
 
 
-    public ArrayList<ProductsDomain> getListObject(String key){
+    public ArrayList<FoodDomain> getListObject(String key){
         Gson gson = new Gson();
 
         ArrayList<String> objStrings = getListString(key);
-        ArrayList<ProductsDomain> playerList =  new ArrayList<ProductsDomain>();
+        ArrayList<FoodDomain> playerList =  new ArrayList<FoodDomain>();
 
         for(String jObjString : objStrings){
-            ProductsDomain player  = gson.fromJson(jObjString,  ProductsDomain.class);
+            FoodDomain player  = gson.fromJson(jObjString,  FoodDomain.class);
             playerList.add(player);
         }
         return playerList;
@@ -487,11 +489,11 @@ public class TinyDB {
     	putString(key, gson.toJson(obj));
     }
 
-    public void putListObject(String key, ArrayList<ProductsDomain> playerList){
+    public void putListObject(String key, ArrayList<FoodDomain> playerList){
         checkForNullKey(key);
         Gson gson = new Gson();
         ArrayList<String> objStrings = new ArrayList<String>();
-        for(ProductsDomain player: playerList){
+        for(FoodDomain player: playerList){
             objStrings.add(gson.toJson(player));
         }
         putListString(key, objStrings);

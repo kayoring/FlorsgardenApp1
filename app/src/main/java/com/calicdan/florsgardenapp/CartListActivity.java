@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import Adaptor.CartListAdaptor;
-import Helper.ManagementCart;
+import com.calicdan.florsgardenapp.Adaptor.CartListAdaptor;
+import com.calicdan.florsgardenapp.Helper.ManagementCart;
 import Interface.ChangeNumberProductsListener;
 
 public class CartListActivity extends AppCompatActivity {
@@ -52,35 +52,26 @@ public class CartListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CartListActivity.this, Home.class));
-
             }
         });
-
         forumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CartListActivity.this, StoreActivity.class));
-
             }
         });
-
         storebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CartListActivity.this, StoreActivity.class));
-
             }
         });
-
-
-
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(CartListActivity.this, ImageRecognition.class));
             }
         });
-
         notificationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,12 +81,6 @@ public class CartListActivity extends AppCompatActivity {
         });
 
     }
-
-
-
-
-
-
 
     private void initView() {
         recyclerViewList=findViewById(R.id.recycleViewWorms);
@@ -128,7 +113,7 @@ public class CartListActivity extends AppCompatActivity {
         }
     }
     private void CalculateCart(){
-        double percentTax = 0.02;
+        double percentTax = 0.12;
         tax = Math.round((managementCart.getTotalfee()*percentTax) * 100)/100;
         double total = Math.round((managementCart.getTotalfee()+tax)*100)/100;
         double itemTotal = Math.round(managementCart.getTotalfee()*100)/100;

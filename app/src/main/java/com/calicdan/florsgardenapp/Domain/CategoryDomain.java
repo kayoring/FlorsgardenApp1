@@ -1,4 +1,4 @@
-package Domain;
+package com.calicdan.florsgardenapp.Domain;
 
 public class CategoryDomain {
     private String title;
