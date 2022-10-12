@@ -24,14 +24,20 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.calicdan.florsgardenapp.Adaptor.PurchasesAdapter;
 import com.calicdan.florsgardenapp.ChatActivity;
+import com.calicdan.florsgardenapp.ChatbotActivity;
 import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
+import com.calicdan.florsgardenapp.Home;
+import com.calicdan.florsgardenapp.ImageRecognition;
 import com.calicdan.florsgardenapp.Login;
 import com.calicdan.florsgardenapp.Model.User;
+import com.calicdan.florsgardenapp.ProfileActivity;
 import com.calicdan.florsgardenapp.R;
+import com.calicdan.florsgardenapp.StoreActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +56,10 @@ import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
+
+    View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
+    FloatingActionButton imageRecog;
+
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewPurchasesList;
@@ -70,9 +80,27 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+/*
+        homebtn = view.findViewById(R.id.homebtn);
+        forumbtn = view.findViewById(R.id.forumbtn);
+        storebtn = view.findViewById(R.id.storebtn);
+        notificationbtn = view.findViewById(R.id.notificationbtn);
+        chatbtn = view.findViewById(R.id.chatbtn);
+        imageViewProfile = view.findViewById(R.id.imageViewProfile);
+        imageRecog = view.findViewById(R.id.imageRecog);
 
+        homebtn.setOnClickListener((View.OnClickListener) getActivity());
+        forumbtn.setOnClickListener((View.OnClickListener) getActivity());
+        storebtn.setOnClickListener((View.OnClickListener) getActivity());
+        notificationbtn.setOnClickListener((View.OnClickListener) getActivity());
+        chatbtn.setOnClickListener((View.OnClickListener) getActivity());
+        imageViewProfile.setOnClickListener((View.OnClickListener) getActivity());
+        imageRecog.setOnClickListener((View.OnClickListener) getActivity());
+*/
         logoutBtn = view.findViewById(R.id.logoutBtn);
+        //logoutBtn.setOnClickListener((View.OnClickListener) getActivity());
         image_profile = view.findViewById(R.id.profile_image);
+        //image_profile.setOnClickListener((View.OnClickListener) getActivity());
         username = view.findViewById(R.id.username);
         email = view.findViewById(R.id.email);
         contact = view.findViewById(R.id.contact);
@@ -101,7 +129,8 @@ public class ProfileFragment extends Fragment {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                logout();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getActivity(), Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
@@ -145,10 +174,7 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
-    private void logout() {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getActivity(), Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-    }
+
     private void openImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
