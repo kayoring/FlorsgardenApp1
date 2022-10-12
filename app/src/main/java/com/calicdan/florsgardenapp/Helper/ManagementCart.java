@@ -19,7 +19,7 @@ public class ManagementCart {
     private Context context;
     private TinyDB tinyDB;
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private DatabaseReference fdb = db.getReference().child("Users").child("Cart");
+    private DatabaseReference fdb = db.getReference().child("Users");
     String uid,email,productID;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
@@ -56,7 +56,7 @@ public class ManagementCart {
         } else {
             listProducts.add(item);
         }
-        fdb.child(uid).child(date).child(item.getTitle()).setValue(item);
+        fdb.child(uid).child("cart").child(date).child(item.getTitle()).setValue(item);
         tinyDB.putListObject("CartList",listProducts);
         Toast.makeText(context,"Added to your Cart", Toast.LENGTH_SHORT).show();
     }
@@ -75,7 +75,7 @@ public class ManagementCart {
         dateFormat = new SimpleDateFormat("MMddyyyyHH");
         date = dateFormat.format(calendar.getTime());
         listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart()+1);
-        fdb.child(uid).child(date).child(listProduct.get(position).getTitle()).child("numberInCart").setValue(listProduct.get(position).getNumberInCart());
+        fdb.child(uid).child("cart").child(date).child(listProduct.get(position).getTitle()).child("numberInCart").setValue(listProduct.get(position).getNumberInCart());
         tinyDB.putListObject("CartList",listProduct);
         changeNumberProductsListener.changed();
     }
@@ -90,11 +90,11 @@ public class ManagementCart {
         dateFormat = new SimpleDateFormat("MMddyyyyHH");
         date = dateFormat.format(calendar.getTime());
         if(listProduct.get(position).getNumberInCart()==1){
-            fdb.child(uid).child(date).child(listProduct.get(position).getTitle()).removeValue();
+            fdb.child(uid).child("cart").child(date).child(listProduct.get(position).getTitle()).removeValue();
             listProduct.remove(position);
         }else{
             listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart()-1);
-            fdb.child(uid).child(date).child(listProduct.get(position).getTitle()).child("numberInCart").setValue(listProduct.get(position).getNumberInCart());
+            fdb.child(uid).child("cart").child(date).child(listProduct.get(position).getTitle()).child("numberInCart").setValue(listProduct.get(position).getNumberInCart());
         }
         tinyDB.putListObject("CartList", listProduct);
         changeNumberProductsListener.changed();
