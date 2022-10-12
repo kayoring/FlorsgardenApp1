@@ -101,7 +101,6 @@ public class ChatActivity extends AppCompatActivity {
                 }
 
                 viewPagerAdapter.addFragment(new UsersFragment(), "Users");
-                viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
 
                 viewPager.setAdapter(viewPagerAdapter);
 
@@ -125,10 +124,6 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case  R.id.logout:
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(ChatActivity.this, Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                return true;
             case  R.id.chatbot:
                 startActivity(new Intent(ChatActivity.this, ChatbotActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 return true;

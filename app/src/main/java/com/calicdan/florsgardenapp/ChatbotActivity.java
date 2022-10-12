@@ -104,10 +104,6 @@ public class ChatbotActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.logout:
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(ChatbotActivity.this, Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                return true;
             case R.id.adminChat:
                 startActivity(new Intent(ChatbotActivity.this, ChatActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 return true;

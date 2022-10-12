@@ -10,15 +10,22 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.calicdan.florsgardenapp.Adaptor.PurchasesAdapter;
+import com.calicdan.florsgardenapp.ChatActivity;
+import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
+import com.calicdan.florsgardenapp.Login;
 import com.calicdan.florsgardenapp.Model.User;
 import com.calicdan.florsgardenapp.R;
 import com.google.android.gms.tasks.Continuation;
@@ -37,14 +44,19 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
+    private RecyclerView.Adapter adapter;
+    private RecyclerView recyclerViewPurchasesList;
+
     CircleImageView image_profile;
-    TextView username;
+    TextView username, email, contact, password, address, id;
+    Button logoutBtn;
 
     DatabaseReference reference;
     FirebaseUser fuser;
@@ -59,20 +71,57 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        logoutBtn = view.findViewById(R.id.logoutBtn);
         image_profile = view.findViewById(R.id.profile_image);
         username = view.findViewById(R.id.username);
+        email = view.findViewById(R.id.email);
+        contact = view.findViewById(R.id.contact);
+        password = view.findViewById(R.id.passW);
+        address = view.findViewById(R.id.address);
+        id = view.findViewById(R.id.id);
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        recyclerViewPurchasesList=view.findViewById(R.id.recycleViewPurchases);
+        recyclerViewPurchasesList.setLayoutManager(linearLayoutManager);
+
+        ArrayList<PurchasesDomain> purchase = new ArrayList<>();
+        purchase.add(new PurchasesDomain("To Pay","pay"));
+        purchase.add(new PurchasesDomain("To Ship","ship"));
+        purchase.add(new PurchasesDomain("To Receive","receive"));
+        purchase.add(new PurchasesDomain("Completed","finished"));
+
+        adapter=new PurchasesAdapter(purchase);
+        recyclerViewPurchasesList.setAdapter(adapter);
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(isAdded()) {
                     User user = dataSnapshot.getValue(User.class);
-                    username.setText(user.getUsername());
+                    String pass = user.getPassword();
+                    char[] ch = new char[pass.length()];
+                    for (int i = 0; i < pass.length(); i++) {
+                        ch[i] = pass.charAt(i);
+                    }
+                    username.setText("Username: " + user.getFullName());
+                    id.setText("User ID: " + user.getId());
+                    email.setText("Email: " + user.getEmail());
+                    contact.setText("Contact #: " + user.getContact());
+                    password.setText("Password: " + ch[0]+ch[1]+"******");
+                    address.setText("Address: " + user.getAddress());
+
                     if (user.getImageURL().equals("default")) {
                         image_profile.setImageResource(R.drawable.ic_default_profile);
                     } else {
@@ -96,7 +145,10 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
-
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getActivity(), Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    }
     private void openImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
