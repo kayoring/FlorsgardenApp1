@@ -1,4 +1,4 @@
-package com.calicdan.florsgardenapp.Adaptor;
+package com.calicdan.florsgardenapp.Adapter;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -65,10 +65,10 @@ public class ProductsAdaptor extends RecyclerView.Adapter<ProductsAdaptor.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.title);
+            title = itemView.findViewById(R.id.productTitle);
             fee = itemView.findViewById(R.id.fee);
-            pic = itemView.findViewById(R.id.pic);
-            addBtn = itemView.findViewById(R.id.addBtn);
+            pic = itemView.findViewById(R.id.productPic);
+            addBtn = itemView.findViewById(R.id.EditBtn);
         }
     }
 }

@@ -15,8 +15,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-import com.calicdan.florsgardenapp.Adaptor.CategoryAdaptor;
-import com.calicdan.florsgardenapp.Adaptor.ProductsAdaptor;
+import com.calicdan.florsgardenapp.Adapter.CategoryAdaptor;
+import com.calicdan.florsgardenapp.Adapter.ProductsAdaptor;
 import com.calicdan.florsgardenapp.Domain.CategoryDomain;
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.google.firebase.auth.FirebaseAuth;

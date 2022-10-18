@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.calicdan.florsgardenapp.Adaptor.PurchasesAdapter;
+import com.calicdan.florsgardenapp.Adapter.PurchasesAdapter;
 import com.calicdan.florsgardenapp.ChatActivity;
 import com.calicdan.florsgardenapp.ChatbotActivity;
 import com.calicdan.florsgardenapp.Domain.PurchasesDomain;

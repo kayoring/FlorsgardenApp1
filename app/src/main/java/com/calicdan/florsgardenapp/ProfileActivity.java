@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
-import com.calicdan.florsgardenapp.Adaptor.CategoryAdaptor;
-import com.calicdan.florsgardenapp.Adaptor.PurchasesAdapter;
+import com.calicdan.florsgardenapp.Adapter.CategoryAdaptor;
+import com.calicdan.florsgardenapp.Adapter.PurchasesAdapter;
 import com.calicdan.florsgardenapp.Domain.CategoryDomain;
 import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
 import com.calicdan.florsgardenapp.Fragments.ChatsFragment;

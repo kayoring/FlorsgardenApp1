@@ -14,7 +14,7 @@ import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.calicdan.florsgardenapp.Helper.TinyDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import com.calicdan.florsgardenapp.Adaptor.CartListAdaptor;
+import com.calicdan.florsgardenapp.Adapter.CartListAdaptor;
 import com.calicdan.florsgardenapp.Helper.ManagementCart;
 
 import java.util.ArrayList;

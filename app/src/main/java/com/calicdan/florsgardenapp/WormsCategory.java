@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.calicdan.florsgardenapp.Adaptor.ProductsAdaptor;
+import com.calicdan.florsgardenapp.Adapter.ProductsAdaptor;
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;

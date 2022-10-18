@@ -1,4 +1,4 @@
-package com.calicdan.florsgardenapp.Adaptor;
+package com.calicdan.florsgardenapp.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

@@ -17,6 +17,12 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AddProduct"
+            android:exported="false" />
+        <activity
+            android:name=".AdminStoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".WormsCategory"
             android:exported="false" />
         <activity
