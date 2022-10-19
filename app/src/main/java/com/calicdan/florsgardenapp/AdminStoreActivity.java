@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.calicdan.florsgardenapp.Adapter.AdminProductsAdapter;
 import com.calicdan.florsgardenapp.Domain.Product;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,11 +31,60 @@ public class AdminStoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_store_activity);
 
+        buttons();
         initView();
         initList();
         AdminProductsView();
     }
+    private void buttons() {
+        View homebtn = findViewById(R.id.homebtn);
+        View forumbtn = findViewById(R.id.forumbtn);
+        View storebtn = findViewById(R.id.storebtn);
 
+        FloatingActionButton imageRecog = (FloatingActionButton) findViewById(R.id.imageRecog);
+        View notificationbtn = findViewById(R.id.notificationbtn);
+        View chatbtn = findViewById(R.id.chatbtn);
+        View profilebtn = findViewById(R.id.profilebtn);
+
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminStoreActivity.this, Home.class));
+            }
+        });
+        forumbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminStoreActivity.this, StoreActivity.class));
+            }
+        });
+        storebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminStoreActivity.this, StoreActivity.class));
+            }
+        });
+        imageRecog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminStoreActivity.this, ImageRecognition.class));
+            }
+        });
+        notificationbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminStoreActivity.this, StoreActivity.class));
+
+            }
+        });
+        profilebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminStoreActivity.this, ProfileActivity.class));
+
+            }
+        });
+    }
     private void initView(){
         addProductBtn = findViewById(R.id.addProductBtn);
 

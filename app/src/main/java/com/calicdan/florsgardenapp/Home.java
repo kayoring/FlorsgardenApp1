@@ -84,7 +84,6 @@ public class Home extends AppCompatActivity {
         storebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                     if(userType.equals("admin")){
                         startActivity(new Intent(Home.this, AdminStoreActivity.class));
                     }
