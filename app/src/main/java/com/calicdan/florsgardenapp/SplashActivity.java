@@ -10,12 +10,35 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class SplashActivity extends AppCompatActivity {
 
+    private static int SPLASH_TIMER1 = 1000;
     private static int SPLASH_TIMER = 4000;
     ImageView imgSplash;
     TextView txtSplash;
     Animation sideAnim, bottomAnim;
+    private FirebaseUser firebaseUser;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (firebaseUser != null){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    Intent intent = new Intent(getApplicationContext(),Home.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }, SPLASH_TIMER1);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -76,7 +76,7 @@ public class Home extends AppCompatActivity {
         forumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, StoreActivity.class));
+                startActivity(new Intent(Home.this, ForumActivity.class));
 
             }
         });
