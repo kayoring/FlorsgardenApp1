@@ -46,6 +46,7 @@ public class AnswersActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private DatabaseReference fuser,Questionref;
+    FirebaseRecyclerAdapter<Answers, AnswersViewHolder> answersAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +107,7 @@ public class AnswersActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<Answers, AnswersViewHolder> answersAdapter;
+
         FirebaseRecyclerOptions answerOptions = new FirebaseRecyclerOptions.Builder<Answers>().setQuery(Questionref, Answers.class).build();
 
         answersAdapter = new FirebaseRecyclerAdapter<Answers, AnswersViewHolder>(answerOptions) {
@@ -128,6 +129,15 @@ public class AnswersActivity extends AppCompatActivity {
             }
         };
         AnsList.setAdapter(answersAdapter);
+
+        super.onStart();
+        answersAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        answersAdapter.stopListening();
     }
 
     public static class AnswersViewHolder extends RecyclerView.ViewHolder{

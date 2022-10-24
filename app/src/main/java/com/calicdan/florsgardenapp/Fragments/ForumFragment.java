@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.calicdan.florsgardenapp.AnswersActivity;
+import com.calicdan.florsgardenapp.HomeModel;
 import com.calicdan.florsgardenapp.Model.Answers;
 import com.calicdan.florsgardenapp.Model.Inquiries;
 import com.calicdan.florsgardenapp.R;
@@ -39,6 +40,7 @@ public class ForumFragment extends Fragment {
     private DatabaseReference Questionref, Likesref;
     Boolean LikeChecker = false;
     String currentuserID;
+    FirebaseRecyclerAdapter<Inquiries, InquiriesViewHolder> InquiriesAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,23 +62,39 @@ public class ForumFragment extends Fragment {
         Questionref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Questions");
         Likesref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Likes");
 
+        queList.hasFixedSize();
+        queList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         DisplayAllQuestion();
 
         return rootview;
     }
 
     private void DisplayAllQuestion() {
-        FirebaseRecyclerAdapter<Inquiries, InquiriesViewHolder> InquiriesAdapter;
 
-        FirebaseRecyclerOptions inquiriesOptions = new FirebaseRecyclerOptions.Builder<Inquiries>().setQuery(Questionref, Inquiries.class).build();
+
+
+        FirebaseRecyclerOptions<Inquiries> inquiriesOptions =
+                new FirebaseRecyclerOptions.Builder<Inquiries>()
+                        .setQuery(Questionref, Inquiries.class)
+                        .build();
+/*
+        FirebaseRecyclerOptions<HomeModel> options =
+                new FirebaseRecyclerOptions.Builder<HomeModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("OrganicWaste"), HomeModel.class)
+                        .build();
+
+ */
 
         InquiriesAdapter = new FirebaseRecyclerAdapter<Inquiries, InquiriesViewHolder>(inquiriesOptions) {
 
             @NonNull
             @Override
             public InquiriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_inquiries, parent, false);
-                return new InquiriesViewHolder(v);
+                //LayoutInflater inflater=LayoutInflater.from(parent.getContext());
+                //View view=inflater.inflate(R.layout.all_inquiries,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_inquiries, parent, false);
+                return new InquiriesViewHolder(view);
             }
 
             @Override
@@ -129,6 +147,18 @@ public class ForumFragment extends Fragment {
                 });
             }};
         queList.setAdapter(InquiriesAdapter);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        InquiriesAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        InquiriesAdapter.stopListening();
     }
 
     public static class InquiriesViewHolder extends RecyclerView.ViewHolder {

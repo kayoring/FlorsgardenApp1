@@ -80,7 +80,7 @@
                     android:layout_below="@id/ans_username"
                     android:layout_marginLeft="3dp"
                     android:text="answered on "
-                    android:textColor="#50FFFFFF"
+                    android:textColor="@color/grey"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:text="Date"
-                    android:textColor="#50FFFFFF"
+                    android:textColor="@color/grey"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
                     android:layout_marginLeft="3dp"
                     android:text="Time"
                     android:textAlignment="viewEnd"
-                    android:textColor="#50FFFFFF"
+                    android:textColor="@color/grey"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
