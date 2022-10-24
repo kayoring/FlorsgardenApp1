@@ -104,7 +104,7 @@ public class AddInquiryActivity extends Fragment {
                     final String  saveCurrentTime = currentTime.format(calForDate.getTime());
 
                     final FirebaseDatabase database=FirebaseDatabase.getInstance();
-                    UsersReference=database.getReference().child("Subject").child("Questions");
+                    UsersReference=database.getReference().child("Forums").child("Questions");
                     String pushID=UsersReference.push().getKey();
 
                     HashMap userMap=new HashMap();

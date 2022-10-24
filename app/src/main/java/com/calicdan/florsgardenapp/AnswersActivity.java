@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import com.calicdan.florsgardenapp.Model.Answers;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -103,18 +106,28 @@ public class AnswersActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<Answers, AnswersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Answers, AnswersViewHolder>(Answers.class,R.layout.all_answers_layout,AnswersViewHolder.class,Questionref) {
+        FirebaseRecyclerAdapter<Answers, AnswersViewHolder> answersAdapter;
+        FirebaseRecyclerOptions answerOptions = new FirebaseRecyclerOptions.Builder<Answers>().setQuery(Questionref, Answers.class).build();
+
+        answersAdapter = new FirebaseRecyclerAdapter<Answers, AnswersViewHolder>(answerOptions) {
+
+            @NonNull
             @Override
-            protected void populateViewHolder(AnswersViewHolder answersViewHolder, Answers answers, int i) {
+            public AnswersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_answers_layout, parent, false);
+                return new AnswersViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull AnswersViewHolder answersViewHolder, int position, @NonNull Answers answers) {
                 answersViewHolder.setUsername(answers.getUsername());
                 answersViewHolder.setProfileimage(getApplicationContext(),answers.getProfileimage());
                 answersViewHolder.setAnswer(answers.getAnswer());
                 answersViewHolder.setDate(answers.getDate());
                 answersViewHolder.setTime(answers.getTime());
-
             }
         };
-        AnsList.setAdapter(firebaseRecyclerAdapter);
+        AnsList.setAdapter(answersAdapter);
     }
 
     public static class AnswersViewHolder extends RecyclerView.ViewHolder{

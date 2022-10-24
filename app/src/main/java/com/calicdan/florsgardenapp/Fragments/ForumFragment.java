@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.calicdan.florsgardenapp.AnswersActivity;
+import com.calicdan.florsgardenapp.Model.Answers;
 import com.calicdan.florsgardenapp.Model.Inquiries;
 import com.calicdan.florsgardenapp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,14 +47,18 @@ public class ForumFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         currentuserID = mAuth.getCurrentUser().getUid();
 
+        if (getActivity() != null) {
+            Intent intent = getActivity().getIntent();
+        }
+
         queList = (RecyclerView) rootview.findViewById(R.id.all_que_list);
         queList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         queList.setLayoutManager(linearLayoutManager);
-        Questionref = FirebaseDatabase.getInstance().getReference().child("Subject").child("Questions");
-        Likesref = FirebaseDatabase.getInstance().getReference().child("Subject").child("Questions").child("Likes");
+        Questionref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Questions");
+        Likesref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Likes");
 
         DisplayAllQuestion();
 
@@ -60,63 +66,69 @@ public class ForumFragment extends Fragment {
     }
 
     private void DisplayAllQuestion() {
-        FirebaseRecyclerAdapter<Inquiries, InquiriesViewHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<Inquiries, InquiriesViewHolder>(Inquiries.class, R.layout.all_inquiries, InquiriesViewHolder.class, Questionref) {
+        FirebaseRecyclerAdapter<Inquiries, InquiriesViewHolder> InquiriesAdapter;
 
-                    public void populateViewHolder(InquiriesViewHolder inquiriesViewHolder, Inquiries inquiries, int i) {
+        FirebaseRecyclerOptions inquiriesOptions = new FirebaseRecyclerOptions.Builder<Inquiries>().setQuery(Questionref, Inquiries.class).build();
 
-                        final String PostKey = getRef(i).getKey();
+        InquiriesAdapter = new FirebaseRecyclerAdapter<Inquiries, InquiriesViewHolder>(inquiriesOptions) {
 
-                        inquiriesViewHolder.setQuestion(inquiries.getQuestion());
-                        inquiriesViewHolder.setProfileImage(getContext(), inquiries.getProfileImage());
-                        inquiriesViewHolder.setUsernamee(inquiries.getUsernamee());
-                        inquiriesViewHolder.setTime(inquiries.getTime());
-                        inquiriesViewHolder.setDate(inquiries.getDate());
+            @NonNull
+            @Override
+            public InquiriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_inquiries, parent, false);
+                return new InquiriesViewHolder(v);
+            }
 
-                        inquiriesViewHolder.setLikeButtonStatus(PostKey);
+            @Override
+            protected void onBindViewHolder(@NonNull InquiriesViewHolder inquiriesViewHolder, int i, @NonNull Inquiries inquiries) {
 
-                        inquiriesViewHolder.CommentPostButton.setOnClickListener(new View.OnClickListener() {
+                final String PostKey = getRef(i).getKey();
+
+                inquiriesViewHolder.setQuestion(inquiries.getQuestion());
+                inquiriesViewHolder.setProfileImage(getContext(), inquiries.getProfileImage());
+                inquiriesViewHolder.setUsernamee(inquiries.getUsernamee());
+                inquiriesViewHolder.setTime(inquiries.getTime());
+                inquiriesViewHolder.setDate(inquiries.getDate());
+
+                inquiriesViewHolder.setLikeButtonStatus(PostKey);
+
+                inquiriesViewHolder.CommentPostButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent commentsIntent = new Intent(getActivity(), AnswersActivity.class);
+                        //commentsIntent.putExtra("Que",)
+                        commentsIntent.putExtra("Postkey", PostKey);
+                        startActivity(commentsIntent);
+
+                    }
+                });
+
+                inquiriesViewHolder.LikePostButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LikeChecker = true;
+                        Likesref.addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onClick(View v) {
-                                Intent commentsIntent = new Intent(getActivity(), AnswersActivity.class);
-                                // commentsIntent.putExtra("Que",)
-                                commentsIntent.putExtra("Postkey", PostKey);
-                                commentsIntent.putExtra("selectedSub", selectedSubject);
-                                commentsIntent.putExtra("Dept", selectedDept);
-                                startActivity(commentsIntent);
-
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (LikeChecker.equals(true)) {
+                                    if (dataSnapshot.child(PostKey).hasChild(currentuserID)) {
+                                        Likesref.child(PostKey).child(currentuserID).removeValue();
+                                        LikeChecker = false;
+                                    } else {
+                                        Likesref.child(PostKey).child(currentuserID).setValue(true);
+                                        LikeChecker = false;
+                                    }
+                                }
                             }
-                        });
-
-                        inquiriesViewHolder.LikePostButton.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(View v) {
-                                LikeChecker = true;
-                                Likesref.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        if (LikeChecker.equals(true)) {
-                                            if (dataSnapshot.child(PostKey).hasChild(currentuserID)) {
-                                                Likesref.child(PostKey).child(currentuserID).removeValue();
-                                                LikeChecker = false;
-                                            } else {
-                                                Likesref.child(PostKey).child(currentuserID).setValue(true);
-                                                LikeChecker = false;
-                                            }
-                                        }
-                                    }
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
                             }
                         });
                     }
-                };
-        queList.setAdapter(firebaseRecyclerAdapter);
-
+                });
+            }};
+        queList.setAdapter(InquiriesAdapter);
     }
 
     public static class InquiriesViewHolder extends RecyclerView.ViewHolder {
@@ -129,13 +141,14 @@ public class ForumFragment extends Fragment {
 
         public InquiriesViewHolder(@NonNull View itemView) {
             super(itemView);
+
             mView = itemView;
 
             LikePostButton = (ImageButton) mView.findViewById(R.id.like_button);
             CommentPostButton = (ImageButton) mView.findViewById(R.id.comment_button);
             DisplaynoOfLikes = (TextView) mView.findViewById(R.id.no_likes);
 
-            Likesref = FirebaseDatabase.getInstance().getReference().child("Subject").child("Questions").child("Likes");
+            Likesref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Likes");
             currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
 
@@ -147,12 +160,10 @@ public class ForumFragment extends Fragment {
                     if (dataSnapshot.child(PostKey).hasChild(currentUserId)) {
                         countLikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
                         LikePostButton.setImageResource(R.drawable.likess);
-
                         DisplaynoOfLikes.setText((Integer.toString(countLikes) + (" Likes")));
                     } else {
                         countLikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
                         LikePostButton.setImageResource(R.drawable.dislike);
-
                         DisplaynoOfLikes.setText((Integer.toString(countLikes) + (" Likes")));
                     }
                 }

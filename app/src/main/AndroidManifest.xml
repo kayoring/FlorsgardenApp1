@@ -17,110 +17,108 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
-
             android:name=".ImageRecognitionHome"
             android:exported="false" />
         <activity
             android:name=".AddInquiryActivity"
-            android:exported="false" >
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AnswersActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ForumActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
 
-    <activity
-        android:name=".AnswersActivity"
-        android:exported="false">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
-    </activity>
-    <activity
-        android:name=".ForumActivity"
-        android:exported="false">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
-    </activity>
+        <activity
+            android:name=".AddProduct"
+            android:exported="false" />
+        <activity
+            android:name=".AdminStoreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WormsCategory"
+            android:exported="false" />
+        <activity
+            android:name=".checkOutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileSettings"
+            android:exported="false" />
+        <activity
+            android:name=".ChatbotActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MessageActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false"
+            android:parentActivityName=".Login" />
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShowDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StoreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RegisterUser"
+            android:exported="true"
+            android:parentActivityName=".Login" />
+        <activity
+            android:name=".OrganicWaste"
+            android:exported="true" />
+        <activity android:name=".Vermiculture" />
+        <activity
+            android:name=".Home"
+            android:exported="true" />
+        <activity
+            android:name=".Login"
+            android:exported="true" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    <activity
-        android:name=".AddProduct"
-        android:exported="false" />
-    <activity
-        android:name=".AdminStoreActivity"
-        android:exported="false" />
-    <activity
-        android:name=".WormsCategory"
-        android:exported="false" />
-    <activity
-        android:name=".checkOutActivity"
-        android:exported="false" />
-    <activity
-        android:name=".ProfileSettings"
-        android:exported="false" />
-    <activity
-        android:name=".ChatbotActivity"
-        android:exported="true">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
-    </activity>
-    <activity
-        android:name=".MessageActivity"
-        android:exported="false">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
-    </activity>
-    <activity
-        android:name=".ResetPasswordActivity"
-        android:exported="false"
-        android:parentActivityName=".Login" />
-    <activity
-        android:name=".ChatActivity"
-        android:exported="false" />
-    <activity
-        android:name=".CartListActivity"
-        android:exported="false" />
-    <activity
-        android:name=".ShowDetailsActivity"
-        android:exported="false" />
-    <activity
-        android:name=".StoreActivity"
-        android:exported="false" />
-    <activity
-        android:name=".ProfileActivity"
-        android:exported="true" />
-    <activity
-        android:name=".RegisterUser"
-        android:exported="true"
-        android:parentActivityName=".Login" />
-    <activity
-        android:name=".OrganicWaste"
-        android:exported="true" />
-    <activity android:name=".Vermiculture" />
-    <activity
-        android:name=".Home"
-        android:exported="true" />
-    <activity
-        android:name=".Login"
-        android:exported="true" />
-    <activity
-        android:name=".SplashActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+        <activity
+            android:name=".ImageRecognitionOrganicWaste"
+            android:exported="true" />
+        <activity
+            android:name=".Worms"
+            android:exported="true" />
+    </application>
 
-    <activity
-        android:name=".ImageRecognitionOrganicWaste"
-        android:exported="true" />
-    <activity
-        android:name=".Worms"
-        android:exported="true" />
-</application>
-
-    </manifest>
+</manifest>
