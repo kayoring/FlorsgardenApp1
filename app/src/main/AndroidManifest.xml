@@ -17,6 +17,9 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ImageRecognitionHome"
+            android:exported="false" />
+        <activity
             android:name=".AddProduct"
             android:exported="false" />
         <activity
@@ -88,7 +91,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ImageRecognition"
+            android:name=".ImageRecognitionOrganicWaste"
             android:exported="true" />
         <activity
             android:name=".Worms"

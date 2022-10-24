@@ -1,128 +1,87 @@
 package com.calicdan.florsgardenapp;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class OrganicWaste extends AppCompatActivity {
-
     RecyclerView recyclerView;
-    WormsAdapter HomeAdapter;
-    DatabaseReference database;
-    //HomeAdapter wormAdapter;
-    ArrayList<HomeModel> wormList;
-
-    View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,profilebtn;
-    FloatingActionButton imageRecog;
-
-    //Button btnWorms;
+    WormsAdapter wormsAdapater;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worms);
 
-        recyclerView = findViewById(R.id.recycleViewWorms);
-        database = FirebaseDatabase.getInstance().getReference("OrganicWaste");
 
-        recyclerView.setHasFixedSize(true);
+        recyclerView = (RecyclerView)findViewById(R.id.recycleViewWorms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        wormList = new ArrayList<>();
+        FirebaseRecyclerOptions<HomeModel> options =
+                new FirebaseRecyclerOptions.Builder<HomeModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("OrganicWaste"), HomeModel.class)
+                        .build();
 
-        HomeAdapter = new WormsAdapter(this, wormList);
-        recyclerView.setAdapter(HomeAdapter);
+        wormsAdapater = new WormsAdapter(options);
+        recyclerView.setAdapter(wormsAdapater);
 
-
-        homebtn = findViewById(R.id.homebtn);
-        forumbtn = findViewById(R.id.forumbtn);
-        storebtn = findViewById(R.id.storebtn);
-
-        imageRecog = findViewById(R.id.imageRecog);
-        notificationbtn = findViewById(R.id.notificationbtn);
-        chatbtn = findViewById(R.id.chatbtn);
-        profilebtn = findViewById(R.id.profilebtn);
-
-        //btnWorms = findViewById(R.id.btnWorms);
-
-        database.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-
-                    HomeModel HomeModel = dataSnapshot.getValue(HomeModel.class);
-                    wormList.add(HomeModel);
-                }
-                HomeAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        homebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(OrganicWaste.this, Home.class));
-
-            }
-        });
-
-        forumbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(OrganicWaste.this, StoreActivity.class));
-
-            }
-        });
-
-        storebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(OrganicWaste.this, StoreActivity.class));
-
-            }
-        });
-
-        imageRecog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(OrganicWaste.this, ImageRecognition.class));
-            }
-        });
-        chatbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(OrganicWaste.this, ChatActivity.class));
-
-            }
-        });
-        notificationbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(OrganicWaste.this, StoreActivity.class));
-
-            }
-        });
 
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        wormsAdapater.startListening();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        wormsAdapater.stopListening();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem item = menu.findItem(R.id.search);
+        SearchView searchview = (SearchView) item.getActionView();
+
+        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextSubmit(String query){
+                txtSearch(query);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String query){
+                txtSearch(query);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    private void txtSearch(String str) {
+        FirebaseRecyclerOptions<HomeModel> options =
+                new FirebaseRecyclerOptions.Builder<HomeModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("OrganicWaste").orderByChild("name").startAt(str + "~"), HomeModel.class)
+                        .build();
+
+        wormsAdapater = new WormsAdapter(options);
+        wormsAdapater.startListening();
+        recyclerView.setAdapter( wormsAdapater);
+
+
+
+    }
 }
-

@@ -83,7 +83,7 @@ public class StoreActivity extends AppCompatActivity {
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(StoreActivity.this, ImageRecognition.class));
+                startActivity(new Intent(StoreActivity.this, ImageRecognitionOrganicWaste.class));
             }
         });
         notificationbtn.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +157,7 @@ public class StoreActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                startActivity(new Intent(StoreActivity.this, ImageRecognition.class));
+                startActivity(new Intent(StoreActivity.this, ImageRecognitionOrganicWaste.class));
             }
         });
     }

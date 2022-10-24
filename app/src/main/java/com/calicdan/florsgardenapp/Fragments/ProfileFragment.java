@@ -23,16 +23,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.calicdan.florsgardenapp.Adapter.PurchasesAdapter;
-import com.calicdan.florsgardenapp.ChatActivity;
-import com.calicdan.florsgardenapp.ChatbotActivity;
 import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
-import com.calicdan.florsgardenapp.Home;
-import com.calicdan.florsgardenapp.ImageRecognition;
 import com.calicdan.florsgardenapp.Login;
 import com.calicdan.florsgardenapp.Model.User;
-import com.calicdan.florsgardenapp.ProfileActivity;
 import com.calicdan.florsgardenapp.R;
-import com.calicdan.florsgardenapp.StoreActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

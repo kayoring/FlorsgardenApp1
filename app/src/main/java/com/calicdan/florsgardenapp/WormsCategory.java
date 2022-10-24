@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.calicdan.florsgardenapp.Adapter.ProductsAdaptor;
@@ -74,7 +73,7 @@ public class WormsCategory extends AppCompatActivity {
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WormsCategory.this, ImageRecognition.class));
+                startActivity(new Intent(WormsCategory.this, ImageRecognitionOrganicWaste.class));
             }
         });
         notificationbtn.setOnClickListener(new View.OnClickListener() {

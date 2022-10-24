@@ -1,33 +1,26 @@
 package com.calicdan.florsgardenapp;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-
 import android.widget.Button;
 
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.disklrucache.DiskLruCache;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import org.checkerframework.checker.units.qual.C;
 
 public class Home extends AppCompatActivity {
 
-    View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
+    View homebtn, forumbtn, storebtn, notificationbtn, chatbtn, imageViewProfile;
     FloatingActionButton imageRecog;
     Button btnWorms, btnVermicast, btnVermiculture, btnOrganic;
 
@@ -85,19 +78,19 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    if(userType.equals("admin")){
-                        startActivity(new Intent(Home.this, AdminStoreActivity.class));
-                    }
-                    if(userType.equals("customer")){
-                        startActivity(new Intent(Home.this, StoreActivity.class));
-                    }
+                if (userType.equals("admin")) {
+                    startActivity(new Intent(Home.this, AdminStoreActivity.class));
+                }
+                if (userType.equals("customer")) {
+                    startActivity(new Intent(Home.this, StoreActivity.class));
+                }
             }
         });
 
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Home.this, ImageRecognition.class));
+                startActivity(new Intent(Home.this, ImageRecognitionOrganicWaste.class));
             }
         });
         chatbtn.setOnClickListener(new View.OnClickListener() {
@@ -121,18 +114,18 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(Home.this, Worms.class));
             }
         });
-        Button btnFlorsGarden = (Button)findViewById(R.id.btnFlorsGarden);
+        Button btnFlorsGarden = (Button) findViewById(R.id.btnFlorsGarden);
 
         btnFlorsGarden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clicked_button("https://florsgarden.com");
-        }
+            }
         });
         btnOrganic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Home.this,OrganicWaste.class));
+                startActivity(new Intent(Home.this, OrganicWaste.class));
             }
         });
         btnVermiculture.setOnClickListener(new View.OnClickListener() {
@@ -149,12 +142,14 @@ public class Home extends AppCompatActivity {
 
             }
         });
+
     }
-        public void clicked_button(String url){
+
+    public void clicked_button(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
 
-
     }
+
 }

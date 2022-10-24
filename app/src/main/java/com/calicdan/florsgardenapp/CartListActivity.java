@@ -75,7 +75,7 @@ public class CartListActivity extends AppCompatActivity {
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CartListActivity.this, ImageRecognition.class));
+                startActivity(new Intent(CartListActivity.this, ImageRecognitionOrganicWaste.class));
             }
         });
         notificationbtn.setOnClickListener(new View.OnClickListener() {

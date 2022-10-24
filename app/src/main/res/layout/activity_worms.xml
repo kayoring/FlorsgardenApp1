@@ -18,12 +18,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleViewWorms"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp" />
-
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

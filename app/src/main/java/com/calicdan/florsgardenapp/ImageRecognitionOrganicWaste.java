@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class ImageRecognition extends AppCompatActivity {
+public class ImageRecognitionOrganicWaste extends AppCompatActivity {
 
     Button camera, gallery;
     ImageView imageView;
@@ -48,7 +48,7 @@ public class ImageRecognition extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_recognition);
+        setContentView(R.layout.activity_image_recognition_organic_waste);
 
 
         camera = findViewById(R.id.button);
@@ -84,7 +84,7 @@ public class ImageRecognition extends AppCompatActivity {
         imgViewBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ImageRecognition.this, Home.class));
+                startActivity(new Intent(ImageRecognitionOrganicWaste.this, Home.class));
             }
             
         });
