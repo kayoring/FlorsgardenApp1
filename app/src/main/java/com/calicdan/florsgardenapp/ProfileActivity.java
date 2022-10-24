@@ -29,6 +29,7 @@ import com.calicdan.florsgardenapp.Fragments.SettingsFragment;
 import com.calicdan.florsgardenapp.Fragments.UsersFragment;
 import com.calicdan.florsgardenapp.Model.Chat;
 import com.calicdan.florsgardenapp.Model.User;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-
+        //buttons();
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
 
@@ -143,4 +144,53 @@ public class ProfileActivity extends AppCompatActivity {
             return titles.get(position);
         }
     }
+    /*private void buttons() {
+        View homebtn = findViewById(R.id.homebtn);
+        View forumbtn = findViewById(R.id.forumbtn);
+        View storebtn = findViewById(R.id.storebtn);
+
+        FloatingActionButton imageRecog = (FloatingActionButton) findViewById(R.id.imageRecog);
+        View notificationbtn = findViewById(R.id.notificationbtn);
+        View chatbtn = findViewById(R.id.chatbtn);
+        View profilebtn = findViewById(R.id.profilebtn);
+
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, Home.class));
+            }
+        });
+        forumbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, StoreActivity.class));
+            }
+        });
+        storebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, StoreActivity.class));
+            }
+        });
+        imageRecog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this, ImageRecognition.class));
+            }
+        });
+        notificationbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, StoreActivity.class));
+
+            }
+        });
+        profilebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, ProfileActivity.class));
+
+            }
+        });
+    } */
 }
