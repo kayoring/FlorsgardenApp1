@@ -9,8 +9,8 @@
             app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="411dp"
-        android:layout_height="221dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:padding="15dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -47,7 +47,7 @@
         <TextView
             android:id="@+id/descriptionText"
             android:layout_width="262dp"
-            android:layout_height="121dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/nameText"
             android:layout_marginStart="8dp"
             android:layout_toRightOf="@+id/profileImage"
