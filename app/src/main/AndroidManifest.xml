@@ -17,31 +17,8 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
-
             android:name=".ImageRecognitionHome"
             android:exported="false" />
-
-            android:name=".AddInquiryActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".AnswersActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ForumActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
         <activity
             android:name=".AddProduct"
             android:exported="false" />
@@ -106,9 +83,6 @@
             android:exported="true" />
         <activity
             android:name=".Login"
-            android:exported="true" />
-        <activity
-            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -69,7 +69,7 @@ public class Home extends AppCompatActivity {
         forumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, ForumActivity.class));
+                startActivity(new Intent(Home.this, StoreActivity.class));
 
             }
         });
@@ -78,21 +78,12 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 if (userType.equals("admin")) {
                     startActivity(new Intent(Home.this, AdminStoreActivity.class));
                 }
                 if (userType.equals("customer")) {
                     startActivity(new Intent(Home.this, StoreActivity.class));
                 }
-
-                    if(userType.equals("admin")){
-                        startActivity(new Intent(Home.this, AdminStoreActivity.class));
-                    }
-                    if(userType.equals("customer")){
-                        startActivity(new Intent(Home.this, StoreActivity.class));
-                    }
-
             }
         });
 

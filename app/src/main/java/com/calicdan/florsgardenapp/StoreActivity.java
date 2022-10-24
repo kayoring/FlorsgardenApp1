@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,22 +21,16 @@ import com.calicdan.florsgardenapp.Domain.CategoryDomain;
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class StoreActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter,adapter1;
     private RecyclerView recyclerViewCategoryList,recyclerViewProductsList;
     TextView introUser;
     ScrollView storeScrollView;
-    String name, email;
-    String userType = "customer";
+    String name, email,uid;
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String uid = user.getUid();
     private DatabaseReference fdb = db.getReference().child("Users");
 
     @Override
@@ -45,19 +38,7 @@ public class StoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference userTypeReference = reference.child("Users").child(uid).child("usertype");
-        userTypeReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userType = snapshot.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                userType = "customer";
-            }
-        });
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
             name = user.getDisplayName();
             email = user.getEmail();
@@ -72,7 +53,6 @@ public class StoreActivity extends AppCompatActivity {
         buttons();
     }
     private void buttons() {
-
         View homebtn = findViewById(R.id.homebtn);
         View forumbtn = findViewById(R.id.forumbtn);
         View storebtn = findViewById(R.id.storebtn);
@@ -103,16 +83,7 @@ public class StoreActivity extends AppCompatActivity {
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 startActivity(new Intent(StoreActivity.this, ImageRecognitionOrganicWaste.class));
-
-                if(userType.equals("admin")){
-                    startActivity(new Intent(StoreActivity.this, AdminStoreActivity.class));
-                }
-                if(userType.equals("customer")){
-                    startActivity(new Intent(StoreActivity.this, StoreActivity.class));
-                }
-
             }
         });
         notificationbtn.setOnClickListener(new View.OnClickListener() {
