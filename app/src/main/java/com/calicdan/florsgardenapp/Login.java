@@ -42,9 +42,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         //check if user is null
         if (firebaseUser != null){
-            Intent intent = new Intent(Login.this, Home.class);
+            Intent intent = new Intent(Login.this, SplashActivity.class);
             startActivity(intent);
-            finish();
         }
     }
 

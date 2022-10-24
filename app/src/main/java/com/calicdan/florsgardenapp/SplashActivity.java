@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,12 +32,22 @@ public class SplashActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-
                     Intent intent = new Intent(getApplicationContext(),Home.class);
                     startActivity(intent);
                     finish();
                 }
             }, SPLASH_TIMER1);
+        } else if (firebaseUser == null){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getApplicationContext(),Login.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }, SPLASH_TIMER);
+        } else {
+            Toast.makeText(this, "Something went wrong! try again...", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -52,14 +63,5 @@ public class SplashActivity extends AppCompatActivity {
 
         imgSplash.setAnimation(sideAnim);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                Intent intent = new Intent(getApplicationContext(),Login.class);
-                startActivity(intent);
-                finish();
-            }
-        }, SPLASH_TIMER);
     }
 }
