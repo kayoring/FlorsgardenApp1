@@ -1,8 +1,11 @@
 package com.calicdan.florsgardenapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -15,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Worms extends AppCompatActivity {
     RecyclerView recyclerView;
     WormsAdapter wormsAdapter;
+    Button btnAdd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,14 @@ public class Worms extends AppCompatActivity {
         wormsAdapter = new WormsAdapter(options);
         recyclerView.setAdapter(wormsAdapter);
 
+        btnAdd = findViewById(R.id.btnAdd);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AddGuides.class));
+            }
+        });
 
 
     }

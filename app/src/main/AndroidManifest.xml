@@ -17,6 +17,9 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AddGuides"
+            android:exported="false" />
+        <activity
             android:name=".GuidesCategories"
             android:exported="false" />
         <activity
