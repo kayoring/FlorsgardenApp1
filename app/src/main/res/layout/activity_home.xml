@@ -19,7 +19,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/rounded_corner"
         android:text="Flor's Garden Website"
-        android:textSize="8sp"/>
+        android:textSize="8sp" />
 
     <Button
         android:id="@+id/btnVermiculture"
@@ -57,7 +57,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/rounded_corner"
         android:text="Organic Waste"
-        android:textSize="8sp"/>
+        android:textSize="8sp" />
 
     <Button
         android:id="@+id/btnOrganic"
@@ -88,8 +88,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/constraintLayout1"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="34dp"
         android:text="Categories"
         android:textColor="#000000"
         android:textSize="18sp"
@@ -99,11 +99,11 @@
         android:id="@+id/constraintLayout1"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_alignTop="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="32dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="32dp"
-        android:layout_alignTop="@+id/toolbar"
         android:background="@drawable/green_light_banner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
