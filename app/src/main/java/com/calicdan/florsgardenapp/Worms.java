@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Worms extends AppCompatActivity {
     RecyclerView recyclerView;
-    WormsAdapter wormsAdapater;
+    WormsAdapter wormsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +29,8 @@ public class Worms extends AppCompatActivity {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Worms"), HomeModel.class)
                         .build();
 
-        wormsAdapater = new WormsAdapter(options);
-        recyclerView.setAdapter(wormsAdapater);
+        wormsAdapter = new WormsAdapter(options);
+        recyclerView.setAdapter(wormsAdapter);
 
 
 
@@ -39,13 +39,13 @@ public class Worms extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        wormsAdapater.startListening();
+        wormsAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        wormsAdapater.stopListening();
+        wormsAdapter.stopListening();
     }
 
     @Override
@@ -74,12 +74,12 @@ public class Worms extends AppCompatActivity {
     private void txtSearch(String str) {
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Worms").orderByChild("name").startAt(str + "~"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Worms").orderByChild("name").startAt(str).endAt(str + "~"), HomeModel.class)
                         .build();
 
-        wormsAdapater = new WormsAdapter(options);
-        wormsAdapater.startListening();
-        recyclerView.setAdapter(wormsAdapater);
+        wormsAdapter = new WormsAdapter(options);
+        wormsAdapter.startListening();
+        recyclerView.setAdapter(wormsAdapter);
 
 
 

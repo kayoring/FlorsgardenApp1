@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Home extends AppCompatActivity {
-
+    TextView txtSeeAll;
     View homebtn, forumbtn, storebtn, notificationbtn, chatbtn, imageViewProfile;
     FloatingActionButton imageRecog;
     Button btnWorms, btnVermicast, btnVermiculture, btnOrganic;
@@ -43,6 +44,7 @@ public class Home extends AppCompatActivity {
         imageViewProfile = findViewById(R.id.imageViewProfile);
         btnWorms = findViewById(R.id.btnWorms);
 
+        txtSeeAll = findViewById(R.id.txtSeeAll);
         //admin checker
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userTypeReference = reference.child("Users").child(uid).child("usertype");
@@ -58,6 +60,13 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        txtSeeAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this, GuidesCategories.class));
+
+            }
+        });
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,12 +95,12 @@ public class Home extends AppCompatActivity {
                     startActivity(new Intent(Home.this, StoreActivity.class));
                 }
 
-                    if(userType.equals("admin")){
-                        startActivity(new Intent(Home.this, AdminStoreActivity.class));
-                    }
-                    if(userType.equals("customer")){
-                        startActivity(new Intent(Home.this, StoreActivity.class));
-                    }
+                if (userType.equals("admin")) {
+                    startActivity(new Intent(Home.this, AdminStoreActivity.class));
+                }
+                if (userType.equals("customer")) {
+                    startActivity(new Intent(Home.this, StoreActivity.class));
+                }
 
             }
         });
@@ -154,11 +163,13 @@ public class Home extends AppCompatActivity {
 
     }
 
+
     public void clicked_button(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
 
     }
+
 
 }

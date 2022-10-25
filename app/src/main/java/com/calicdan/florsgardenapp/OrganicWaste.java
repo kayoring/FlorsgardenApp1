@@ -14,23 +14,23 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class OrganicWaste extends AppCompatActivity {
     RecyclerView recyclerView;
-    WormsAdapter wormsAdapater;
+    WormsAdapter wormsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worms);
 
 
-        recyclerView = (RecyclerView)findViewById(R.id.recycleViewWorms);
+        recyclerView = findViewById(R.id.recycleViewWorms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("OrganicWaste"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste"), HomeModel.class)
                         .build();
 
-        wormsAdapater = new WormsAdapter(options);
-        recyclerView.setAdapter(wormsAdapater);
+        wormsAdapter = new WormsAdapter(options);
+        recyclerView.setAdapter(wormsAdapter);
 
 
 
@@ -39,13 +39,13 @@ public class OrganicWaste extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        wormsAdapater.startListening();
+        wormsAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        wormsAdapater.stopListening();
+        wormsAdapter.stopListening();
     }
 
     @Override
@@ -74,12 +74,12 @@ public class OrganicWaste extends AppCompatActivity {
     private void txtSearch(String str) {
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("OrganicWaste").orderByChild("name").startAt(str + "~"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste").orderByChild("name").startAt(str + "~"), HomeModel.class)
                         .build();
 
-        wormsAdapater = new WormsAdapter(options);
-        wormsAdapater.startListening();
-        recyclerView.setAdapter( wormsAdapater);
+        wormsAdapter = new WormsAdapter(options);
+        wormsAdapter.startListening();
+        recyclerView.setAdapter( wormsAdapter);
 
 
 
