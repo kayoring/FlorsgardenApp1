@@ -1,6 +1,8 @@
 package com.calicdan.florsgardenapp;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +43,7 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull HomeModel model) {
+    protected void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull HomeModel model) {
 
         holder.nameText.setText(model.getName());
         holder.descriptionText.setText(model.getDescription());
@@ -101,11 +103,36 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(name.getContext(), "Error While Updating", Toast.LENGTH_SHORT).show();
+                                        dialogPlus.dismiss();
                                     }
                                 });
                     }
                 });
 
+            }
+        });
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(holder.nameText.getContext());
+                builder.setTitle("Are you sure you want to permanently remove this item?");
+                builder.setMessage("Deleted data can't be undone.");
+
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseDatabase.getInstance().getReference().child("Worms")
+                                .child(getRef(position).getKey()).removeValue();
+                        Toast.makeText(holder.nameText.getContext(), "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(holder.nameText.getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.show();
             }
         });
 
