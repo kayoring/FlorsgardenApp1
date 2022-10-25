@@ -23,6 +23,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,5 +62,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 }

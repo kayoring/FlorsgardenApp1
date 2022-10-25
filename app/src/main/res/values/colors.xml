@@ -2,8 +2,10 @@
 <resources>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF04AA6D</color>
-    <color name="prp">#B5CF49</color> 81a140
+    <color name="prp">#B5CF49</color>
     <color name="prp1">#81a140</color>
+    <color name="prp2">#D2E190</color>
+
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#D003DAC5</color>
     <color name="teal_201">#03DAC5</color>

@@ -71,8 +71,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     TextView username, email, contact, password, address;
     Button logoutBtn;
 
-    DatabaseReference reference;
-    FirebaseUser fuser;
+    DatabaseReference reference,ref;
+    FirebaseUser fuser,firebaseUser;
+
 
     StorageReference storageReference;
     private static final int IMAGE_REQUEST = 1;
@@ -98,6 +99,27 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         chatbtn.setOnClickListener(this);
         imageViewProfile.setOnClickListener(this);
         imageRecog.setOnClickListener(this);
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        ref = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                username.setText(user.getUsername());
+                if (user.getImageURL().equals("default")){
+                    profile_image.setImageResource(R.mipmap.ic_launcher);
+                } else {
+                    Glide.with(getActivity()).load(user.getImageURL()).into(profile_image);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         logoutBtn = view.findViewById(R.id.logoutBtn);
         //logoutBtn.setOnClickListener((View.OnClickListener) getActivity());

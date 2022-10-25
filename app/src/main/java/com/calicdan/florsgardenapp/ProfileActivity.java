@@ -48,8 +48,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     CircleImageView profile_image;
     TextView username;
-
-    FirebaseUser firebaseUser;
     DatabaseReference reference;
 
     @Override
@@ -62,29 +60,6 @@ public class ProfileActivity extends AppCompatActivity {
         //buttons();
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
-
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                username.setText(user.getUsername());
-                if (user.getImageURL().equals("default")){
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
-                } else {
-
-                    //change this
-                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
         final ViewPager viewPager = findViewById(R.id.view_pager);
@@ -101,7 +76,6 @@ public class ProfileActivity extends AppCompatActivity {
                 viewPager.setAdapter(viewPagerAdapter);
 
                 tabLayout.setupWithViewPager(viewPager);
-
             }
 
             @Override
@@ -144,53 +118,4 @@ public class ProfileActivity extends AppCompatActivity {
             return titles.get(position);
         }
     }
-    /*private void buttons() {
-        View homebtn = findViewById(R.id.homebtn);
-        View forumbtn = findViewById(R.id.forumbtn);
-        View storebtn = findViewById(R.id.storebtn);
-
-        FloatingActionButton imageRecog = (FloatingActionButton) findViewById(R.id.imageRecog);
-        View notificationbtn = findViewById(R.id.notificationbtn);
-        View chatbtn = findViewById(R.id.chatbtn);
-        View profilebtn = findViewById(R.id.profilebtn);
-
-        homebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, Home.class));
-            }
-        });
-        forumbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, StoreActivity.class));
-            }
-        });
-        storebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, StoreActivity.class));
-            }
-        });
-        imageRecog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, ImageRecognition.class));
-            }
-        });
-        notificationbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, StoreActivity.class));
-
-            }
-        });
-        profilebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, ProfileActivity.class));
-
-            }
-        });
-    } */
 }

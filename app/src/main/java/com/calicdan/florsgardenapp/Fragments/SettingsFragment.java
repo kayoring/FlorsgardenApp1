@@ -1,5 +1,6 @@
 package com.calicdan.florsgardenapp.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,16 +8,79 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.calicdan.florsgardenapp.ChangeEmailActivity;
+import com.calicdan.florsgardenapp.ForumActivity;
+import com.calicdan.florsgardenapp.Home;
 import com.calicdan.florsgardenapp.R;
+import com.calicdan.florsgardenapp.ResetPasswordActivity;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements View.OnClickListener{
+
+    TextView cPass, cUser, cContact, cAddress, addAdmin, notifs, allowNotifs, cEmail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        cPass = view.findViewById(R.id.cPass);
+        cUser = view.findViewById(R.id.cUser);
+        cContact = view.findViewById(R.id.cContact);
+        cAddress = view.findViewById(R.id.cAddress);
+        addAdmin = view.findViewById(R.id.addAdmin);
+        notifs = view.findViewById(R.id.cNotifs);
+        allowNotifs = view.findViewById(R.id.cAllowNotifs);
+        cEmail = view.findViewById(R.id.cEmail);
+
+        cPass.setOnClickListener(this);
+        cUser.setOnClickListener(this);
+        cContact.setOnClickListener(this);
+        cAddress.setOnClickListener(this);
+        addAdmin.setOnClickListener(this);
+        notifs.setOnClickListener(this);
+        allowNotifs.setOnClickListener(this);
+        cEmail.setOnClickListener(this);
+
+        return view;
+    }
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.cPass:
+                startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
+                break;
+
+            case R.id.cEmail:
+                startActivity(new Intent(getActivity(), ChangeEmailActivity.class));
+                break;
+
+            case R.id.cUser:
+                startActivity(new Intent(getActivity(), Home.class));
+                break;
+
+            case R.id.cContact:
+                startActivity(new Intent(getActivity(), Home.class));
+                break;
+
+            case R.id.cAddress:
+                startActivity(new Intent(getActivity(), Home.class));
+                break;
+
+            case R.id.addAdmin:
+                startActivity(new Intent(getActivity(), Home.class));
+                break;
+
+            case R.id.cNotifs:
+                startActivity(new Intent(getActivity(), Home.class));
+                break;
+
+            case R.id.cAllowNotifs:
+                startActivity(new Intent(getActivity(), Home.class));
+                break;
+        }
     }
 }

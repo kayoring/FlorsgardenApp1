@@ -206,6 +206,7 @@ public class Home extends AppCompatActivity {
             builder2.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog2, which2) -> {
                 dialog2.cancel();
             });
+
             AlertDialog alertDialog = builder2.create();
             alertDialog.show();
         });
