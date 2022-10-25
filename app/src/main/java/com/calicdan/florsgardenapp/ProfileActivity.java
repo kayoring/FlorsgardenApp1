@@ -56,7 +56,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Profile");
+
         //buttons();
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
@@ -70,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ProfileActivity.ViewPagerAdapter viewPagerAdapter = new ProfileActivity.ViewPagerAdapter(getSupportFragmentManager());
 
-                viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
+                viewPagerAdapter.addFragment(new ProfileFragment(), "User Details");
                 viewPagerAdapter.addFragment(new SettingsFragment(), "Settings");
 
                 viewPager.setAdapter(viewPagerAdapter);
