@@ -6,7 +6,8 @@
     android:layout_gravity="start"
     android:layout_margin="5dp"
     android:elevation="8dp"
-    app:cardBackgroundColor="@color/bot_back_color"
+    android:layout_alignParentLeft="true"
+    app:cardBackgroundColor="@color/prp1"
     app:cardCornerRadius="8dp">
 
     <LinearLayout
@@ -17,19 +18,20 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_chatbot"
+            android:src="@drawable/wrmbot"
             android:layout_margin="10dp"
             />
 
         <TextView
+            android:id="@+id/idTVBot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/idTVBot"
-            android:text="Bot Message"
             android:layout_gravity="center"
+            android:textSize="16sp"
             android:layout_margin="5dp"
             android:padding="3dp"
-            android:textColor="@color/white"/>
+            android:text="Bot Message"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

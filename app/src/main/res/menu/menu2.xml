@@ -2,10 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:icon="@drawable/wrmbot"
         android:id="@+id/chatbot"
         android:title="Chat Bot"
         app:showAsAction="never"/>
     <item
+        android:icon="@drawable/white_home"
         android:id="@+id/home"
         android:title="Home"
         app:showAsAction="never"/>

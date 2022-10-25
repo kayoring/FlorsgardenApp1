@@ -55,21 +55,35 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/text_send"
-            android:background="@android:color/transparent"
-            android:hint="Type a message..."
+            android:layout_width="248dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/btn_send"
-            android:layout_centerVertical="true"/>
+            android:layout_toEndOf="@+id/sendImageButton"
+            android:background="@android:color/transparent"
+            android:hint="Type a message..." />
 
         <ImageButton
+            android:id="@+id/btn_send"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/ic_action_name"
-            android:id="@+id/btn_send"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/ic_action_name" />
+
+        <ImageButton
+            android:id="@+id/sendImageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/image_icon" />
 
     </RelativeLayout>
 

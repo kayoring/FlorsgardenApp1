@@ -51,23 +51,12 @@
                         android:id="@+id/username"
                         android:textSize="18sp"
                         android:layout_marginBottom="20dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="user ID"
-                        android:layout_below="@id/username"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:id="@+id/id"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="20dp"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="email"
-                        android:layout_below="@id/id"
+                        android:layout_below="@id/username"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/black"

@@ -4,9 +4,11 @@
     <item
         android:id="@+id/adminChat"
         android:title="Chat with admin"
-        app:showAsAction="never"/>
+        android:icon="@drawable/ic_baseline_help_24"
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/home"
+        android:icon="@drawable/white_home"
         android:title="Home"
         app:showAsAction="never"/>
 </menu>

@@ -4,11 +4,13 @@ import static android.app.Activity.RESULT_OK;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +25,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.calicdan.florsgardenapp.Adapter.PurchasesAdapter;
+import com.calicdan.florsgardenapp.ChatActivity;
+import com.calicdan.florsgardenapp.ChatbotActivity;
 import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
 import com.calicdan.florsgardenapp.Login;
 import com.calicdan.florsgardenapp.Model.User;
@@ -57,8 +61,8 @@ public class ProfileFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewPurchasesList;
 
-    CircleImageView image_profile;
-    TextView username, email, contact, password, address, id;
+    CircleImageView profile_image;
+    TextView username, email, contact, password, address;
     Button logoutBtn;
 
     DatabaseReference reference;
@@ -92,7 +96,7 @@ public class ProfileFragment extends Fragment {
 */
         logoutBtn = view.findViewById(R.id.logoutBtn);
         //logoutBtn.setOnClickListener((View.OnClickListener) getActivity());
-        image_profile = view.findViewById(R.id.profile_image);
+        profile_image = view.findViewById(R.id.profile_image);
         //image_profile.setOnClickListener((View.OnClickListener) getActivity());
         username = view.findViewById(R.id.username);
         email = view.findViewById(R.id.email);
@@ -121,8 +125,23 @@ public class ProfileFragment extends Fragment {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getActivity(), Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Are you sure you want to log out?");
+                builder.setTitle("Logout");
+                builder.setCancelable(false);
+
+                builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(getActivity(), Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    getActivity().finish();
+                });
+
+                builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    dialog.cancel();
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
             }
         });
 
@@ -143,9 +162,9 @@ public class ProfileFragment extends Fragment {
                     address.setText("Address: " + user.getAddress());
 
                     if (user.getImageURL().equals("default")) {
-                        image_profile.setImageResource(R.drawable.ic_default_profile);
+                        profile_image.setImageResource(R.drawable.ic_default_profile);
                     } else {
-                        Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
+                        Glide.with(getContext()).load(user.getImageURL()).into(profile_image);
                     }
                 }
             }
@@ -156,7 +175,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        image_profile.setOnClickListener(new View.OnClickListener() {
+        profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openImage();
