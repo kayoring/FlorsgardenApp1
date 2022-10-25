@@ -28,9 +28,15 @@ import com.calicdan.florsgardenapp.Adapter.PurchasesAdapter;
 import com.calicdan.florsgardenapp.ChatActivity;
 import com.calicdan.florsgardenapp.ChatbotActivity;
 import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
+import com.calicdan.florsgardenapp.ForumActivity;
+import com.calicdan.florsgardenapp.Home;
+import com.calicdan.florsgardenapp.ImageRecognitionHome;
 import com.calicdan.florsgardenapp.Login;
 import com.calicdan.florsgardenapp.Model.User;
+import com.calicdan.florsgardenapp.ProfileActivity;
 import com.calicdan.florsgardenapp.R;
+import com.calicdan.florsgardenapp.RegisterUser;
+import com.calicdan.florsgardenapp.StoreActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,7 +59,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
     FloatingActionButton imageRecog;
@@ -77,7 +83,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-/*
         homebtn = view.findViewById(R.id.homebtn);
         forumbtn = view.findViewById(R.id.forumbtn);
         storebtn = view.findViewById(R.id.storebtn);
@@ -86,14 +91,14 @@ public class ProfileFragment extends Fragment {
         imageViewProfile = view.findViewById(R.id.imageViewProfile);
         imageRecog = view.findViewById(R.id.imageRecog);
 
-        homebtn.setOnClickListener((View.OnClickListener) getActivity());
-        forumbtn.setOnClickListener((View.OnClickListener) getActivity());
-        storebtn.setOnClickListener((View.OnClickListener) getActivity());
-        notificationbtn.setOnClickListener((View.OnClickListener) getActivity());
-        chatbtn.setOnClickListener((View.OnClickListener) getActivity());
-        imageViewProfile.setOnClickListener((View.OnClickListener) getActivity());
-        imageRecog.setOnClickListener((View.OnClickListener) getActivity());
-*/
+        homebtn.setOnClickListener(this);
+        forumbtn.setOnClickListener(this);
+        storebtn.setOnClickListener(this);
+        notificationbtn.setOnClickListener(this);
+        chatbtn.setOnClickListener(this);
+        imageViewProfile.setOnClickListener(this);
+        imageRecog.setOnClickListener(this);
+
         logoutBtn = view.findViewById(R.id.logoutBtn);
         //logoutBtn.setOnClickListener((View.OnClickListener) getActivity());
         profile_image = view.findViewById(R.id.profile_image);
@@ -252,14 +257,41 @@ public class ProfileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null){
+                && data != null && data.getData() != null) {
             imageUri = data.getData();
 
-            if (uploadTask != null && uploadTask.isInProgress()){
+            if (uploadTask != null && uploadTask.isInProgress()) {
                 Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
             } else {
                 uploadImage();
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.homebtn:
+                startActivity(new Intent(getActivity(), Home.class));
+                break;
+            case R.id.forumbtn:
+                startActivity(new Intent(getActivity(), ForumActivity.class));
+                break;
+            case R.id.storebtn:
+                startActivity(new Intent(getActivity(), StoreActivity.class));
+                break;
+            case R.id.notificationbtn:
+                startActivity(new Intent(getActivity(), StoreActivity.class));
+                break;
+            case R.id.chatbtn:
+                startActivity(new Intent(getActivity(), ChatbotActivity.class));
+                break;
+            case R.id.imageViewProfile:
+                startActivity(new Intent(getActivity(), ProfileActivity.class));
+                break;
+            case R.id.imageRecog:
+                startActivity(new Intent(getActivity(), ImageRecognitionHome.class));
+                break;
         }
     }
 }

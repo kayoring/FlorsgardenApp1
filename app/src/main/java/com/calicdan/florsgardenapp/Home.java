@@ -1,15 +1,20 @@
 package com.calicdan.florsgardenapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -28,9 +33,14 @@ public class Home extends AppCompatActivity {
     FloatingActionButton imageRecog;
     Button btnWorms, btnVermicast, btnVermiculture, btnOrganic;
 
+    DatabaseReference reference;
+    FirebaseUser fuser;
+
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String uid = user.getUid();
     String userType = "customer";
+
+    private static int SPLASH_TIMER = 400000000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +61,9 @@ public class Home extends AppCompatActivity {
         chatbtn = findViewById(R.id.chatbtn);
         imageViewProfile = findViewById(R.id.imageViewProfile);
         btnWorms = findViewById(R.id.btnWorms);
+
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
         txtSeeAll = findViewById(R.id.txtSeeAll);
         //admin checker
@@ -169,6 +182,40 @@ public class Home extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        builder.setMessage("Would you like to logout?");
+        builder.setTitle("Logout?");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+            AlertDialog.Builder builder2 = new AlertDialog.Builder(Home.this);
+            builder2.setMessage("Are you sure? pressing yes will sign you out and return to login page.");
+            builder2.setTitle("Logout?");
+            builder2.setCancelable(false);
+
+            builder2.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog2, which2) -> {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Home.this, Login.class));
+                finish();
+            });
+
+            builder2.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog2, which2) -> {
+                dialog2.cancel();
+            });
+            AlertDialog alertDialog = builder2.create();
+            alertDialog.show();
+        });
+
+        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+            dialog.cancel();
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        return;
     }
 
     @Override
