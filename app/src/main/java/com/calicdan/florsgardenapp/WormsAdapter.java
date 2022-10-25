@@ -1,5 +1,6 @@
 package com.calicdan.florsgardenapp;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,9 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -34,7 +41,7 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull HomeModel model) {
+    protected void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull HomeModel model) {
 
         holder.nameText.setText(model.getName());
         holder.descriptionText.setText(model.getDescription());
@@ -72,6 +79,32 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
                 Surl.setText(model.getSurl());
 
                 dialogPlus.show();
+
+                btnUpdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("name", name.getText().toString());
+                        map.put("description", description.getText().toString());
+                        map.put("Surl", Surl.getText().toString());
+
+                        FirebaseDatabase.getInstance().getReference().child("Worms")
+                                .child(getRef(position).getKey()).updateChildren(map)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(name.getContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show();
+                                        dialogPlus.dismiss();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(name.getContext(), "Error While Updating", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
 
             }
         });
