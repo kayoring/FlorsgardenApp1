@@ -39,7 +39,7 @@ public class Home extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("8=D- - - - -");
+        getSupportActionBar().setTitle("Home");
 
         btnVermiculture = findViewById(R.id.btnVermiculture);
         btnOrganic = findViewById(R.id.btnOrganic);

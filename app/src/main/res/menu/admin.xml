@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/usersChat"
+        android:title="Check users"
+        android:icon="@drawable/users"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/white_home"
+        android:title="Home"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/qa"
+        android:title="Edit API"
+        app:showAsAction="never"/>
+</menu>
