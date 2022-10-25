@@ -119,6 +119,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                             hashMap.put("imageURL", "default");
                             hashMap.put("status", "offline");
                             hashMap.put("search", fullName.toLowerCase());
+                            hashMap.put("usertype", "customer");
 
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

@@ -33,8 +33,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class ForumFragment extends Fragment {
-    String selectedSubject;
-    String selectedDept;
     FirebaseAuth mAuth;
     private RecyclerView queList;
     private DatabaseReference Questionref, Likesref;
@@ -71,28 +69,16 @@ public class ForumFragment extends Fragment {
     }
 
     private void DisplayAllQuestion() {
-
-
-
         FirebaseRecyclerOptions<Inquiries> inquiriesOptions =
                 new FirebaseRecyclerOptions.Builder<Inquiries>()
                         .setQuery(Questionref, Inquiries.class)
                         .build();
-/*
-        FirebaseRecyclerOptions<HomeModel> options =
-                new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("OrganicWaste"), HomeModel.class)
-                        .build();
-
- */
 
         InquiriesAdapter = new FirebaseRecyclerAdapter<Inquiries, InquiriesViewHolder>(inquiriesOptions) {
 
             @NonNull
             @Override
             public InquiriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                //LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-                //View view=inflater.inflate(R.layout.all_inquiries,parent,false);
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_inquiries, parent, false);
                 return new InquiriesViewHolder(view);
             }
@@ -103,7 +89,7 @@ public class ForumFragment extends Fragment {
                 final String PostKey = getRef(i).getKey();
 
                 inquiriesViewHolder.setQuestion(inquiries.getQuestion());
-                inquiriesViewHolder.setProfileImage(getContext(), inquiries.getProfileImage());
+                inquiriesViewHolder.setProfileImage(getContext(), inquiries.getImageURL());
                 inquiriesViewHolder.setUsernamee(inquiries.getUsernamee());
                 inquiriesViewHolder.setTime(inquiries.getTime());
                 inquiriesViewHolder.setDate(inquiries.getDate());
@@ -117,7 +103,6 @@ public class ForumFragment extends Fragment {
                         //commentsIntent.putExtra("Que",)
                         commentsIntent.putExtra("Postkey", PostKey);
                         startActivity(commentsIntent);
-
                     }
                 });
 
