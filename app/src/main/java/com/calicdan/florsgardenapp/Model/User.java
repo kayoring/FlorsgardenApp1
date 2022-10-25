@@ -11,10 +11,11 @@ public class User {
     private String contact;
     private String address;
     private String password;
+    private String usertype;
 
 
     public User(String id, String fullName, String imageURL, String status,
-                String search, String email, String contact, String address, String password) {
+                String search, String email, String contact, String address, String password, String usertype) {
         this.id = id;
         this.fullName = fullName;
         this.imageURL = imageURL;
@@ -24,6 +25,7 @@ public class User {
         this.contact = contact;
         this.address = address;
         this.password = password;
+        this.usertype = usertype;
     }
 
     public User() {
@@ -108,5 +110,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 }

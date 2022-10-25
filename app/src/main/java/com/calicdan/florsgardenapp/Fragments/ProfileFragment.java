@@ -54,7 +54,6 @@ public class ProfileFragment extends Fragment {
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
     FloatingActionButton imageRecog;
 
-
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewPurchasesList;
 
@@ -100,7 +99,6 @@ public class ProfileFragment extends Fragment {
         contact = view.findViewById(R.id.contact);
         password = view.findViewById(R.id.passW);
         address = view.findViewById(R.id.address);
-        id = view.findViewById(R.id.id);
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
@@ -139,7 +137,6 @@ public class ProfileFragment extends Fragment {
                         ch[i] = pass.charAt(i);
                     }
                     username.setText("Username: " + user.getFullName());
-                    id.setText("User ID: " + user.getId());
                     email.setText("Email: " + user.getEmail());
                     contact.setText("Contact #: " + user.getContact());
                     password.setText("Password: " + ch[0]+ch[1]+"******");
