@@ -116,6 +116,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     private void userLogin(final String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
