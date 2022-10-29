@@ -2,6 +2,7 @@ package com.calicdan.florsgardenapp;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,14 +23,17 @@ public class ImageRecogResult extends ImageRecognitionOrganicWaste {
         TextView txtDesc1 = (TextView)findViewById(R.id.txtDesc1);
 
         String s = getIntent().getStringExtra("result");
+
         txtDesc1.setText(s);
-        
+
+        String res = txtDesc1.getText().toString();
+
         recyclerView = findViewById(R.id.recycleViewWorms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste/" + s), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste/" + res), HomeModel.class)
                         .build();
 
         wormsAdapter = new WormsAdapter(options);

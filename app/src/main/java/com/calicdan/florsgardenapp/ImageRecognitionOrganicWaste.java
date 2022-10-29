@@ -165,12 +165,15 @@ public class ImageRecognitionOrganicWaste extends AppCompatActivity {
 
                 image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
                 classifyImage(image);
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 Intent intent = new Intent();
                 intent.putExtra("result",result.getText().toString());
                 intent.setClass(ImageRecognitionOrganicWaste.this, ImageRecogResult.class);
