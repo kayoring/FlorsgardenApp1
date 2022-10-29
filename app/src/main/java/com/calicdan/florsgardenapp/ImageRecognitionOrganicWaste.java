@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.calicdan.florsgardenapp.ml.Model;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -132,6 +132,15 @@ public class ImageRecognitionOrganicWaste extends AppCompatActivity {
             }
             String[] classes = {"apple", "banana", "cabbage", "carrot", "chayote", "chili", "egg", "orange", "tomato"};
             result.setText(classes[maxPos]);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(ImageRecognitionOrganicWaste.this,ImageRecogResult.class);
+                    intent.putExtra("result",result.getText().toString());
+                    startActivity(intent);
+
+                }
+            }, 2000);
 
             // Releases model resources if no longer used.
             model.close();
@@ -168,7 +177,9 @@ public class ImageRecognitionOrganicWaste extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+
     }
+
 }
 
 

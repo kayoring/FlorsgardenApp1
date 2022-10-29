@@ -15,6 +15,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class OrganicWaste extends AppCompatActivity {
     RecyclerView recyclerView;
     WormsAdapter wormsAdapter;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +35,8 @@ public class OrganicWaste extends AppCompatActivity {
         wormsAdapter = new WormsAdapter(options);
         recyclerView.setAdapter(wormsAdapter);
 
+        }
 
-
-    }
 
     @Override
     protected void onStart() {
