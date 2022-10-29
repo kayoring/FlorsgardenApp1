@@ -27,9 +27,9 @@ public class Vermiculture extends AppCompatActivity {
 
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("ermiculture"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Vermiculture"), HomeModel.class)
                         .build();
-
+        
         wormsAdapater = new WormsAdapter(options);
         recyclerView.setAdapter(wormsAdapater);
 
@@ -75,12 +75,12 @@ public class Vermiculture extends AppCompatActivity {
     private void txtSearch(String str) {
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Vermiculture").orderByChild("name").startAt(str + "~"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Vermiculture").orderByChild("name").startAt(str + "~"), HomeModel.class)
                         .build();
 
         wormsAdapater = new WormsAdapter(options);
         wormsAdapater.startListening();
-        recyclerView.setAdapter( wormsAdapater);
+        recyclerView.setAdapter(wormsAdapater);
 
 
 
