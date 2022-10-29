@@ -17,16 +17,19 @@ public class ImageRecogResult extends ImageRecognitionOrganicWaste {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_recog_result);
-        TextView tv = (TextView) findViewById(R.id.txtDesc);
-        tv.setText(getIntent().getExtras().getString("result"));
+        //TextView txtDesc1 = (TextView) findViewById(R.id.txtDesc1);
+        //txtDesc1.setText(getIntent().getExtras().getString("result"));
+        TextView txtDesc1 = (TextView)findViewById(R.id.txtDesc1);
 
-
+        String s = getIntent().getStringExtra("result");
+        txtDesc1.setText(s);
+        
         recyclerView = findViewById(R.id.recycleViewWorms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste/" + tv), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste/" + s), HomeModel.class)
                         .build();
 
         wormsAdapter = new WormsAdapter(options);

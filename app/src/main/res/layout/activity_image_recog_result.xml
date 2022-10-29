@@ -19,11 +19,12 @@
         app:layout_constraintVertical_bias="1.0">
 
 
-        <Button
-            android:id="@+id/btnAdd"
+        <TextView
+            android:id="@+id/txtDesc1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add New" />
+            android:text="txtDesc"
+            android:textAlignment="center" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleViewWorms"

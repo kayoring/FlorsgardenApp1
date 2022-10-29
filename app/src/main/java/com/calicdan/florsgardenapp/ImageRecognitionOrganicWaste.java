@@ -132,15 +132,6 @@ public class ImageRecognitionOrganicWaste extends AppCompatActivity {
             }
             String[] classes = {"apple", "banana", "cabbage", "carrot", "chayote", "chili", "egg", "orange", "tomato"};
             result.setText(classes[maxPos]);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(ImageRecognitionOrganicWaste.this,ImageRecogResult.class);
-                    intent.putExtra("result",result.getText().toString());
-                    startActivity(intent);
-
-                }
-            }, 2000);
 
             // Releases model resources if no longer used.
             model.close();
@@ -177,6 +168,16 @@ public class ImageRecognitionOrganicWaste extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent();
+                intent.putExtra("result",result.getText().toString());
+                intent.setClass(ImageRecognitionOrganicWaste.this, ImageRecogResult.class);
+                startActivity(intent);
+
+            }
+        }, 2000);
 
     }
 
