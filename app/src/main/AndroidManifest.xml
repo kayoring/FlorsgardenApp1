@@ -136,6 +136,9 @@
         <activity
             android:name=".ImageRecognitionWorm"
             android:exported="true" />
+        <activity
+            android:name=".Search"
+            android:exported="true" />
     </application>
 
 </manifest>
