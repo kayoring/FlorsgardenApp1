@@ -66,8 +66,6 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
                         .setExpanded(true,1500)
                         .create();
 
-
-
                 View view = dialogPlus.getHolderView();
 
                 EditText name = view.findViewById(R.id.txtName);
