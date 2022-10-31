@@ -6,7 +6,6 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,9 +21,6 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Search");
 
 
         recyclerView = findViewById(R.id.recycleViewWorms);
@@ -38,7 +34,6 @@ public class Search extends AppCompatActivity {
         recyclerView.setAdapter(searchAdapter);
 
     }
-
 
     @Override
     protected void onStart() {
@@ -55,9 +50,14 @@ public class Search extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search, menu);
-        MenuItem item = menu.findItem(R.id.search);
-        SearchView searchview = (SearchView)item.getActionView();
+
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        // Initialise menu item search bar
+        // with id and take its object
+        MenuItem searchViewItem = menu.findItem(R.id.search);
+        SearchView searchview = (SearchView) searchViewItem.getActionView();
+        searchview.setQueryHint("Type here to search");
 
         searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override

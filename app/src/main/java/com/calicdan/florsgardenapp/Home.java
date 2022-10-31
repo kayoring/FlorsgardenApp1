@@ -47,7 +47,7 @@ public class Home extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
-        btnSearch = findViewById(R.id.btnSearch);
+
         btnVermiculture = findViewById(R.id.btnVermiculture);
         btnOrganic = findViewById(R.id.btnOrganic);
         homebtn = findViewById(R.id.homebtn);
@@ -178,12 +178,7 @@ public class Home extends AppCompatActivity {
 
             }
         });
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Home.this, Search.class));
-            }
-        });
+
     }
 
     @Override
