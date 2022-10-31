@@ -47,6 +47,7 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
 
         holder.nameText.setText(model.getName());
         holder.descriptionText.setText(model.getDescription());
+        holder.categoryText.setText(model.getCategory());
 
         Glide.with(holder.profileImage.getContext())
                 .load(model.getSurl())
@@ -72,6 +73,7 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
                 EditText name = view.findViewById(R.id.txtName);
                 EditText description = view.findViewById(R.id.txtDesc);
                 EditText Surl = view.findViewById(R.id.txtSurl);
+                EditText category = view.findViewById(R.id.txtCategory);
 
                 Button btnUpdate = view.findViewById(R.id.btnUpdate);
 
@@ -79,6 +81,7 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
                 name.setText(model.getName());
                 description.setText(model.getDescription());
                 Surl.setText(model.getSurl());
+                category.setText(model.getCategory());
 
                 dialogPlus.show();
 
@@ -89,8 +92,9 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
                         map.put("name", name.getText().toString());
                         map.put("description", description.getText().toString());
                         map.put("Surl", Surl.getText().toString());
+                        map.put("category", category.getText().toString());
 
-                        FirebaseDatabase.getInstance().getReference().child("Worms")
+                        FirebaseDatabase.getInstance().getReference().child("Guides/Worms")
                                 .child(getRef(position).getKey()).updateChildren(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -121,7 +125,7 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("Worms")
+                        FirebaseDatabase.getInstance().getReference().child("Guides/Worms")
                                 .child(getRef(position).getKey()).removeValue();
                         Toast.makeText(holder.nameText.getContext(), "Successfully Deleted", Toast.LENGTH_SHORT).show();
                     }
@@ -148,8 +152,7 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
 
     class myViewHolder extends RecyclerView.ViewHolder {
         CircleImageView profileImage;
-        TextView nameText;
-        TextView descriptionText;
+        TextView nameText, descriptionText, categoryText;
 
         ImageView imgEdit;
 
@@ -161,6 +164,7 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
             profileImage = (CircleImageView)itemView.findViewById(R.id.profileImage);
 
             nameText = (TextView)itemView.findViewById(R.id.nameText);
+            categoryText = (TextView)itemView.findViewById(R.id.categoryText);
 
             descriptionText = (TextView)itemView.findViewById(R.id.descriptionText);
 

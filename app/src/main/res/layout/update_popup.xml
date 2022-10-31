@@ -46,6 +46,26 @@
     <EditText
         android:id="@+id/txtDesc"
         android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/rounded"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="Can be used in vermiculture:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/txtCategory"
+        android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"

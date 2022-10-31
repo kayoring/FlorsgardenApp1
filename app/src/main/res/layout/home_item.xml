@@ -30,7 +30,7 @@
         <TextView
             android:id="@+id/nameText"
             android:layout_width="207dp"
-            android:layout_height="44dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_toRightOf="@+id/profileImage"
             android:text="Name"
@@ -45,11 +45,26 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
+            android:id="@+id/nameText2"
+            android:layout_width="168dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@+id/profileImage"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Can be used in vermiculture:"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.078"
+            app:layout_constraintStart_toEndOf="@+id/profileImage"
+            app:layout_constraintTop_toBottomOf="@+id/nameText" />
+
+        <TextView
             android:id="@+id/descriptionText"
             android:layout_width="221dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/nameText"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
             android:layout_toRightOf="@+id/profileImage"
             android:text="Description"
             android:textColor="#000000"
@@ -57,10 +72,26 @@
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.166"
+            app:layout_constraintHorizontal_bias="0.054"
             app:layout_constraintStart_toEndOf="@+id/profileImage"
-            app:layout_constraintTop_toBottomOf="@+id/nameText"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/nameText2"
+            app:layout_constraintVertical_bias="0.041" />
+
+        <TextView
+            android:id="@+id/categoryText"
+            android:layout_width="32dp"
+            android:layout_height="19dp"
+            android:layout_below="@id/nameText"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@+id/profileImage"
+            android:text="Yes"
+            android:textColor="@color/purple_500"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.08"
+            app:layout_constraintStart_toEndOf="@+id/nameText2"
+            app:layout_constraintTop_toBottomOf="@+id/imgEdit" />
 
         <ImageView
             android:id="@+id/imgEdit"

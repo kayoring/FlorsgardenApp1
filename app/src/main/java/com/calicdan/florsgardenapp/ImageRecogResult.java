@@ -2,7 +2,6 @@ package com.calicdan.florsgardenapp;
 
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +19,7 @@ public class ImageRecogResult extends ImageRecognitionOrganicWaste {
         setContentView(R.layout.activity_image_recog_result);
         //TextView txtDesc1 = (TextView) findViewById(R.id.txtDesc1);
         //txtDesc1.setText(getIntent().getExtras().getString("result"));
-        TextView txtDesc1 = (TextView)findViewById(R.id.txtDesc1);
+        TextView txtDesc1 = (TextView) findViewById(R.id.txtDesc1);
 
         String s = getIntent().getStringExtra("result");
 
@@ -33,24 +32,13 @@ public class ImageRecogResult extends ImageRecognitionOrganicWaste {
 
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste/" + res), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste/Banana"), HomeModel.class)
                         .build();
 
         wormsAdapter = new WormsAdapter(options);
+        wormsAdapter.startListening();
         recyclerView.setAdapter(wormsAdapter);
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        wormsAdapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        wormsAdapter.stopListening();
     }
 
     }
