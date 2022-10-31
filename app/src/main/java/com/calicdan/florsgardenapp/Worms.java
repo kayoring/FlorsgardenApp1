@@ -42,7 +42,7 @@ public class Worms extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), AddGuides.class));
+                startActivity(new Intent(getApplicationContext(), AddGuidesWorms.class));
             }
         });
 

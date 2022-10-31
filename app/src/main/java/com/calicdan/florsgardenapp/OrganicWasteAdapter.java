@@ -47,6 +47,7 @@ public class OrganicWasteAdapter extends FirebaseRecyclerAdapter<HomeModel,Organ
 
         holder.nameText.setText(model.getName());
         holder.descriptionText.setText(model.getDescription());
+        holder.categoryText.setText(model.getCategory());
 
         Glide.with(holder.profileImage.getContext())
                 .load(model.getSurl())

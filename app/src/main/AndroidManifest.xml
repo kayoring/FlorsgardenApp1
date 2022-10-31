@@ -27,7 +27,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddGuides"
+            android:name=".AddGuidesWorms"
             android:exported="false" />
         <activity
             android:name=".GuidesCategories"
@@ -140,6 +140,10 @@
 
             android:name=".Search"
             android:exported="true" />
+        <activity
+
+        android:name=".AddGuidesOrganicWaste"
+        android:exported="true" />
     </application>
 
 </manifest>

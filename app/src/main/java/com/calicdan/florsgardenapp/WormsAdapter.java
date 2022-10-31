@@ -56,8 +56,6 @@ public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter
                 .error(R.drawable.common_google_signin_btn_icon_dark_normal)
                 .into(holder.profileImage);
 
-
-
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

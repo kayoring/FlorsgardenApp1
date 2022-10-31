@@ -1,8 +1,11 @@
 package com.calicdan.florsgardenapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -15,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class OrganicWaste extends AppCompatActivity {
     RecyclerView recyclerView;
     OrganicWasteAdapter organicWasteAdapter;
-
+    Button btnAdd;
 
 
     @Override
@@ -26,6 +29,16 @@ public class OrganicWaste extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycleViewWorms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        btnAdd = findViewById(R.id.btnAdd);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AddGuidesOrganicWaste.class));
+            }
+        });
+
 
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()

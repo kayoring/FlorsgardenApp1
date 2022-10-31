@@ -32,7 +32,7 @@ public class ImageRecogResult extends ImageRecognitionOrganicWaste {
 
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste/"), HomeModel.class)
                         .build();
 
         wormsAdapter = new WormsAdapter(options);
