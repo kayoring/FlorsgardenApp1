@@ -31,7 +31,7 @@ public class Worms extends AppCompatActivity {
 
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Worms"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Worms"), HomeModel.class)
                         .build();
 
         wormsAdapter = new WormsAdapter(options);
@@ -87,7 +87,7 @@ public class Worms extends AppCompatActivity {
     private void txtSearch(String str) {
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides").orderByChild("name").startAt(str).endAt(str + "~"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Worms").orderByChild("name").startAt(str).endAt(str + "~"), HomeModel.class)
                         .build();
 
         wormsAdapter = new WormsAdapter(options);

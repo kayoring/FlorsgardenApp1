@@ -4,16 +4,18 @@ public class HomeModel {
     String name;
     String description;
     String Surl;
+    String category;
 
 //constructor
     HomeModel() {
 
 
     }
-    public HomeModel(String name, String description, String Surl) {
+    public HomeModel(String name, String description, String Surl, String  category) {
         this.name = name;
         this.description = description;
         this.Surl = Surl;
+        this. category =  category;
     }
 //setters and getters
     public String getName() {
@@ -38,5 +40,14 @@ public class HomeModel {
 
     public void setSurl(String Surl) {
         this.Surl = Surl;
+    }
+
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

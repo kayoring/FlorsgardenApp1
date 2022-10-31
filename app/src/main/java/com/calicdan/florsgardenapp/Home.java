@@ -4,14 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -31,7 +28,7 @@ public class Home extends AppCompatActivity {
     TextView txtSeeAll;
     View homebtn, forumbtn, storebtn, notificationbtn, chatbtn, imageViewProfile;
     FloatingActionButton imageRecog;
-    Button btnWorms, btnVermicast, btnVermiculture, btnOrganic;
+    Button btnWorms, btnSearch, btnVermiculture, btnOrganic;
 
     DatabaseReference reference;
     FirebaseUser fuser;
@@ -50,7 +47,7 @@ public class Home extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
-
+        btnSearch = findViewById(R.id.btnSearch);
         btnVermiculture = findViewById(R.id.btnVermiculture);
         btnOrganic = findViewById(R.id.btnOrganic);
         homebtn = findViewById(R.id.homebtn);
@@ -129,7 +126,7 @@ public class Home extends AppCompatActivity {
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Home.this, ImageRecognitionOrganicWaste.class));
+                startActivity(new Intent(Home.this, ImageRecognitionHome.class));
             }
         });
         chatbtn.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +178,12 @@ public class Home extends AppCompatActivity {
 
             }
         });
-
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Home.this, Search.class));
+            }
+        });
     }
 
     @Override
@@ -229,7 +231,7 @@ public class Home extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search:
-                startActivity(new Intent(Home.this, ChatActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(Home.this, Search.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 return true;
         }
         return false;

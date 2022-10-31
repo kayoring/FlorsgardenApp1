@@ -8,17 +8,18 @@ import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.calicdan.florsgardenapp.ml.Model;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -165,10 +166,35 @@ public class ImageRecognitionOrganicWaste extends AppCompatActivity {
 
                 image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
                 classifyImage(image);
+
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+        Toast.makeText(com.calicdan.florsgardenapp.ImageRecognitionOrganicWaste.this,"Redirecting...", Toast.LENGTH_SHORT).show();
+            }
+        }, 1000);
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                Intent intent = new Intent();
+                intent.putExtra("result",result.getText().toString());
+                intent.setClass(ImageRecognitionOrganicWaste.this, ImageRecogResult.class);
+                startActivity(intent);
+
+
+            }
+        }, 2000);
+
     }
+
 }
 
 

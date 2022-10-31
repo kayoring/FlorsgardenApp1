@@ -17,6 +17,9 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ImageRecogResult"
+            android:exported="false" />
+        <activity
             android:name=".ChangeEmailActivity"
             android:exported="false">
             <meta-data
@@ -129,6 +132,12 @@
             android:exported="true" />
         <activity
             android:name=".Worms"
+            android:exported="true" />
+        <activity
+            android:name=".ImageRecognitionWorm"
+            android:exported="true" />
+        <activity
+            android:name=".Search"
             android:exported="true" />
     </application>
 

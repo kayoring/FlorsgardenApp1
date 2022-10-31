@@ -14,7 +14,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class OrganicWaste extends AppCompatActivity {
     RecyclerView recyclerView;
-    WormsAdapter wormsAdapter;
+    OrganicWasteAdapter organicWasteAdapter;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,23 +32,22 @@ public class OrganicWaste extends AppCompatActivity {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste"), HomeModel.class)
                         .build();
 
-        wormsAdapter = new WormsAdapter(options);
-        recyclerView.setAdapter(wormsAdapter);
+        organicWasteAdapter = new OrganicWasteAdapter(options);
+        recyclerView.setAdapter(organicWasteAdapter);
 
+        }
 
-
-    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        wormsAdapter.startListening();
+        organicWasteAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        wormsAdapter.stopListening();
+        organicWasteAdapter.stopListening();
     }
 
     @Override
@@ -77,9 +79,9 @@ public class OrganicWaste extends AppCompatActivity {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste").orderByChild("name").startAt(str + "~"), HomeModel.class)
                         .build();
 
-        wormsAdapter = new WormsAdapter(options);
-        wormsAdapter.startListening();
-        recyclerView.setAdapter( wormsAdapter);
+        organicWasteAdapter = new OrganicWasteAdapter(options);
+        organicWasteAdapter.startListening();
+        recyclerView.setAdapter(organicWasteAdapter);
 
 
 
