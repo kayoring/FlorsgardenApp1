@@ -32,7 +32,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Reset Password");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         send_email = findViewById(R.id.send_email);
         resetBtn = findViewById(R.id.resetBtn);
@@ -66,6 +65,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+
         super.onStart();
     }
+
+
 }
