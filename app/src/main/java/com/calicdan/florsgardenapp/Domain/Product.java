@@ -2,9 +2,10 @@ package com.calicdan.florsgardenapp.Domain;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Product {
+public class Product implements Serializable {
     private String productName, productDescription;
     private int productQuantity;
     private float productPrice;

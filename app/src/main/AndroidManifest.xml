@@ -17,6 +17,11 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AdminDetailsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_admin_details"
+            android:theme="@style/Theme.FlorsgardenApp.NoActionBar" />
+        <activity
             android:name=".ImageRecogResult"
             android:exported="false" />
         <activity
@@ -137,13 +142,11 @@
             android:name=".ImageRecognitionWorm"
             android:exported="true" />
         <activity
-
             android:name=".Search"
             android:exported="true" />
         <activity
-
-        android:name=".AddGuidesOrganicWaste"
-        android:exported="true" />
+            android:name=".AddGuidesOrganicWaste"
+            android:exported="true" />
     </application>
 
 </manifest>

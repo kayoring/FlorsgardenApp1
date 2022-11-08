@@ -77,7 +77,6 @@ public class AddProduct extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),productName + " Added!",Toast.LENGTH_SHORT).show();
                 uploadPicture();
                 startActivity(new Intent(AddProduct.this,AdminStoreActivity.class));
-
             }
         });
     }
