@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddGuidesWorms extends AppCompatActivity {
+public class AddGuidesVermiculture extends AppCompatActivity {
 
     EditText name, description, Surl, category;
     Button btnBack, btnUpdate;
@@ -60,19 +60,19 @@ public class AddGuidesWorms extends AppCompatActivity {
         map.put("category", category.getText().toString());
         map.put("Surl", Surl.getText().toString());
 
-        FirebaseDatabase.getInstance().getReference().child("Guides/Worms").push()
+        FirebaseDatabase.getInstance().getReference().child("Guides/Vermiculture").push()
                 .setValue(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(AddGuidesWorms.this, "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddGuidesVermiculture.this, "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
                     }
                 })
 
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddGuidesWorms.this, "Error! Cannot Insert Data.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddGuidesVermiculture.this, "Error! Cannot Insert Data.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

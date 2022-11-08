@@ -93,7 +93,7 @@ public class VermicultureAdapter extends FirebaseRecyclerAdapter<HomeModel,Vermi
                         map.put("Surl", Surl.getText().toString());
                         map.put("category", category.getText().toString());
 
-                        FirebaseDatabase.getInstance().getReference().child("/Guides/Vermiculture")
+                        FirebaseDatabase.getInstance().getReference().child("Guides/Vermiculture")
                                 .child(getRef(position).getKey()).updateChildren(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -124,7 +124,7 @@ public class VermicultureAdapter extends FirebaseRecyclerAdapter<HomeModel,Vermi
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("/Guides/Vermiculture")
+                        FirebaseDatabase.getInstance().getReference().child("Guides/Vermiculture")
                                 .child(getRef(position).getKey()).removeValue();
                         Toast.makeText(holder.nameText.getContext(), "Successfully Deleted", Toast.LENGTH_SHORT).show();
                     }

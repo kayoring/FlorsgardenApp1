@@ -56,7 +56,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/rounded_corner"
-        android:text="Search"
+        android:text="category"
         android:textSize="8sp" />
 
     <Button

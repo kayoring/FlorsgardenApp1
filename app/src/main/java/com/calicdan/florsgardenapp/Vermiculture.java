@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,15 +31,10 @@ public class Vermiculture extends AppCompatActivity {
 
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Worms"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Vermiculture"), HomeModel.class)
                         .build();
 
-        vermicultureAdapter = new VermicultureAdapter(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull HomeModel model) {
-
-            }
-        };
+        vermicultureAdapter = new VermicultureAdapter(options);
         recyclerView.setAdapter(vermicultureAdapter);
 
         btnAdd = findViewById(R.id.btnAdd);
@@ -48,7 +42,7 @@ public class Vermiculture extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), AddGuidesWorms.class));
+                startActivity(new Intent(getApplicationContext(), AddGuidesVermiculture.class));
             }
         });
 
@@ -93,7 +87,7 @@ public class Vermiculture extends AppCompatActivity {
     private void txtSearch(String str) {
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("/Guides/Vermiculture").orderByChild("name").startAt(str).endAt(str + "~"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Vermiculture").orderByChild("name").startAt(str).endAt(str + "~"), HomeModel.class)
                         .build();
 
         vermicultureAdapter = new VermicultureAdapter(options);
