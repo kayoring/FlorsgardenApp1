@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class AddGuidesOrganicWaste extends AppCompatActivity {
 
-    EditText name, description, Surl;
+    EditText name, description, Surl, category;
     Button btnBack, btnUpdate;
 
     @Override
@@ -30,6 +30,7 @@ public class AddGuidesOrganicWaste extends AppCompatActivity {
         name = findViewById(R.id.txtName);
         description = findViewById(R.id.txtDesc);
         Surl = findViewById(R.id.txtSurl);
+        category = findViewById(R.id.txtCat);
         btnBack = findViewById(R.id.btnBack);
         btnUpdate = findViewById(R.id.btnUpdate);
 
@@ -56,6 +57,7 @@ public class AddGuidesOrganicWaste extends AppCompatActivity {
         Map<String, Object> map = new HashMap<>();
         map.put("name", name.getText().toString());
         map.put("description", description.getText().toString());
+        map.put("category", category.getText().toString());
         map.put("Surl", Surl.getText().toString());
 
         FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste").push()

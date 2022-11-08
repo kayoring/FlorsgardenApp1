@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.calicdan.florsgardenapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -42,7 +43,8 @@
             android:exported="false" />
         <activity
             android:name=".AddInquiryActivity"
-            android:exported="false">
+            android:exported="false"
+            tools:ignore="Instantiatable">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -145,7 +147,12 @@
             android:name=".Search"
             android:exported="true" />
         <activity
-            android:name=".AddGuidesOrganicWaste"
+
+        android:name=".AddGuidesOrganicWaste"
+        android:exported="true" />
+        <activity
+
+            android:name=".AddGuidesVermiculture"
             android:exported="true" />
     </application>
 
