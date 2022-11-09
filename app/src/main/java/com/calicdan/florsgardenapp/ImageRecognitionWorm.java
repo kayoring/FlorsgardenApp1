@@ -19,7 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.calicdan.florsgardenapp.ml.Model;
+import com.calicdan.florsgardenapp.ml.Model2;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -95,7 +95,7 @@ public class ImageRecognitionWorm extends AppCompatActivity {
 
     public void classifyImage(Bitmap image) {
         try {
-            Model model1 = Model.newInstance(getApplicationContext());
+            Model2 model2 = Model2.newInstance(getApplicationContext());
 
             // Creates inputs for reference.
             TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 32, 32, 3}, DataType.FLOAT32);
@@ -118,7 +118,7 @@ public class ImageRecognitionWorm extends AppCompatActivity {
             inputFeature0.loadBuffer(byteBuffer);
 
             // Runs model inference and gets result.
-            Model.Outputs outputs = model1.process(inputFeature0);
+            Model2.Outputs outputs = model2.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
 
             float[] confidences = outputFeature0.getFloatArray();
@@ -135,7 +135,7 @@ public class ImageRecognitionWorm extends AppCompatActivity {
             result1.setText(classes[maxPos]);
 
             // Releases model resources if no longer used.
-            model1.close();
+            model2.close();
         } catch (IOException e) {
             // TODO Handle the exception
         }
