@@ -51,6 +51,7 @@ public class AnswersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_answers);
         Post_Key = getIntent().getExtras().get("Postkey").toString();
         mAuth = FirebaseAuth.getInstance();
@@ -59,9 +60,10 @@ public class AnswersActivity extends AppCompatActivity {
         fuser = FirebaseDatabase.getInstance().getReference().child("Users");
         Questionref = FirebaseDatabase.getInstance().getReference().child("Subject").child("Questions").child(Post_Key).child("answers");
 
-
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Discussion Board");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         AnsList = (RecyclerView) findViewById(R.id.ans_list);

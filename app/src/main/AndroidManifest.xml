@@ -18,6 +18,13 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SendImageActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AdminDetailsActivity"
             android:exported="false"
             android:label="@string/title_activity_admin_details"
@@ -147,11 +154,9 @@
             android:name=".Search"
             android:exported="true" />
         <activity
-
-        android:name=".AddGuidesOrganicWaste"
-        android:exported="true" />
+            android:name=".AddGuidesOrganicWaste"
+            android:exported="true" />
         <activity
-
             android:name=".AddGuidesVermiculture"
             android:exported="true" />
         <activity

@@ -52,16 +52,20 @@ public class ForumFragment extends Fragment {
         }
 
         queList = (RecyclerView) rootview.findViewById(R.id.all_que_list);
+
         queList.setHasFixedSize(true);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
+
         queList.setLayoutManager(linearLayoutManager);
         Questionref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Questions");
         Likesref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Likes");
 
         queList.hasFixedSize();
-        queList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        queList.setLayoutManager(linearLayoutManager);
+        //queList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         DisplayAllQuestion();
 

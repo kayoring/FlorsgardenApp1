@@ -182,6 +182,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     for (int i = 0; i < pass.length(); i++) {
                         ch[i] = pass.charAt(i);
                     }
+
                     username.setText("Username: " + user.getFullName());
                     email.setText("Email: " + user.getEmail());
                     contact.setText("Contact #: " + user.getContact());

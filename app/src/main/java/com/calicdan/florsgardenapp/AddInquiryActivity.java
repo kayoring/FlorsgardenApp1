@@ -69,6 +69,7 @@ public class AddInquiryActivity extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 addNewQuestion(selectedSubject,selectedDept);
+                                question.setText("");
                             }
                         })
                         .setNegativeButton("No",null)
@@ -76,7 +77,6 @@ public class AddInquiryActivity extends Fragment {
 
             }
         });
-
 
         return view;
     }
