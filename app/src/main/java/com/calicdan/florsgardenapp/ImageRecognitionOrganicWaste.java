@@ -56,7 +56,7 @@ public class ImageRecognitionOrganicWaste extends AppCompatActivity {
         gallery = findViewById(R.id.button2);
 
         result = findViewById(R.id.result);
-        imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageViewWorms);
 
         camera.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
