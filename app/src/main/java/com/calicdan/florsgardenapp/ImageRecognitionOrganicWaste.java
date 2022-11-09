@@ -186,7 +186,7 @@ public class ImageRecognitionOrganicWaste extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 intent.putExtra("result",result.getText().toString());
-                intent.setClass(ImageRecognitionOrganicWaste.this, ImageRecogResult.class);
+                intent.setClass(ImageRecognitionOrganicWaste.this, ImageRecogResultOrganic.class);
                 startActivity(intent);
 
 

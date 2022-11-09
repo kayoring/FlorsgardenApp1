@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ImageRecogResult extends ImageRecognitionOrganicWaste {
+public class ImageRecogResultOrganic extends ImageRecognitionOrganicWaste {
     RecyclerView recyclerView;
     WormsAdapter wormsAdapter;
 

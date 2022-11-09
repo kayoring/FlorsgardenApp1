@@ -186,7 +186,7 @@ public class ImageRecognitionWorm extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 intent.putExtra("result",result1.getText().toString());
-                intent.setClass(ImageRecognitionWorm.this, ImageRecogResult.class);
+                intent.setClass(ImageRecognitionWorm.this, ImageRecogResultWorm.class);
                 startActivity(intent);
 
 

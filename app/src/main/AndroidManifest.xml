@@ -23,7 +23,7 @@
             android:label="@string/title_activity_admin_details"
             android:theme="@style/Theme.FlorsgardenApp.NoActionBar" />
         <activity
-            android:name=".ImageRecogResult"
+            android:name=".ImageRecogResultOrganic"
             android:exported="false" />
         <activity
             android:name=".ChangeEmailActivity"
@@ -153,6 +153,10 @@
         <activity
 
             android:name=".AddGuidesVermiculture"
+            android:exported="true" />
+        <activity
+
+            android:name=".ImageRecogResultWorm"
             android:exported="true" />
     </application>
 
