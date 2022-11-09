@@ -15,8 +15,8 @@
         android:layout_height="30dp"
         android:layout_below="@+id/textView11"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"
         android:text="Flor's Garden Website"
         android:textSize="8sp" />
@@ -40,23 +40,13 @@
         android:layout_width="110dp"
         android:layout_height="30dp"
         android:layout_below="@+id/btnOrganic"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/btnSearch"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="272dp"
         android:background="@drawable/rounded_corner"
         android:text="Worms"
-        android:textSize="8sp" />
-
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="110dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/btnFlorsGarden"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/rounded_corner"
-        android:text="category"
         android:textSize="8sp" />
 
     <Button
@@ -389,11 +379,12 @@
         android:id="@+id/txtSeeAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnSearch"
+        android:layout_below="@+id/btnWorms"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="326dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="340dp"
         android:text="See all"
         android:textColor="#3F51B5" />
 
