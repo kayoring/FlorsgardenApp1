@@ -25,14 +25,14 @@ public class ImageRecogResultOrganic extends ImageRecognitionOrganicWaste {
 
         txtDesc1.setText(s);
 
-        String res = txtDesc1.getText().toString();
+       // String res = txtDesc1.getText().toString();
 
         recyclerView = findViewById(R.id.recycleViewWorms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste/"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste").orderByChild("name").equalTo(s), HomeModel.class)
                         .build();
 
         wormsAdapter = new WormsAdapter(options);

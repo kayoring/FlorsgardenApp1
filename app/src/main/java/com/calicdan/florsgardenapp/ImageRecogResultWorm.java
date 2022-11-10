@@ -25,14 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
             txtDesc1.setText(s);
 
-            String res = txtDesc1.getText().toString();
+            //String res = txtDesc1.getText().toString();
 
             recyclerView = findViewById(R.id.recycleViewWorms);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
             FirebaseRecyclerOptions<HomeModel> options =
                     new FirebaseRecyclerOptions.Builder<HomeModel>()
-                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Worms"), HomeModel.class)
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Worms").orderByChild("name").equalTo(s), HomeModel.class)
                             .build();
 
             wormsAdapter = new WormsAdapter(options);
