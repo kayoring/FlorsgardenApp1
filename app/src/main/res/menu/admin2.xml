@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/usersChat"
+        android:id="@+id/bot"
         android:title="Chat Bot"
         android:icon="@drawable/wrmbot"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/home"
         android:icon="@drawable/white_home"
@@ -13,7 +13,7 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/edit"
-        android:icon="@drawable/ic_baseline_edit_24"
+        android:icon="@drawable/users"
         android:title="Remove/delete users"
-        app:showAsAction="never"/>
+        app:showAsAction="ifRoom"/>
 </menu>

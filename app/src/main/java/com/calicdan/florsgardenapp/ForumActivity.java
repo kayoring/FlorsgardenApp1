@@ -32,6 +32,14 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setTitle("Discussion Board");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ForumActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
+            }
+        });
+
         homebtn = findViewById(R.id.homebtn);
         forumbtn = findViewById(R.id.forumbtn);
         storebtn = findViewById(R.id.storebtn);
@@ -47,12 +55,6 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
         chatbtn.setOnClickListener(this);
         imageViewProfile.setOnClickListener(this);
         imageRecog.setOnClickListener(this);
-
-/*
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-        bottomNav.setOnNavigationItemSelectedListener(navListner);
-
- */
 
         if(savedInstanceState==null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp, new ForumFragment()).commit();
@@ -117,29 +119,4 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
         menu.findItem(R.id.search).setVisible(true);
         return super.onPrepareOptionsMenu(menu);
     }
-
-    /*
-    private BottomNavigationView.OnNavigationItemSelectedListener navListner = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()){
-                case R.id.bforum:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp,new ForumFragment()).commit();
-                    break;
-
-                case R.id.bhome:
-                    Intent intent=new Intent(getApplicationContext(),Home.class);
-                    startActivity(intent);
-                    finish();
-                    break;
-
-                case R.id.badd:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp,new AddInquiryActivity()).commit();
-                    break;
-
-            }
-            return true;
-        }
-    };
-     */
 }

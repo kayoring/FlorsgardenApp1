@@ -52,6 +52,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = mUsers.get(position);
         holder.username.setText(user.getUsername());
+
         if (user.getImageURL().equals("default")){
             holder.profile_image.setImageResource(R.drawable.ic_default_profile);
         } else {
@@ -115,12 +116,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         theLastMessage = "default";
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chats");
-
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Chat chat = snapshot.getValue(Chat.class);
+                    String type = chat.getType();
                     if (firebaseUser != null && chat != null) {
                         if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid) ||
                                 chat.getReceiver().equals(userid) && chat.getSender().equals(firebaseUser.getUid())) {
@@ -133,7 +134,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                     case  "default":
                         last_msg.setText("No Message");
                         break;
-
                     default:
                         last_msg.setText(theLastMessage);
                         break;

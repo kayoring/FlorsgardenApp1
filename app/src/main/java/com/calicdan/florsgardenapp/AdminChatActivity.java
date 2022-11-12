@@ -19,8 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.calicdan.florsgardenapp.Fragments.AdminChatsFragment;
+import com.calicdan.florsgardenapp.Fragments.AdminUsersFragment;
 import com.calicdan.florsgardenapp.Fragments.ChatsFragment;
-import com.calicdan.florsgardenapp.Fragments.ProfileFragment;
 import com.calicdan.florsgardenapp.Fragments.UsersFragment;
 import com.calicdan.florsgardenapp.Model.Chat;
 import com.calicdan.florsgardenapp.Model.User;
@@ -38,7 +39,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ChatActivity extends AppCompatActivity {
+public class AdminChatActivity extends AppCompatActivity {
 
     CircleImageView profile_image;
     TextView username;
@@ -49,8 +50,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
-
+        setContentView(R.layout.activity_admin_chat);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -101,12 +101,12 @@ public class ChatActivity extends AppCompatActivity {
                 }
 
                 if (unread == 0){
-                    viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
+                    viewPagerAdapter.addFragment(new AdminChatsFragment(), "Chats");
                 } else {
-                    viewPagerAdapter.addFragment(new ChatsFragment(), "("+unread+") Chats");
+                    viewPagerAdapter.addFragment(new AdminChatsFragment(), "("+unread+") Chats");
                 }
 
-                viewPagerAdapter.addFragment(new UsersFragment(), "Admins");
+                viewPagerAdapter.addFragment(new AdminUsersFragment(), "Customers/Users");
 
                 viewPager.setAdapter(viewPagerAdapter);
 
@@ -123,21 +123,21 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu2, menu);
+        getMenuInflater().inflate(R.menu.admin2, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case  R.id.chatbot:
-                AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+            case  R.id.bot:
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminChatActivity.this);
                 builder.setMessage("Would you like to use the chatbot?");
                 builder.setTitle("Chatbot");
                 builder.setCancelable(false);
 
                 builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
-                    startActivity(new Intent(ChatActivity.this, ChatbotActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(AdminChatActivity.this, AdminChatbotActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
                 });
 
@@ -147,9 +147,26 @@ public class ChatActivity extends AppCompatActivity {
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
                 return true;
+            case  R.id.edit:
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(AdminChatActivity.this);
+                builder1.setMessage("Would you like to remove or edit user accounts?");
+                builder1.setTitle("Remove users");
+                builder1.setCancelable(false);
+
+                builder1.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    Toast.makeText(this, "User is removed", Toast.LENGTH_SHORT).show();
+                });
+
+                builder1.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    dialog.cancel();
+                });
+                AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+                return true;
+
             case  R.id.home:
-                    startActivity(new Intent(ChatActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                    finish();
+                startActivity(new Intent(AdminChatActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
                 return true;
         }
 

@@ -67,6 +67,7 @@ public class Home extends AppCompatActivity {
         //admin checker
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userTypeReference = reference.child("Users").child(uid).child("usertype");
+
         userTypeReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -106,7 +107,6 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 if (userType.equals("admin")) {
                     startActivity(new Intent(Home.this, AdminStoreActivity.class));
                 }
@@ -114,12 +114,14 @@ public class Home extends AppCompatActivity {
                     startActivity(new Intent(Home.this, StoreActivity.class));
                 }
 
+                /*
                 if (userType.equals("admin")) {
                     startActivity(new Intent(Home.this, AdminStoreActivity.class));
                 }
                 if (userType.equals("customer")) {
                     startActivity(new Intent(Home.this, StoreActivity.class));
                 }
+                 */
 
             }
         });
@@ -133,8 +135,12 @@ public class Home extends AppCompatActivity {
         chatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, ChatbotActivity.class));
-
+                if (userType.equals("admin")) {
+                    startActivity(new Intent(Home.this, AdminChatbotActivity.class));
+                }
+                if (userType.equals("customer")) {
+                    startActivity(new Intent(Home.this, ChatbotActivity.class));
+                }
             }
         });
         notificationbtn.setOnClickListener(new View.OnClickListener() {
@@ -237,7 +243,6 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
-
     }
 
 

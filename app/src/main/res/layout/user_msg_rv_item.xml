@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_margin="5dp"
-
-        app:cardBackgroundColor="@color/prp"
+        android:backgroundTint="@color/purple_500"
         android:elevation="8dp"
         android:layout_alignParentRight="true"
         app:cardCornerRadius="8dp">

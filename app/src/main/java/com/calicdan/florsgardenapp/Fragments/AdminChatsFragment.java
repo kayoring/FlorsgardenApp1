@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ChatsFragment extends Fragment {
+public class AdminChatsFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
@@ -88,11 +88,11 @@ public class ChatsFragment extends Fragment {
                     User user = snapshot.getValue(User.class);
                     String usertype = user.getUsertype();
 
-                        for (Chatlist chatlist : usersList){
-                            if (user.getId().equals(chatlist.getId())){
-                                    mUsers.add(user);
-                                }
-                            }
+                    for (Chatlist chatlist : usersList){
+                        if (user.getId().equals(chatlist.getId())){
+                            mUsers.add(user);
+                        }
+                    }
 
 
                 }

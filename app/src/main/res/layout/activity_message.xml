@@ -99,7 +99,7 @@
             android:layout_marginEnd="0dp"
             android:layout_marginRight="15dp"
             android:backgroundTint="@color/white"
-            android:src="@drawable/camera_icon"
+            android:src="@drawable/ic_baseline_attach_file_24"
             android:tint="@color/white"
             app:fabCustomSize="45dp" />
 

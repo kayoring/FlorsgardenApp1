@@ -119,4 +119,10 @@ public class ProfileActivity extends AppCompatActivity {
             return titles.get(position);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
 }

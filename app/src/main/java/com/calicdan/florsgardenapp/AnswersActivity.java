@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -58,13 +59,20 @@ public class AnswersActivity extends AppCompatActivity {
         current_user_id =  mAuth.getCurrentUser().getUid();
 
         fuser = FirebaseDatabase.getInstance().getReference().child("Users");
-        Questionref = FirebaseDatabase.getInstance().getReference().child("Subject").child("Questions").child(Post_Key).child("answers");
+        Questionref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Questions").child(Post_Key).child("answers");
 
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Discussion Board");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AnswersActivity.this, ForumActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
+            }
+        });
 
         AnsList = (RecyclerView) findViewById(R.id.ans_list);
         AnsList.setHasFixedSize(true);

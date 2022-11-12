@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersFragment extends Fragment {
+public class AdminUsersFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
@@ -121,7 +121,7 @@ public class UsersFragment extends Fragment {
 
                         assert user != null;
                         assert firebaseUser != null;
-                        if (!user.getId().equals(firebaseUser.getUid()) && usertype.equals("admin")) {
+                        if (!user.getId().equals(firebaseUser.getUid()) && usertype.equals("customer")) {
                             mUsers.add(user);
                         }
                     }

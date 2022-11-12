@@ -5,7 +5,7 @@
         android:id="@+id/usersChat"
         android:title="Check users"
         android:icon="@drawable/users"
-        app:showAsAction="ifRoom"/>
+            app:showAsAction="never"/>
     <item
         android:id="@+id/home"
         android:icon="@drawable/white_home"
@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/edit"
-        android:icon="@drawable/qa"
+        android:icon="@drawable/ic_baseline_edit_24"
         android:title="Edit API"
-        app:showAsAction="never"/>
+        app:showAsAction="ifRoom"/>
 </menu>
