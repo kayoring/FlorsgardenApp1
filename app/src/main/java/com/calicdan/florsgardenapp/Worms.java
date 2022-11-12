@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Worms extends AppCompatActivity {
     RecyclerView recyclerView;
-    WormsAdapter wormsAdapter;
+    WormsAndOrganicAdapter wormsAdapter;
     Button btnAdd;
 
     @Override
@@ -34,7 +34,7 @@ public class Worms extends AppCompatActivity {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Worms"), HomeModel.class)
                         .build();
 
-        wormsAdapter = new WormsAdapter(options);
+        wormsAdapter = new WormsAndOrganicAdapter(options);
         recyclerView.setAdapter(wormsAdapter);
 
         btnAdd = findViewById(R.id.btnAdd);
@@ -90,7 +90,7 @@ public class Worms extends AppCompatActivity {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Worms").orderByChild("name").startAt(str).endAt(str + "~"), HomeModel.class)
                         .build();
 
-        wormsAdapter = new WormsAdapter(options);
+        wormsAdapter = new WormsAndOrganicAdapter(options);
         wormsAdapter.startListening();
         recyclerView.setAdapter(wormsAdapter);
 

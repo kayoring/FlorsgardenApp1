@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,8 +29,8 @@ public class Home extends AppCompatActivity {
     TextView txtSeeAll;
     View homebtn, forumbtn, storebtn, notificationbtn, chatbtn, imageViewProfile;
     FloatingActionButton imageRecog;
-    Button btnWorms, btnSearch, btnVermiculture, btnOrganic;
-
+    Button  btnSearch, btnVermiculture;
+    ImageButton btnWorms, btnOrganic;
     DatabaseReference reference;
     FirebaseUser fuser;
 
@@ -48,7 +49,7 @@ public class Home extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
 
-        btnVermiculture = findViewById(R.id.btnVermiculture);
+        //btnVermiculture = findViewById(R.id.btnVermiculture);
         btnOrganic = findViewById(R.id.btnOrganic);
         homebtn = findViewById(R.id.homebtn);
         forumbtn = findViewById(R.id.forumbtn);
@@ -150,26 +151,26 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(Home.this, Worms.class));
             }
         });
-        Button btnFlorsGarden = (Button) findViewById(R.id.btnFlorsGarden);
+       // Button btnFlorsGarden = (Button) findViewById(R.id.btnFlorsGarden);
 
-        btnFlorsGarden.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clicked_button("https://florsgarden.com");
-            }
-        });
+       // btnFlorsGarden.setOnClickListener(new View.OnClickListener() {
+           // @Override
+            //public void onClick(View view) {
+            //    clicked_button("https://florsgarden.com");
+           // }
+     //   });
         btnOrganic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Home.this, OrganicWaste.class));
             }
         });
-        btnVermiculture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Home.this, Vermiculture.class));
-            }
-        });
+      //  btnVermiculture.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+          //  public void onClick(View view) {
+           //     startActivity(new Intent(Home.this, Vermiculture.class));
+          //  }
+      //  });
 
         imageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,64 +9,87 @@
     tools:context=".Home">
 
 
-    <Button
-        android:id="@+id/btnFlorsGarden"
-        android:layout_width="110dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/textView11"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner"
-        android:text="Flor's Garden Website"
-        android:textSize="8sp" />
-
-    <Button
-        android:id="@+id/btnVermiculture"
-        android:layout_width="110dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/textView11"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="30dp"
-        android:layout_toEndOf="@+id/btnOrganic"
-        android:background="@drawable/rounded_corner"
-        android:text="Vermiculture"
-        android:textSize="8sp" />
-
-    <Button
+    <ImageButton
         android:id="@+id/btnWorms"
-        android:layout_width="110dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/btnOrganic"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="272dp"
-        android:background="@drawable/rounded_corner"
-        android:text="Worms"
-        android:textSize="8sp" />
-
-    <Button
-        android:id="@+id/btnOrganic"
-        android:layout_width="110dp"
-        android:layout_height="30dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_below="@+id/textView11"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_toEndOf="@+id/btnFlorsGarden"
-        android:background="@drawable/rounded_corner"
-        android:text="Organic Waste"
-        android:textSize="8sp" />
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/btnOrganic"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@android:color/transparent"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/worm_guides" />
+
+    <ImageButton
+        android:id="@+id/btnVids"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_below="@+id/textView11"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/btnWorms"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@android:color/transparent"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/videos_guides" />
+
+    <ImageButton
+        android:id="@+id/btnHow"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_below="@+id/textView11"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/btnVids"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@android:color/transparent"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/vermi_guides" />
+
+    <ImageButton
+        android:id="@+id/btnOrganic"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_below="@+id/textView11"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@android:color/transparent"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/organic_waste_guides" />
+
+    <ImageButton
+        android:id="@+id/btnOrganic2"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_below="@+id/textView11"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="149dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@android:color/transparent"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/how_to_guides" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="-2dp"
+        android:layout_marginStart="-4dp"
         android:layout_marginBottom="243dp"
         android:background="@color/purple_500"
         android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -128,14 +151,14 @@
             android:id="@+id/textView9"
             android:layout_width="188dp"
             android:layout_height="65dp"
-            android:layout_marginTop="8dp"
-            android:text="Search or select from our categories"
+            android:layout_marginTop="16dp"
+            android:text="Select from categories"
             android:textAlignment="textStart"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageViewWorms"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -373,20 +396,89 @@
             app:tint="#ffffff"
 
             />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <TextView
-        android:id="@+id/txtSeeAll"
+        android:id="@+id/textView42"
+        android:layout_width="54dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/btnOrganic"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:text="Organic Waste"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnOrganic2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="10dp"
+        android:text="How-To"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textView43"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnWorms"
-        android:layout_alignParentLeft="true"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="9dp"
+        android:layout_toEndOf="@+id/textView42"
+        android:text="Worms"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/brnVids"
+        android:layout_width="74dp"
+        android:layout_height="23dp"
+        android:layout_below="@+id/btnVids"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="9dp"
+        android:layout_toEndOf="@+id/textView43"
+        android:text="Inctructional Videos"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/brnVids2"
+        android:layout_width="74dp"
+        android:layout_height="23dp"
+        android:layout_below="@+id/btnVids"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="29dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="340dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="30dp"
+        android:layout_toEndOf="@+id/brnVids"
+        android:text="How-Tos"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/txtSeeAll"
+        android:layout_width="54dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView11"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="261dp"
+        android:layout_marginEnd="328dp"
         android:text="See all"
-        android:textColor="#3F51B5" />
+        android:textColor="#3F51B5"
+        android:textSize="12sp" />
 
 
 </RelativeLayout>

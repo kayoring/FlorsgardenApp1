@@ -31,14 +31,14 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class WormsAdapter extends FirebaseRecyclerAdapter<HomeModel,WormsAdapter.myViewHolder> {
+public class WormsAndOrganicAdapter extends FirebaseRecyclerAdapter<HomeModel, WormsAndOrganicAdapter.myViewHolder> {
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
      *
      * @param options
      */
-    public WormsAdapter(@NonNull FirebaseRecyclerOptions<HomeModel> options) {
+    public WormsAndOrganicAdapter(@NonNull FirebaseRecyclerOptions<HomeModel> options) {
         super(Objects.requireNonNull(options));
     }
 

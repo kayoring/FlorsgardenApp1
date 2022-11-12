@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ImageRecogResultOrganic extends ImageRecognitionOrganicWaste {
     RecyclerView recyclerView;
-    WormsAdapter wormsAdapter;
+    ImageRecogResultAdapter wormsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class ImageRecogResultOrganic extends ImageRecognitionOrganicWaste {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste").orderByChild("name").equalTo(s), HomeModel.class)
                         .build();
 
-        wormsAdapter = new WormsAdapter(options);
+        wormsAdapter = new ImageRecogResultAdapter(options);
         wormsAdapter.startListening();
         recyclerView.setAdapter(wormsAdapter);
 

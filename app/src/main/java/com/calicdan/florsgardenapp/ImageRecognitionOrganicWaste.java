@@ -175,7 +175,7 @@ public class ImageRecognitionOrganicWaste extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-        Toast.makeText(com.calicdan.florsgardenapp.ImageRecognitionOrganicWaste.this,"Redirecting...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(com.calicdan.florsgardenapp.ImageRecognitionOrganicWaste.this,"Loading information...", Toast.LENGTH_SHORT).show();
             }
         }, 1000);
 

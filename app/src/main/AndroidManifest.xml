@@ -160,9 +160,13 @@
             android:name=".AddGuidesVermiculture"
             android:exported="true" />
         <activity
-
             android:name=".ImageRecogResultWorm"
             android:exported="true" />
+        <activity
+
+            android:name=".ImageRecogResultAdapter"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>

@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
     public class ImageRecogResultWorm extends ImageRecognitionWorm {
         RecyclerView recyclerView;
-        WormsAdapter wormsAdapter;
+        ImageRecogResultAdapter wormsAdapter;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
                             .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/Worms").orderByChild("name").equalTo(s), HomeModel.class)
                             .build();
 
-            wormsAdapter = new WormsAdapter(options);
+            wormsAdapter = new ImageRecogResultAdapter(options);
             wormsAdapter.startListening();
             recyclerView.setAdapter(wormsAdapter);
 
