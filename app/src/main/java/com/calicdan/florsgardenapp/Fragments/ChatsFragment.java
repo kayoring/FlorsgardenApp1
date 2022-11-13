@@ -78,21 +78,26 @@ public class ChatsFragment extends Fragment {
 
     //Get users
     private void chatList() {
-        mUsers = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference("Users");
+
+        mUsers = new ArrayList<>(); //creating an array to store the users
+        reference = FirebaseDatabase.getInstance().getReference("Users"); //path of users in the realtime database
+        //read data from the database referenced
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //clear array list first before adding new data
                 mUsers.clear();
+
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     User user = snapshot.getValue(User.class);
-                    String usertype = user.getUsertype();
 
+                        //create object and iterate through usersList and add user if user id and ....
                         for (Chatlist chatlist : usersList){
                             if (user.getId().equals(chatlist.getId())){
-                                    mUsers.add(user);
-                                }
+                                mUsers.add(user);
                             }
+                        }
 
 
                 }

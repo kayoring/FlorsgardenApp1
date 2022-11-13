@@ -51,10 +51,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @NonNull
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        //senderImageview = itemView.findViewById(R.id.senderImageview);
-        //receiverImageview = itemView.findViewById(R.id.receiverImageview);
-
         if (viewType == MSG_TYPE_RIGHT) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, parent, false);
             mAuth = FirebaseAuth.getInstance();
@@ -73,8 +69,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         Chat chat = mChat.get(i);
         String fromUserID = chat.getSender();
         String fromMessageType = chat.getType();
-
-
 
         if(fromMessageType.equals("text")){
             if (fromUserID.equals(messageSenderId)) {
@@ -149,6 +143,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 } else {
                     Picasso.with(mContext).load(imageurl).into(holder.profile_image);
                 }
+
                 holder.show_message.setVisibility(View.GONE);
                 holder.receiverLayout.setVisibility(View.VISIBLE);
                 holder.receiverImageview.setVisibility(View.VISIBLE);

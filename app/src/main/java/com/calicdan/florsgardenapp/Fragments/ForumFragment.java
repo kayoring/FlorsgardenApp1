@@ -1,6 +1,8 @@
 package com.calicdan.florsgardenapp.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,16 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.calicdan.florsgardenapp.AnswersActivity;
 import com.calicdan.florsgardenapp.HomeModel;
+import com.calicdan.florsgardenapp.MessageActivity;
 import com.calicdan.florsgardenapp.Model.Answers;
 import com.calicdan.florsgardenapp.Model.Inquiries;
+import com.calicdan.florsgardenapp.Model.User;
 import com.calicdan.florsgardenapp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -26,6 +32,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -42,7 +49,6 @@ public class ForumFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View rootview = inflater.inflate(R.layout.fragment_forum, container, false);
         mAuth = FirebaseAuth.getInstance();
         currentuserID = mAuth.getCurrentUser().getUid();
@@ -88,10 +94,11 @@ public class ForumFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull InquiriesViewHolder inquiriesViewHolder, int i, @NonNull Inquiries inquiries) {
+            protected void onBindViewHolder(@NonNull InquiriesViewHolder inquiriesViewHolder, @SuppressLint("RecyclerView") int position, @NonNull Inquiries inquiries) {
 
-                final String PostKey = getRef(i).getKey();
+                final String PostKey = getRef(position).getKey();
 
+                inquiriesViewHolder.getItemViewType();
                 inquiriesViewHolder.setQuestion(inquiries.getQuestion());
                 inquiriesViewHolder.setProfileImage(getContext(), inquiries.getImageURL());
                 inquiriesViewHolder.setUsernamee(inquiries.getUsernamee());
@@ -99,6 +106,26 @@ public class ForumFragment extends Fragment {
                 inquiriesViewHolder.setDate(inquiries.getDate());
 
                 inquiriesViewHolder.setLikeButtonStatus(PostKey);
+
+                inquiriesViewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        new android.app.AlertDialog.Builder(inquiriesViewHolder.itemView.getContext())
+                                .setTitle("Delete Content")
+                                .setMessage("Would you like to delete this inquiry?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        InquiriesAdapter.getRef(position).removeValue();
+                                        Toast.makeText(getActivity(), "Inquiry removed successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .setNegativeButton("No",null)
+                                .show();
+                    }
+                });
 
                 inquiriesViewHolder.CommentPostButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -152,7 +179,7 @@ public class ForumFragment extends Fragment {
 
     public static class InquiriesViewHolder extends RecyclerView.ViewHolder {
         View mView;
-        ImageButton LikePostButton, CommentPostButton;
+        ImageButton LikePostButton, CommentPostButton, deleteBtn;
         TextView DisplaynoOfLikes;
         int countLikes;
         String currentUserId;
@@ -165,6 +192,7 @@ public class ForumFragment extends Fragment {
 
             LikePostButton = (ImageButton) mView.findViewById(R.id.like_button);
             CommentPostButton = (ImageButton) mView.findViewById(R.id.comment_button);
+            deleteBtn = (ImageButton) mView.findViewById(R.id.deleteBtn);
             DisplaynoOfLikes = (TextView) mView.findViewById(R.id.no_likes);
 
             Likesref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Likes");

@@ -312,7 +312,9 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String sender, String receiver, String message) {
+        //id of the receiver
         String userid = intent.getStringExtra("userid");
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -324,24 +326,38 @@ public class MessageActivity extends AppCompatActivity {
 
         reference.child("Chats").push().setValue(hashMap);
 
-        // add user to chat fragment
-        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
-                .child(fuser.getUid())
-                .child(userid);
-
-        chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        // add user or sender to chat fragment of the current user
+        final DatabaseReference chatSenderRef = FirebaseDatabase.getInstance().getReference("Chatlist").child(fuser.getUid()).child(userid);
+        chatSenderRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    chatRef.child("id").setValue(userid);
+                    //adds receiver user to chats tab
+                    chatSenderRef.child("id").setValue(userid);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(MessageActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        // add user or receiver to chat fragment of the current user
+        final DatabaseReference chatReceiverRef = FirebaseDatabase.getInstance().getReference("Chatlist").child(userid).child(fuser.getUid());
+        chatReceiverRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    //adds receiver user to chats tab
+                    chatReceiverRef.child("id").setValue(fuser.getUid());
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(MessageActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void readMesagges(String myid, String userid, String imageurl) {

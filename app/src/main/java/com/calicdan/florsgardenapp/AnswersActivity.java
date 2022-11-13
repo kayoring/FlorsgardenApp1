@@ -1,18 +1,22 @@
 package com.calicdan.florsgardenapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -89,7 +93,6 @@ public class AnswersActivity extends AppCompatActivity {
         PostAnsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 fuser.child(current_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -130,12 +133,31 @@ public class AnswersActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull AnswersViewHolder answersViewHolder, int position, @NonNull Answers answers) {
+            protected void onBindViewHolder(@NonNull AnswersViewHolder answersViewHolder, @SuppressLint("RecyclerView") int position, @NonNull Answers answers) {
                 answersViewHolder.setUsername(answers.getUsername());
                 answersViewHolder.setProfileimage(getApplicationContext(),answers.getProfileimage());
                 answersViewHolder.setAnswer(answers.getAnswer());
                 answersViewHolder.setDate(answers.getDate());
                 answersViewHolder.setTime(answers.getTime());
+
+                answersViewHolder.delBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new android.app.AlertDialog.Builder(answersViewHolder.itemView.getContext())
+                                .setTitle("Delete Content")
+                                .setMessage("Would you like to delete this answer/reply?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        answersAdapter.getRef(position).removeValue();
+                                        Toast.makeText(AnswersActivity.this, "Answer/reply removed successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .setNegativeButton("No",null)
+                                .show();
+                    }
+                });
             }
         };
         AnsList.setAdapter(answersAdapter);
@@ -152,9 +174,13 @@ public class AnswersActivity extends AppCompatActivity {
 
     public static class AnswersViewHolder extends RecyclerView.ViewHolder{
         View mView;
+        ImageButton delBtn;
+
+
         public AnswersViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
+            delBtn = (ImageButton) mView.findViewById(R.id.deleteBtn);
         }
         public void setUsername(String username){
             TextView myuserName = (TextView) mView.findViewById(R.id.ans_username);

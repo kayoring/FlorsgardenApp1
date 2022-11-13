@@ -16,17 +16,40 @@ import android.widget.Toast;
 import com.calicdan.florsgardenapp.Fragments.ForumFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ForumActivity extends AppCompatActivity implements View.OnClickListener {
 
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
     FloatingActionButton imageRecog;
-
+    String userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum);
+/*
+        FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userTypeReference = reference.child("Users").child(fuser.getUid()).child("usertype");
+        userTypeReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userType = snapshot.getValue(String.class);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+ */
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Discussion Board");
@@ -39,6 +62,7 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
                 finish();
             }
         });
+
 
         homebtn = findViewById(R.id.homebtn);
         forumbtn = findViewById(R.id.forumbtn);
@@ -77,7 +101,7 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(ForumActivity.this, StoreActivity.class));
                 break;
             case R.id.chatbtn:
-                startActivity(new Intent(ForumActivity.this, ChatbotActivity.class));
+                    startActivity(new Intent(ForumActivity.this, ChatbotActivity.class));
                 break;
             case R.id.imageViewProfile:
                 startActivity(new Intent(ForumActivity.this, ProfileActivity.class));

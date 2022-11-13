@@ -123,13 +123,13 @@
 
             <ImageButton
                 android:id="@+id/comment_button"
-                android:layout_marginTop="10dp"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/trans"
-                android:src="@drawable/comment"
-                android:layout_marginLeft="124dp"
-                android:baselineAlignBottom="false"/>
+                android:baselineAlignBottom="false"
+                android:src="@drawable/comment" />
 
             <TextView
                 android:id="@+id/ans_text"
@@ -139,6 +139,17 @@
                 android:padding="10dp"
                 android:text="Answers"
                 android:textSize="11dp" />
+
+            <ImageButton
+                android:id="@+id/deleteBtn"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_marginLeft="85dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/trans"
+                android:baselineAlignBottom="false"
+                android:src="@drawable/delete" />
+
         </LinearLayout>
 
     </LinearLayout>
