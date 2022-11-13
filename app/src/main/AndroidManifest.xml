@@ -18,6 +18,20 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AdminAnswersActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AdminForumActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AdminChatActivity"
             android:exported="false">
             <meta-data
@@ -177,7 +191,6 @@
             android:name=".ImageRecogResultWorm"
             android:exported="true" />
         <activity
-
             android:name=".ImageRecogResultAdapter"
             android:exported="true"
             tools:ignore="Instantiatable" />

@@ -98,8 +98,12 @@ public class Home extends AppCompatActivity {
         forumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, ForumActivity.class));
-
+                if (userType.equals("admin")) {
+                    startActivity(new Intent(Home.this, AdminForumActivity.class));
+                }
+                if (userType.equals("customer")) {
+                    startActivity(new Intent(Home.this, ForumActivity.class));
+                }
             }
         });
 

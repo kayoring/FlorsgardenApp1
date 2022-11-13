@@ -1,7 +1,6 @@
 package com.calicdan.florsgardenapp;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +15,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -41,7 +39,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AnswersActivity extends AppCompatActivity {
+public class AdminAnswersActivity extends AppCompatActivity {
 
     private RecyclerView AnsList;
     private ImageButton PostAnsButton;
@@ -51,7 +49,7 @@ public class AnswersActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private DatabaseReference fuser,Questionref;
-    FirebaseRecyclerAdapter<Answers, AnswersViewHolder> answersAdapter;
+    FirebaseRecyclerAdapter<Answers, AnswersActivity.AnswersViewHolder> answersAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +71,7 @@ public class AnswersActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AnswersActivity.this, ForumActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(AdminAnswersActivity.this, AdminForumActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
             }
         });
@@ -123,25 +121,23 @@ public class AnswersActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions answerOptions = new FirebaseRecyclerOptions.Builder<Answers>().setQuery(Questionref, Answers.class).build();
 
-        answersAdapter = new FirebaseRecyclerAdapter<Answers, AnswersViewHolder>(answerOptions) {
+        answersAdapter = new FirebaseRecyclerAdapter<Answers, AnswersActivity.AnswersViewHolder>(answerOptions) {
 
             @NonNull
             @Override
-            public AnswersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_answers_layout, parent, false);
-                return new AnswersViewHolder(view);
+            public AnswersActivity.AnswersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_all_answers, parent, false);
+                return new AnswersActivity.AnswersViewHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull AnswersViewHolder answersViewHolder, @SuppressLint("RecyclerView") int position, @NonNull Answers answers) {
+            protected void onBindViewHolder(@NonNull AnswersActivity.AnswersViewHolder answersViewHolder, @SuppressLint("RecyclerView") int position, @NonNull Answers answers) {
                 answersViewHolder.setUsername(answers.getUsername());
                 answersViewHolder.setProfileimage(getApplicationContext(),answers.getProfileimage());
                 answersViewHolder.setAnswer(answers.getAnswer());
                 answersViewHolder.setDate(answers.getDate());
                 answersViewHolder.setTime(answers.getTime());
 
-
-                /*
                 answersViewHolder.delBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -153,15 +149,13 @@ public class AnswersActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         answersAdapter.getRef(position).removeValue();
-                                        Toast.makeText(AnswersActivity.this, "Answer/reply removed successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AdminAnswersActivity.this, "Answer/reply removed successfully", Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .setNegativeButton("No",null)
                                 .show();
                     }
                 });
-
-                 */
             }
         };
         AnsList.setAdapter(answersAdapter);
@@ -238,10 +232,10 @@ public class AnswersActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(AnswersActivity.this, "Your answer submitted Successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminAnswersActivity.this, "Your answer submitted Successfully!", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(AnswersActivity.this, "Error occured, try again....", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminAnswersActivity.this, "Error occured, try again....", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

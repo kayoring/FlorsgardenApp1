@@ -1,10 +1,16 @@
-package com.calicdan.florsgardenapp.Fragments;
+package com.calicdan.florsgardenapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +18,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.calicdan.florsgardenapp.AnswersActivity;
-import com.calicdan.florsgardenapp.HomeModel;
-import com.calicdan.florsgardenapp.MessageActivity;
-import com.calicdan.florsgardenapp.Model.Answers;
+import com.calicdan.florsgardenapp.Fragments.ForumFragment;
 import com.calicdan.florsgardenapp.Model.Inquiries;
-import com.calicdan.florsgardenapp.Model.User;
-import com.calicdan.florsgardenapp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,14 +27,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
-public class ForumFragment extends Fragment {
+public class AdminForumFragment extends Fragment {
     FirebaseAuth mAuth;
     private RecyclerView queList;
     private DatabaseReference Questionref, Likesref;
@@ -64,8 +57,8 @@ public class ForumFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
-        queList.setLayoutManager(linearLayoutManager);
 
+        queList.setLayoutManager(linearLayoutManager);
         Questionref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Questions");
         Likesref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Likes");
 
@@ -89,7 +82,7 @@ public class ForumFragment extends Fragment {
             @NonNull
             @Override
             public InquiriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_inquiries, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_all_inquiries, parent, false);
                 return new InquiriesViewHolder(view);
             }
 
@@ -106,7 +99,7 @@ public class ForumFragment extends Fragment {
                 inquiriesViewHolder.setDate(inquiries.getDate());
 
                 inquiriesViewHolder.setLikeButtonStatus(PostKey);
-/*
+
                 inquiriesViewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -127,12 +120,11 @@ public class ForumFragment extends Fragment {
                     }
                 });
 
- */
-
                 inquiriesViewHolder.CommentPostButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent commentsIntent = new Intent(getActivity(), AnswersActivity.class);
+
+                        Intent commentsIntent = new Intent(getActivity(), AdminAnswersActivity.class);
                         //commentsIntent.putExtra("Que",)
                         commentsIntent.putExtra("Postkey", PostKey);
                         startActivity(commentsIntent);
@@ -181,7 +173,7 @@ public class ForumFragment extends Fragment {
 
     public static class InquiriesViewHolder extends RecyclerView.ViewHolder {
         View mView;
-        ImageButton LikePostButton, CommentPostButton;
+        ImageButton LikePostButton, CommentPostButton, deleteBtn;
         TextView DisplaynoOfLikes;
         int countLikes;
         String currentUserId;
@@ -194,6 +186,7 @@ public class ForumFragment extends Fragment {
 
             LikePostButton = (ImageButton) mView.findViewById(R.id.like_button);
             CommentPostButton = (ImageButton) mView.findViewById(R.id.comment_button);
+            deleteBtn = (ImageButton) mView.findViewById(R.id.deleteBtn);
             DisplaynoOfLikes = (TextView) mView.findViewById(R.id.no_likes);
 
             Likesref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Likes");
