@@ -1,6 +1,7 @@
 package com.calicdan.florsgardenapp.Fragments;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -10,11 +11,13 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,8 +76,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     DatabaseReference reference,ref;
     FirebaseUser fuser,firebaseUser;
-
-
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String uid = user.getUid();
     StorageReference storageReference;
     private static final int IMAGE_REQUEST = 1;
     private Uri imageUri;
@@ -116,10 +119,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
@@ -132,21 +133,41 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         contact = view.findViewById(R.id.contact);
         //password = view.findViewById(R.id.passW);
         address = view.findViewById(R.id.address);
-
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
-
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         recyclerViewPurchasesList=view.findViewById(R.id.recycleViewPurchases);
         recyclerViewPurchasesList.setLayoutManager(linearLayoutManager);
+        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("usertype");
+        /*ref1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userType = dataSnapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+*/
+        String userType = getArguments().getString("userType1");
 
         ArrayList<PurchasesDomain> purchase = new ArrayList<>();
-        purchase.add(new PurchasesDomain("To Pay","pay"));
-        purchase.add(new PurchasesDomain("To Ship","ship"));
-        purchase.add(new PurchasesDomain("To Receive","receive"));
-        purchase.add(new PurchasesDomain("Completed","finished"));
+        if(userType.equals("customer")) {
+            purchase.add(new PurchasesDomain("To Pay", "pay"));
+            purchase.add(new PurchasesDomain("To Ship", "ship"));
+            purchase.add(new PurchasesDomain("To Receive", "receive"));
+            purchase.add(new PurchasesDomain("Completed", "finished"));
+        }
+        if (userType.equals("admin")){
+            purchase.add(new PurchasesDomain("Pending", "pay"));
+            purchase.add(new PurchasesDomain("Paid", "ship"));
+            purchase.add(new PurchasesDomain("Shipped", "receive"));
+            purchase.add(new PurchasesDomain("Completed", "finished"));
+        }
 
         adapter=new PurchasesAdapter(purchase);
         recyclerViewPurchasesList.setAdapter(adapter);
@@ -219,7 +240,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         return view;
     }
-
     private void openImage() {
         Intent intent = new Intent();
         intent.setType("image/*");

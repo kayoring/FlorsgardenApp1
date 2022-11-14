@@ -38,7 +38,7 @@ public class AdminDetailsActivity extends AppCompatActivity {
     TextView editProductDbBTN;
     ImageView editProductPhoto;
     Uri imageUri;
-    String productName, productDescription,dbproductname,dbproductdescription, retProductName,retProductName1,temp;
+    String productName, productDescription,dbproductname,dbproductdescription, retProductName,retProductName1,temp,productPic;
     int productQuantity,dbproductquantity;
     float productPrice,dbproductprice;
     private Product editProduct;
@@ -162,10 +162,10 @@ public class AdminDetailsActivity extends AppCompatActivity {
                 productPrice = Float.parseFloat(String.valueOf(inpProductPrice.getText()));
                 productDescription = inpProductDescription.getText().toString();
                 productQuantity = Integer.parseInt(String.valueOf(inpProductQuantity.getText()));
-                Product prod = new Product(productName,productDescription,productQuantity,productPrice);
+                uploadPicture();
+                Product prod = new Product(productName,productDescription,productQuantity,productPrice,productPic);
                 ref.child(productName).setValue(prod);
                 Toast.makeText(getApplicationContext(),productName + " edited!",Toast.LENGTH_SHORT).show();
-                uploadPicture();
                 startActivity(new Intent(AdminDetailsActivity.this,AdminStoreActivity.class));
 
             }
@@ -189,6 +189,7 @@ public class AdminDetailsActivity extends AppCompatActivity {
     private void uploadPicture() {
         final String randomKey = UUID.randomUUID().toString();
         final String imageKey = productName.replaceAll(" ","");
+        productPic = imageKey;
         StorageReference productsRef = storageReference.child("products/" + imageKey);
         productsRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

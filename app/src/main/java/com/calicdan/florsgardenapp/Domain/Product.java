@@ -6,18 +6,29 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Product implements Serializable {
-    private String productName, productDescription;
+    private String productName;
+    private String productDescription;
+    private String productPic;
     private int productQuantity;
     private float productPrice;
 
-    public Product(String productName, String productDescription, int productQuantity, float productPrice) {
+    public Product(String productName, String productDescription, int productQuantity, float productPrice, String productPic) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productQuantity = productQuantity;
         this.productPrice = productPrice;
+        this.productPic = productPic;
     }
 
     public Product(){}
+
+    public String getProductPic() {
+        return productPic;
+    }
+
+    public void setProductPic(String productPic) {
+        this.productPic = productPic;
+    }
     public String getProductName() {
         return productName;
     }

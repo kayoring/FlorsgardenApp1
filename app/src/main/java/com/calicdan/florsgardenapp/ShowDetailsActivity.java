@@ -1,8 +1,10 @@
 package com.calicdan.florsgardenapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,13 +14,11 @@ import com.bumptech.glide.Glide;
 
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.calicdan.florsgardenapp.Helper.ManagementCart;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class ShowDetailsActivity extends AppCompatActivity {
     private TextView addToCartBtn;
@@ -27,6 +27,11 @@ public class ShowDetailsActivity extends AppCompatActivity {
     private FoodDomain object;
     int numberOrder = 1;
     private ManagementCart managementCart;
+    String temp,retProductName;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference = storage.getReference();
+    StorageReference imageref;
+    FirebaseDatabase fdb = FirebaseDatabase.getInstance();
 
 
     @Override
@@ -43,14 +48,27 @@ public class ShowDetailsActivity extends AppCompatActivity {
     private void getBundle() {
         object = (FoodDomain) getIntent().getSerializableExtra("object");
 
-        int drawableResourceId = this.getResources().getIdentifier(object.getPic(), "drawable", this.getPackageName());
-        Glide.with(this)
-                .load(drawableResourceId)
-                .into(picProduct);
+        temp = (object.getProductPic());
+        retProductName = "products/" + temp;
+        imageref = storageReference.child((retProductName));
+        imageref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(picProduct.getContext())
+                        .load(uri)
+                        .into(picProduct);
 
-        titleTxt.setText(object.getTitle());
-        feeTxt.setText("₱" + object.getFee());
-        descriptionTxt.setText(object.getDescription());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+        titleTxt.setText(object.getProductName());
+        feeTxt.setText("₱" + object.getProductPrice());
+        descriptionTxt.setText(object.getProductDescription());
         numberOrderTxt.setText(String.valueOf(numberOrder));
 
         plusBtn.setOnClickListener(new View.OnClickListener() {

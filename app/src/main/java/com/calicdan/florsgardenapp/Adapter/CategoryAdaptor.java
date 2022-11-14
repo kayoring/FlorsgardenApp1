@@ -66,6 +66,8 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHo
             holder.itemView.getContext().startActivity(intent);
         }
     });
+
+
     }
 
     @Override

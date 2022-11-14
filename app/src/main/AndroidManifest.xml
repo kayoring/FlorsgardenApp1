@@ -18,6 +18,7 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
+<<<<<<< Updated upstream
             android:name=".RegisterAdminActivity"
             android:exported="false">
             <meta-data
@@ -38,6 +39,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+=======
+            android:name=".PurchasesView"
+            android:exported="false"
+            android:label="@string/title_activity_purchases_view"
+            android:theme="@style/Theme.FlorsgardenApp.NoActionBar" />
+>>>>>>> Stashed changes
         <activity
             android:name=".AdminChatActivity"
             android:exported="false">
@@ -211,6 +218,9 @@
             android:exported="true" />
         <activity
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
             android:name=".ImageRecogResultAdapter"
 =======
             android:name=".HowTo"

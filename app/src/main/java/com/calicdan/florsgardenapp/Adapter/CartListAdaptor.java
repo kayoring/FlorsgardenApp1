@@ -2,6 +2,7 @@ package com.calicdan.florsgardenapp.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,25 @@ import java.util.ArrayList;
 
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.calicdan.florsgardenapp.Helper.ManagementCart;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import Interface.ChangeNumberProductsListener;
 
 public class CartListAdaptor extends RecyclerView.Adapter<CartListAdaptor.ViewHolder> {
     private ArrayList<FoodDomain> foodDomain;
     private ManagementCart managementCart;
     private ChangeNumberProductsListener changeNumberProductsListener;
+    String temp,retProductName;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference = storage.getReference();
+    StorageReference imageref;
+    FirebaseDatabase fdb = FirebaseDatabase.getInstance();
+    DatabaseReference productsref = fdb.getReference("Products");
 
     public CartListAdaptor(ArrayList<FoodDomain> foodDomain, Context context, ChangeNumberProductsListener changeNumberProductsListener) {
         this.foodDomain = foodDomain;
@@ -40,16 +54,26 @@ public class CartListAdaptor extends RecyclerView.Adapter<CartListAdaptor.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CartListAdaptor.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.title.setText(foodDomain.get(position).getTitle());
-        holder.feeEachProduct.setText(String.valueOf(foodDomain.get(position).getFee()));
-        holder.totalEachProduct.setText(String.valueOf(Math.round((foodDomain.get(position).getNumberInCart()* foodDomain.get(position).getFee())*100)/100));
+        holder.title.setText(foodDomain.get(position).getProductName());
+        holder.feeEachProduct.setText(String.valueOf(foodDomain.get(position).getProductPrice()));
+        holder.totalEachProduct.setText(String.valueOf(Math.round((foodDomain.get(position).getNumberInCart()* foodDomain.get(position).getProductPrice())*100)/100));
         holder.num.setText(String.valueOf(foodDomain.get(position).getNumberInCart()));
 
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(foodDomain.get(position).getPic(),"drawable",holder.itemView.getContext().getPackageName());
-
-        Glide.with(holder.itemView.getContext())
-                .load(drawableResourceId)
-                .into(holder.pic);
+        temp = (foodDomain.get(position).getProductPic());
+        retProductName = "products/" + temp;
+        imageref = storageReference.child((retProductName));
+        imageref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(holder.pic.getContext())
+                        .load(uri)
+                        .into(holder.pic);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
 
         holder.plusItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +116,7 @@ public class CartListAdaptor extends RecyclerView.Adapter<CartListAdaptor.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.titleTxt);
-            feeEachProduct = itemView.findViewById(R.id.feeEachProduct);
+            feeEachProduct = itemView.findViewById(R.id.totalFee);
             pic = itemView.findViewById(R.id.picCart);
             totalEachProduct = itemView.findViewById(R.id.totalEachProduct);
             num = itemView.findViewById(R.id.numberProductTxt);

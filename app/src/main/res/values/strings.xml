@@ -13,4 +13,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_admin_details">AdminDetailsActivity</string>
+    <string name="title_activity_purchases_view">PurchasesView</string>
 </resources>

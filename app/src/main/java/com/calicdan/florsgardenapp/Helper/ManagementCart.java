@@ -19,7 +19,7 @@ public class ManagementCart {
     private Context context;
     private TinyDB tinyDB;
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private DatabaseReference fdb = db.getReference().child("Users");
+    private DatabaseReference fdb = db.getReference().child("Orders");
     String uid,email,productID;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
@@ -44,7 +44,7 @@ public class ManagementCart {
         boolean existAlready = false;
         int n=0;
         for (int i = 0; i <listProducts.size(); i ++){
-            if(listProducts.get(i).getTitle().equals(item.getTitle())){
+            if(listProducts.get(i).getProductName().equals(item.getProductName())){
                 existAlready = true;
                 n = i;
                 break;
@@ -56,7 +56,7 @@ public class ManagementCart {
         } else {
             listProducts.add(item);
         }
-        fdb.child(uid).child("cart").child(date).child(item.getTitle()).setValue(item);
+        fdb.child(uid).child(item.getProductName()).setValue(item);
         tinyDB.putListObject("CartList",listProducts);
         Toast.makeText(context,"Added to your Cart", Toast.LENGTH_SHORT).show();
     }
@@ -75,7 +75,7 @@ public class ManagementCart {
         dateFormat = new SimpleDateFormat("MMddyyyyHH");
         date = dateFormat.format(calendar.getTime());
         listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart()+1);
-        fdb.child(uid).child("cart").child(date).child(listProduct.get(position).getTitle()).child("numberInCart").setValue(listProduct.get(position).getNumberInCart());
+        fdb.child(uid).child(listProduct.get(position).getProductName()).child("numberInCart").setValue(listProduct.get(position).getNumberInCart());
         tinyDB.putListObject("CartList",listProduct);
         changeNumberProductsListener.changed();
     }
@@ -90,11 +90,11 @@ public class ManagementCart {
         dateFormat = new SimpleDateFormat("MMddyyyyHH");
         date = dateFormat.format(calendar.getTime());
         if(listProduct.get(position).getNumberInCart()==1){
-            fdb.child(uid).child("cart").child(date).child(listProduct.get(position).getTitle()).removeValue();
+            fdb.child(uid).child(listProduct.get(position).getProductName()).removeValue();
             listProduct.remove(position);
         }else{
             listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart()-1);
-            fdb.child(uid).child("cart").child(date).child(listProduct.get(position).getTitle()).child("numberInCart").setValue(listProduct.get(position).getNumberInCart());
+            fdb.child(uid).child(listProduct.get(position).getProductName()).child("numberInCart").setValue(listProduct.get(position).getNumberInCart());
         }
         tinyDB.putListObject("CartList", listProduct);
         changeNumberProductsListener.changed();
@@ -104,7 +104,7 @@ public class ManagementCart {
         ArrayList<FoodDomain> listorder = getListCart();
         double fee = 0;
         for (int i = 0; i < listorder.size(); i ++){
-            fee = fee + (listorder.get(i).getFee() * listorder.get(i).getNumberInCart());
+            fee = fee + (listorder.get(i).getProductPrice() * listorder.get(i).getNumberInCart());
         }
         return fee;
     }

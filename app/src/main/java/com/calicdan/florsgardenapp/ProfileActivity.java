@@ -1,7 +1,10 @@
 package com.calicdan.florsgardenapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,6 +60,8 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Profile");
+        String userType = "";
+
 
         //buttons();
         profile_image = findViewById(R.id.profile_image);
@@ -65,13 +70,20 @@ public class ProfileActivity extends AppCompatActivity {
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
         final ViewPager viewPager = findViewById(R.id.view_pager);
 
+        userType = getIntent().getStringExtra("userType");
+        Log.i(TAG,"--------------------------------"+userType);
+        ProfileFragment fragment = new ProfileFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("userType1", userType);
+        fragment.setArguments(bundle);
+
         reference = FirebaseDatabase.getInstance().getReference("Chats");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ProfileActivity.ViewPagerAdapter viewPagerAdapter = new ProfileActivity.ViewPagerAdapter(getSupportFragmentManager());
 
-                viewPagerAdapter.addFragment(new ProfileFragment(), "User Details");
+                viewPagerAdapter.addFragment(fragment, "User Details");
                 viewPagerAdapter.addFragment(new SettingsFragment(), "Settings");
 
                 viewPager.setAdapter(viewPagerAdapter);

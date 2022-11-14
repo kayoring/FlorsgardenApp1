@@ -1,5 +1,6 @@
 package com.calicdan.florsgardenapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +15,11 @@ import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -25,7 +29,7 @@ public class WormsCategory extends AppCompatActivity {
     TextView introUser2;
     String name, email,uid;
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private DatabaseReference fdb = db.getReference().child("Users");
+    private DatabaseReference productsRef = db.getReference().child("Products");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,14 +101,25 @@ public class WormsCategory extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerViewWorms = findViewById(R.id.recyclerViewWorms);
         recyclerViewWorms.setLayoutManager(linearLayoutManager);
-
         ArrayList<FoodDomain> productsList = new ArrayList<>();
-        productsList.add(new FoodDomain("Red Worms", "worms1", "worms number 1", 100.00, 0));
-        productsList.add(new FoodDomain("Grey Worms", "worm2", "worms number 2", 149.99, 0));
-        productsList.add(new FoodDomain("Another Grey Worms", "worm2", "worms number 3", 89.99, 0));
-        productsList.add(new FoodDomain("Another Red Worms", "worms1", "worms number 4", 149.99, 0));
-
         adapter1 = new ProductsAdaptor(productsList);
         recyclerViewWorms.setAdapter(adapter1);
+
+        productsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                productsList.clear();
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    FoodDomain foodDomain = postSnapshot.getValue(FoodDomain.class);
+                    productsList.add(foodDomain);
+                }
+                adapter1.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

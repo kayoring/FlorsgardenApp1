@@ -1,13 +1,17 @@
 package com.calicdan.florsgardenapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +26,7 @@ import com.calicdan.florsgardenapp.Domain.CategoryDomain;
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +43,7 @@ public class StoreActivity extends AppCompatActivity {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String uid = user.getUid();
-    private DatabaseReference fdb = db.getReference().child("Users");
+    private DatabaseReference productsRef = db.getReference().child("Products");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,19 +164,29 @@ public class StoreActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerViewProductsList = findViewById(R.id.recyclerView2);
         recyclerViewProductsList.setLayoutManager(linearLayoutManager);
-
         ArrayList<FoodDomain> productsList = new ArrayList<>();
-        productsList.add(new FoodDomain("Red Worms","worms1","worms number 1",100.00, 0));
-        productsList.add(new FoodDomain("Grey Worms","worm2","worms number 2",149.99, 0));
-        productsList.add(new FoodDomain("Another Grey Worms","worm2","worms number 3",89.99, 0));
-        productsList.add(new FoodDomain("Another Red Worms","worms1","worms number 4",149.99, 0));
-
-        adapter1=new ProductsAdaptor(productsList);
+        adapter1 = new ProductsAdaptor(productsList);
         recyclerViewProductsList.setAdapter(adapter1);
 
+        productsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                productsList.clear();
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    FoodDomain foodDomain = postSnapshot.getValue(FoodDomain.class);
+                    productsList.add(foodDomain);
+
+                }
+                adapter1.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         ImageView imageViewHome = (ImageView) findViewById(R.id. imageViewHome);
-
         imageViewHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

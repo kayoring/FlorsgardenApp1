@@ -66,7 +66,7 @@
         app:srcCompat="@drawable/add" />
 
     <TextView
-        android:id="@+id/feeEachProduct"
+        android:id="@+id/totalFee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -85,9 +85,9 @@
         android:layout_marginEnd="4dp"
         android:text="₱"
         android:textColor="#006400"
-        app:layout_constraintBottom_toBottomOf="@+id/feeEachProduct"
-        app:layout_constraintEnd_toStartOf="@+id/feeEachProduct"
-        app:layout_constraintTop_toTopOf="@+id/feeEachProduct" />
+        app:layout_constraintBottom_toBottomOf="@+id/totalFee"
+        app:layout_constraintEnd_toStartOf="@+id/totalFee"
+        app:layout_constraintTop_toTopOf="@+id/totalFee" />
 
     <TextView
         android:id="@+id/totalEachProduct"
@@ -98,7 +98,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/plusCartBtn"
-        app:layout_constraintEnd_toEndOf="@+id/feeEachProduct"
+        app:layout_constraintEnd_toEndOf="@+id/totalFee"
         app:layout_constraintTop_toTopOf="@+id/plusCartBtn" />
 
     <TextView

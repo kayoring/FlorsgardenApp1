@@ -1,5 +1,6 @@
 package com.calicdan.florsgardenapp.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
+import com.calicdan.florsgardenapp.PurchasesView;
 import com.calicdan.florsgardenapp.R;
 
 import java.util.ArrayList;
@@ -61,6 +63,14 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
         Glide.with(holder.itemView.getContext())
                 .load(drawableResourceId)
                 .into(holder.purchasesPic);
+        holder.purchasesLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), PurchasesView.class);
+                intent.putExtra("object", purchasesDomains.get(position));
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

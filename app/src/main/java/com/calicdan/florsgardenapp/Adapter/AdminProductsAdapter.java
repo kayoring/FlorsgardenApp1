@@ -30,13 +30,13 @@ import java.util.ArrayList;
 
 public class AdminProductsAdapter extends RecyclerView.Adapter<AdminProductsAdapter.ViewHolder> {
     ArrayList<Product> productDomain;
-
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference = storage.getReference();
     StorageReference imageref;
     FirebaseDatabase fdb = FirebaseDatabase.getInstance();
     DatabaseReference productsref = fdb.getReference("Products");
     String temp,retProductName;
+
     public AdminProductsAdapter(ArrayList<Product> productDomains) { this.productDomain = productDomains;}
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -55,7 +55,7 @@ public class AdminProductsAdapter extends RecyclerView.Adapter<AdminProductsAdap
                 holder.itemView.getContext().startActivity(intent);
             }
     });
-        temp = (productDomain.get(position).getProductName()).replaceAll(" ", "");
+        temp = (productDomain.get(position).getProductPic());
         retProductName = "products/" + temp;
         imageref = storageReference.child(retProductName);
         imageref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

@@ -1,6 +1,8 @@
 package com.calicdan.florsgardenapp.Domain;
 
-public class PurchasesDomain {
+import java.io.Serializable;
+
+public class PurchasesDomain implements Serializable {
     private String title;
     private String pic;
 

@@ -1,9 +1,12 @@
 package com.calicdan.florsgardenapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -184,7 +187,10 @@ public class Home extends AppCompatActivity {
         imageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, ProfileActivity.class));
+                Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+                i.putExtra("userType",userType);
+                Log.i(TAG,"--------------------------------------" + userType);
+                startActivity(i);
 
             }
         });

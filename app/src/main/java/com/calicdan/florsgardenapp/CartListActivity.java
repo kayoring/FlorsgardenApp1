@@ -1,7 +1,10 @@
 package com.calicdan.florsgardenapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -16,8 +19,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.calicdan.florsgardenapp.Adapter.CartListAdaptor;
 import com.calicdan.florsgardenapp.Helper.ManagementCart;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import Interface.ChangeNumberProductsListener;
 
@@ -26,16 +35,27 @@ public class CartListActivity extends AppCompatActivity {
     private RecyclerView recyclerViewList;
     private ManagementCart managementCart;
     TextView totalFeeTxt, taxTxt, totalTxt,emptyTxt,checkOutBtn;
-    private double tax;
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference fdb = db.getReference().child("Orders");
+    String uid,email,productID,phone;
+    private double tax, itemTotal, total;
     private ScrollView scrollView;
     private TinyDB tinyDB;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_list);
-
         managementCart = new ManagementCart(this);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            uid = user.getUid();
+            email = user.getEmail();
+        }
 
         initView();
         initList();
@@ -129,6 +149,16 @@ public class CartListActivity extends AppCompatActivity {
         checkOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                dateFormat = new SimpleDateFormat("MMddyyyyHH");
+                date = dateFormat.format(calendar.getTime());
+                fdb.child(uid).child("status").setValue("Pending");
+                fdb.child(uid).child("itemTotal").setValue(itemTotal);
+                fdb.child(uid).child("tax").setValue(tax);
+                fdb.child(uid).child("total").setValue(total);
+                fdb.child(uid).child("date").setValue(date);
+                fdb.child(uid).child("uid").setValue(uid);
+
                 Intent i = new Intent(CartListActivity.this,checkOutActivity.class);
                 CartListActivity.this.startActivity(i);
             }
@@ -140,8 +170,8 @@ public class CartListActivity extends AppCompatActivity {
     private void CalculateCart(){
         double percentTax = 0.12;
         tax = Math.round((managementCart.getTotalfee()*percentTax) * 100)/100;
-        double total = Math.round((managementCart.getTotalfee()+tax)*100)/100;
-        double itemTotal = Math.round(managementCart.getTotalfee()*100)/100;
+        total = Math.round((managementCart.getTotalfee()+tax)*100)/100;
+        itemTotal = Math.round(managementCart.getTotalfee()*100)/100;
 
         totalFeeTxt.setText("₱"+itemTotal);
         taxTxt.setText("₱"+tax);

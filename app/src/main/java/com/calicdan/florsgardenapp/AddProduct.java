@@ -1,5 +1,7 @@
 package com.calicdan.florsgardenapp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,13 +28,15 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.UUID;
 
+import retrofit2.http.Tag;
+
 public class AddProduct extends AppCompatActivity {
 
     EditText inpProductName,inpProductPrice,inpProductDescription,inpProductQuantity;
     TextView addProductDbBTN;
     ImageView inpProductPhoto;
     Uri imageUri;
-    String productName, productDescription;
+    String productName, productDescription, productPic;
     int productQuantity;
     float productPrice;
 
@@ -72,10 +77,12 @@ public class AddProduct extends AppCompatActivity {
                 productPrice = Float.parseFloat(String.valueOf(inpProductPrice.getText()));
                 productDescription = inpProductDescription.getText().toString();
                 productQuantity = Integer.parseInt(String.valueOf(inpProductQuantity.getText()));
-                Product prod = new Product(productName,productDescription,productQuantity,productPrice);
+                uploadPicture();
+                Product prod = new Product(productName,productDescription,productQuantity,productPrice,productPic);
+                Log.i(TAG, "products pic check " + productPic);
                 ref.child(productName).setValue(prod);
                 Toast.makeText(getApplicationContext(),productName + " Added!",Toast.LENGTH_SHORT).show();
-                uploadPicture();
+
                 startActivity(new Intent(AddProduct.this,AdminStoreActivity.class));
             }
         });
@@ -98,6 +105,7 @@ public class AddProduct extends AppCompatActivity {
     private void uploadPicture() {
         final String randomKey = UUID.randomUUID().toString();
         final String imageKey = productName.replaceAll(" ","");
+        productPic = imageKey;
         StorageReference productsRef = storageReference.child("products/" + imageKey);
         productsRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
