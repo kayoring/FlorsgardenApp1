@@ -130,7 +130,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         username = view.findViewById(R.id.username);
         email = view.findViewById(R.id.email);
         contact = view.findViewById(R.id.contact);
-        password = view.findViewById(R.id.passW);
+        //password = view.findViewById(R.id.passW);
         address = view.findViewById(R.id.address);
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
@@ -188,8 +188,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     username.setText("Username: " + user.getFullName());
                     email.setText("Email: " + user.getEmail());
                     contact.setText("Contact #: " + user.getContact());
-                    password.setText("Password: " + ch[0]+ch[1]+"******");
-                    address.setText("Address: " + user.getAddress());
+                    //password.setText("Password: " + ch[0]+ch[1]+"******");
+
+                    if (user.getAddress() == null) {
+                        address.setText("Address: " + "N/A");
+                    } else {
+                        address.setText("Address: " + user.getAddress());
+                    }
 
                     if (user.getImageURL().equals("default")) {
                         profile_image.setImageResource(R.drawable.ic_default_profile);

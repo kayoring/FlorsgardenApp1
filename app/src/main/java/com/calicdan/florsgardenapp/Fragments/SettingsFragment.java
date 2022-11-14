@@ -14,6 +14,7 @@ import com.calicdan.florsgardenapp.ChangeEmailActivity;
 import com.calicdan.florsgardenapp.ForumActivity;
 import com.calicdan.florsgardenapp.Home;
 import com.calicdan.florsgardenapp.R;
+import com.calicdan.florsgardenapp.RegisterAdminActivity;
 import com.calicdan.florsgardenapp.ResetPasswordActivity;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener{
@@ -26,22 +27,26 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         cPass = view.findViewById(R.id.cPass);
+        addAdmin = view.findViewById(R.id.addAdmin);
+        cEmail = view.findViewById(R.id.cEmail);
+        /*
         cUser = view.findViewById(R.id.cUser);
         cContact = view.findViewById(R.id.cContact);
         cAddress = view.findViewById(R.id.cAddress);
-        addAdmin = view.findViewById(R.id.addAdmin);
         notifs = view.findViewById(R.id.cNotifs);
         allowNotifs = view.findViewById(R.id.cAllowNotifs);
-        cEmail = view.findViewById(R.id.cEmail);
+         */
 
         cPass.setOnClickListener(this);
+        addAdmin.setOnClickListener(this);
+        cEmail.setOnClickListener(this);
+        /*
         cUser.setOnClickListener(this);
         cContact.setOnClickListener(this);
         cAddress.setOnClickListener(this);
-        addAdmin.setOnClickListener(this);
         notifs.setOnClickListener(this);
         allowNotifs.setOnClickListener(this);
-        cEmail.setOnClickListener(this);
+       */
 
         return view;
     }
@@ -57,7 +62,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             case R.id.cEmail:
                 startActivity(new Intent(getActivity(), ChangeEmailActivity.class));
                 break;
-
+            case R.id.addAdmin:
+                startActivity(new Intent(getActivity(), RegisterAdminActivity.class));
+                break;
+/*
             case R.id.cUser:
                 startActivity(new Intent(getActivity(), Home.class));
                 break;
@@ -70,9 +78,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                 startActivity(new Intent(getActivity(), Home.class));
                 break;
 
-            case R.id.addAdmin:
-                startActivity(new Intent(getActivity(), Home.class));
-                break;
 
             case R.id.cNotifs:
                 startActivity(new Intent(getActivity(), Home.class));
@@ -81,6 +86,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             case R.id.cAllowNotifs:
                 startActivity(new Intent(getActivity(), Home.class));
                 break;
+
+ */
         }
     }
 }
