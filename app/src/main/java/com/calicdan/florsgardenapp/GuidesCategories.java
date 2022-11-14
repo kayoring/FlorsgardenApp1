@@ -16,15 +16,29 @@ public class GuidesCategories extends AppCompatActivity {
         setContentView(R.layout.activity_guides_categories);
 
         ImageView imgBack;
-        TextView txtVermi, txtWorm, txtFlors, txtVids, txtOrganic;
+        TextView txtVermi, txtWorm, txtFlors, txtVids, txtOrganic, txtHow;
 
         imgBack = findViewById(R.id.imgBack);
         txtVermi = findViewById(R.id.txtVermi);
         txtWorm = findViewById(R.id.txtWorm);
         txtFlors = findViewById(R.id.txtFlors);
         txtOrganic = findViewById(R.id.txtOrganic);
+        txtHow = findViewById(R.id.txtHow);
+        txtVids = findViewById(R.id.txtVids);
 
+        txtVids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GuidesCategories.this, VideosActivity.class));
+            }
+        });
 
+        txtHow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GuidesCategories.this, HowTo.class));
+            }
+        });
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

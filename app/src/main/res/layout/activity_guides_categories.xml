@@ -402,6 +402,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                app:srcCompat="@drawable/how_to_guides" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -539,6 +545,14 @@
                 android:id="@+id/textView74"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
+
+            <TextView
+                android:id="@+id/txtHow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="How-To"
+                android:textColor="#000000"
+                android:textSize="20sp" />
 
         </LinearLayout>
 

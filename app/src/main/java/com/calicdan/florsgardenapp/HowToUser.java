@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,60 +15,59 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class OrganicWaste extends AppCompatActivity {
-    RecyclerView recyclerView;
-    OrganicWasteAdapter organicWasteAdapter;
-    Button btnAdd;
-    ImageView imgViewBack4;
+public class HowToUser extends AppCompatActivity {
 
+    RecyclerView recyclerView;
+    HowToAdapterUser wormsAdapter;
+    //Button btnAdd;
+    ImageView imgViewBack4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_worms);
-
-
-        recyclerView = findViewById(R.id.recycleViewWorms);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        btnAdd = findViewById(R.id.btnAdd);
+        setContentView(R.layout.activity_how_user);
 
         imgViewBack4 = findViewById(R.id.imgViewBack4);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), AddGuidesOrganicWaste.class));
-            }
-        });
+        recyclerView = (RecyclerView)findViewById(R.id.recycleViewWorms);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FirebaseRecyclerOptions<HomeModel> options =
+                new FirebaseRecyclerOptions.Builder<HomeModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/How"), HomeModel.class)
+                        .build();
+
+        wormsAdapter = new HowToAdapterUser(options);
+        recyclerView.setAdapter(wormsAdapter);
+
+        //btnAdd = findViewById(R.id.btnAdd);
 
         imgViewBack4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(OrganicWaste.this, Home.class));
+                startActivity(new Intent(HowToUser.this, Home.class));
             }
         });
+        /*
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HowTo.this, AddGuidesHow.class));
+            }
+        });
+*/
 
-        FirebaseRecyclerOptions<HomeModel> options =
-                new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste"), HomeModel.class)
-                        .build();
-
-        organicWasteAdapter = new OrganicWasteAdapter(options);
-        recyclerView.setAdapter(organicWasteAdapter);
-
-        }
-
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        organicWasteAdapter.startListening();
+        wormsAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        organicWasteAdapter.stopListening();
+        wormsAdapter.stopListening();
     }
 
     @Override
@@ -98,12 +96,12 @@ public class OrganicWaste extends AppCompatActivity {
     private void txtSearch(String str) {
         FirebaseRecyclerOptions<HomeModel> options =
                 new FirebaseRecyclerOptions.Builder<HomeModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/OrganicWaste").orderByChild("name").startAt(str + "~"), HomeModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Guides/How").orderByChild("name").startAt(str).endAt(str + "~"), HomeModel.class)
                         .build();
 
-        organicWasteAdapter = new OrganicWasteAdapter(options);
-        organicWasteAdapter.startListening();
-        recyclerView.setAdapter(organicWasteAdapter);
+        wormsAdapter = new HowToAdapterUser(options);
+        wormsAdapter.startListening();
+        recyclerView.setAdapter(wormsAdapter);
 
 
 

@@ -33,7 +33,7 @@ import java.nio.ByteOrder;
 public class ImageRecognitionWorm extends AppCompatActivity {
 
     Button camera, gallery;
-    ImageView imageView1;
+    ImageView imageView1, imgViewBack;
     TextView result1;
     int imageSize = 32;
 
@@ -50,8 +50,7 @@ public class ImageRecognitionWorm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_recognition_worm);
-
-
+        imgViewBack = findViewById(R.id.imgViewBack);
         camera = findViewById(R.id.button);
         gallery = findViewById(R.id.button2);
 
@@ -80,7 +79,7 @@ public class ImageRecognitionWorm extends AppCompatActivity {
             }
         });
 
-        ImageView imgViewBack = (ImageView)findViewById(R.id.imgViewBack);
+
 
         imgViewBack.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -131,7 +130,7 @@ public class ImageRecognitionWorm extends AppCompatActivity {
                     maxPos = i;
                 }
             }
-            String[] classes = {"anc", "red", "tiger"};
+            String[] classes = {"African Night Crawler", "Dolichoplana","Hammer Head","Red Wiggler","Tiger Worm"};
             result1.setText(classes[maxPos]);
 
             // Releases model resources if no longer used.

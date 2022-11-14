@@ -131,7 +131,7 @@ public class ImageRecognitionOrganicWaste extends AppCompatActivity {
                     maxPos = i;
                 }
             }
-            String[] classes = {"apple", "banana", "cabbage", "carrot", "chayote", "chili", "egg", "orange", "tomato"};
+            String[] classes = {"Apple", "Banana", "Cabbage", "Cantaloupe", "Carrot", "Chayote", "Chili", "Egg", "Garlic", "Onion", "Orange", "Squash", "Tomato", "Watermelon"};
             result.setText(classes[maxPos]);
 
             // Releases model resources if no longer used.

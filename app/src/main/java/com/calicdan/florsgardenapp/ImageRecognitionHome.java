@@ -16,10 +16,18 @@ public class ImageRecognitionHome extends AppCompatActivity {
         setContentView(R.layout.activity_image_recognition_home);
 
 
-        ImageView imgOrganicWaste, imgWorms;
+        ImageView imgOrganicWaste, imgWorms, imgViewBack2;
 
         imgOrganicWaste = findViewById(R.id.imgOrganicWaste);
         imgWorms = findViewById(R.id.imgWorms);
+        imgViewBack2 = findViewById(R.id.imgViewBack2);
+
+        imgViewBack2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ImageRecognitionHome.this, Home.class));
+            }
+        });
 
         imgOrganicWaste.setOnClickListener(new View.OnClickListener() {
             @Override

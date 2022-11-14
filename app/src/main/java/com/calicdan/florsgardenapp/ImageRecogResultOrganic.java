@@ -1,6 +1,9 @@
 package com.calicdan.florsgardenapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ImageRecogResultOrganic extends ImageRecognitionOrganicWaste {
     RecyclerView recyclerView;
     ImageRecogResultAdapter wormsAdapter;
+    ImageView imgViewBack3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +28,15 @@ public class ImageRecogResultOrganic extends ImageRecognitionOrganicWaste {
         String s = getIntent().getStringExtra("result");
 
         txtDesc1.setText(s);
-
-       // String res = txtDesc1.getText().toString();
-
+        imgViewBack3 = findViewById(R.id.imgViewBack3);
         recyclerView = findViewById(R.id.recycleViewWorms);
+
+        imgViewBack3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               startActivity(new Intent(ImageRecogResultOrganic.this, Home.class));
+            }
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseRecyclerOptions<HomeModel> options =

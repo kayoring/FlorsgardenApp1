@@ -78,6 +78,9 @@
             android:name=".AddGuidesWorms"
             android:exported="false" />
         <activity
+            android:name=".AddGuidesHow"
+            android:exported="false" />
+        <activity
             android:name=".GuidesCategories"
             android:exported="false" />
         <activity
@@ -135,6 +138,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".VideosActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddVideoActivity"
+            android:exported="true"
+           />/ android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".ResetPasswordActivity"
             android:exported="false"
             android:parentActivityName=".Login" />
@@ -171,11 +181,13 @@
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ImageRecognitionOrganicWaste"
             android:exported="true" />
@@ -198,9 +210,30 @@
             android:name=".ImageRecogResultWorm"
             android:exported="true" />
         <activity
+<<<<<<< Updated upstream
             android:name=".ImageRecogResultAdapter"
+=======
+            android:name=".HowTo"
+            android:exported="true" />
+        <activity
+            android:name=".HomeUser"
+            android:exported="true" />
+        <activity android:name=".OrganicWasteUser"
+            android:exported="true"/>
+
+        <activity android:name=".WormsUser"
+            android:exported="true"/>
+        <activity
+            android:name=".HowToAdapter"
+>>>>>>> Stashed changes
             android:exported="true"
             tools:ignore="Instantiatable" />
+        <activity android:name=".VideosActivityUser"
+            android:exported="true"/>
+
+        <activity android:name=".HowToUser"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

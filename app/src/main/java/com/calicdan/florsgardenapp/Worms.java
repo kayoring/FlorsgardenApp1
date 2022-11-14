@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -19,6 +20,7 @@ public class Worms extends AppCompatActivity {
     RecyclerView recyclerView;
     WormsAndOrganicAdapter wormsAdapter;
     Button btnAdd;
+    ImageView imgViewBack4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,14 @@ public class Worms extends AppCompatActivity {
         recyclerView.setAdapter(wormsAdapter);
 
         btnAdd = findViewById(R.id.btnAdd);
+        imgViewBack4 = findViewById(R.id.imgViewBack4);
+
+        imgViewBack4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Worms.this, Home.class));
+            }
+        });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

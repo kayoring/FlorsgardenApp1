@@ -1,159 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/btnOrganicWaste"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home">
+    tools:context=".Worms">
 
-
-    <ImageButton
-        android:id="@+id/btnWorms"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_below="@+id/textView11"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="16dp"
-        android:layout_toEndOf="@+id/btnOrganic"
-        android:adjustViewBounds="true"
-        android:backgroundTint="@android:color/transparent"
-        android:maxWidth="100dp"
-        android:maxHeight="100dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/worm_guides" />
-
-    <ImageButton
-        android:id="@+id/btnVids"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_below="@+id/textView11"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="16dp"
-        android:layout_toEndOf="@+id/btnWorms"
-        android:adjustViewBounds="true"
-        android:backgroundTint="@android:color/transparent"
-        android:maxWidth="100dp"
-        android:maxHeight="100dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/videos_guides" />
-
-    <ImageButton
-        android:id="@+id/btnOrganic"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_below="@+id/textView11"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="16dp"
-        android:adjustViewBounds="true"
-        android:backgroundTint="@android:color/transparent"
-        android:maxWidth="100dp"
-        android:maxHeight="100dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/organic_waste_guides" />
-
-    <ImageButton
-        android:id="@+id/btnHow"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_below="@+id/textView11"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="17dp"
-        android:layout_toEndOf="@+id/btnVids"
-        android:adjustViewBounds="true"
-        android:backgroundTint="@android:color/transparent"
-        android:maxWidth="100dp"
-        android:maxHeight="100dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/how_to_guides" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="-4dp"
-        android:layout_marginBottom="243dp"
-        android:background="@color/purple_500"
-        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/MenuStyle" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/constraintLayout1"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="34dp"
-        android:text="Categories"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_alignTop="@+id/toolbar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/green_light_banner"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <ImageView
-            android:id="@+id/imageViewWorms"
-            android:layout_width="111dp"
-            android:layout_height="105dp"
-            android:layout_marginStart="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.511"
-            app:srcCompat="@drawable/logo_flors" />
+            android:id="@+id/imgViewBack4"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="358dp"
+            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_left_24" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="229dp"
-            android:layout_height="23dp"
-            android:layout_marginTop="16dp"
-            android:text="Learn about vermiculture here"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageViewWorms"
-            app:layout_constraintTop_toTopOf="@+id/imageViewWorms" />
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add New" />
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="188dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="16dp"
-            android:text="Select from categories"
-            android:textAlignment="textStart"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageViewWorms"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleViewWorms"
+            android:layout_width="match_parent"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content" /><![CDATA[
+
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_marginTop="28dp" />
+
+
+    ]]>
+    </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_alignParentBottom="true">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/app_bar"
@@ -366,7 +265,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -381,74 +279,7 @@
             app:tint="#ffffff"
 
             />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <TextView
-        android:id="@+id/textView42"
-        android:layout_width="54dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/btnOrganic"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:text="Organic Waste"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="12sp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView44"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnHow"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="9dp"
-        android:layout_toEndOf="@+id/brnVids"
-        android:text="How-To"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="12sp" />
-
-    <TextView
-        android:id="@+id/textView43"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnWorms"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="9dp"
-        android:layout_toEndOf="@+id/textView42"
-        android:text="Worms"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="12sp" />
-
-    <TextView
-        android:id="@+id/brnVids"
-        android:layout_width="74dp"
-        android:layout_height="23dp"
-        android:layout_below="@+id/btnVids"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="9dp"
-        android:layout_toEndOf="@+id/textView43"
-        android:text="Inctructional Videos"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="10sp" />
-
-    <TextView
-        android:id="@+id/txtSeeAll"
-        android:layout_width="54dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView11"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="143dp"
-        android:layout_marginEnd="328dp"
-        android:text="See all"
-        android:textColor="#3F51B5"
-        android:textSize="12sp" />
-
-
-</RelativeLayout>

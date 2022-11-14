@@ -25,11 +25,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Home extends AppCompatActivity {
+public class HomeUser extends AppCompatActivity {
     TextView txtSeeAll;
     View homebtn, forumbtn, storebtn, notificationbtn, chatbtn, imageViewProfile;
     FloatingActionButton imageRecog;
-    Button  btnVermiculture;
+    Button btnVermiculture;
     ImageButton btnWorms, btnOrganic, btnVids, btnHow;
     DatabaseReference reference;
     FirebaseUser fuser;
@@ -43,7 +43,7 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home_user);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -83,14 +83,14 @@ public class Home extends AppCompatActivity {
         txtSeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, GuidesCategories.class));
+                startActivity(new Intent(HomeUser.this, GuidesCategories.class));
 
             }
         });
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, Home.class));
+                startActivity(new Intent(HomeUser.this, Home.class));
 
             }
         });
@@ -98,12 +98,8 @@ public class Home extends AppCompatActivity {
         forumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (userType.equals("admin")) {
-                    startActivity(new Intent(Home.this, AdminForumActivity.class));
-                }
-                if (userType.equals("customer")) {
-                    startActivity(new Intent(Home.this, ForumActivity.class));
-                }
+                startActivity(new Intent(HomeUser.this, ForumActivity.class));
+
             }
         });
 
@@ -112,10 +108,10 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (userType.equals("admin")) {
-                    startActivity(new Intent(Home.this, AdminStoreActivity.class));
+                    startActivity(new Intent(HomeUser.this, AdminStoreActivity.class));
                 }
                 if (userType.equals("customer")) {
-                    startActivity(new Intent(Home.this, StoreActivity.class));
+                    startActivity(new Intent(HomeUser.this, StoreActivity.class));
                 }
 
                 /*
@@ -133,24 +129,24 @@ public class Home extends AppCompatActivity {
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Home.this, ImageRecognitionHome.class));
+                startActivity(new Intent(HomeUser.this, ImageRecognitionHome.class));
             }
         });
         chatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (userType.equals("admin")) {
-                    startActivity(new Intent(Home.this, AdminChatbotActivity.class));
+                    startActivity(new Intent(HomeUser.this, AdminChatbotActivity.class));
                 }
                 if (userType.equals("customer")) {
-                    startActivity(new Intent(Home.this, ChatbotActivity.class));
+                    startActivity(new Intent(HomeUser.this, ChatbotActivity.class));
                 }
             }
         });
         notificationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, StoreActivity.class));
+                startActivity(new Intent(HomeUser.this, StoreActivity.class));
 
             }
         });
@@ -158,33 +154,33 @@ public class Home extends AppCompatActivity {
         btnWorms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Home.this, Worms.class));
+                startActivity(new Intent(HomeUser.this, WormsUser.class));
             }
         });
 
         btnOrganic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Home.this, OrganicWaste.class));
+                startActivity(new Intent(HomeUser.this, OrganicWasteUser.class));
             }
         });
         btnVids.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               startActivity(new Intent(Home.this, VideosActivity.class));
-           }
-       });
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeUser.this, VideosActivityUser.class));
+            }
+        });
         btnHow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Home.this, HowTo.class));
+                startActivity(new Intent(HomeUser.this, HowToUser.class));
             }
         });
 
         imageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, ProfileActivity.class));
+                startActivity(new Intent(HomeUser.this, ProfileActivity.class));
 
             }
         });
@@ -193,20 +189,20 @@ public class Home extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeUser.this);
         builder.setMessage("Would you like to logout?");
         builder.setTitle("Logout?");
         builder.setCancelable(false);
 
         builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
-            AlertDialog.Builder builder2 = new AlertDialog.Builder(Home.this);
+            AlertDialog.Builder builder2 = new AlertDialog.Builder(HomeUser.this);
             builder2.setMessage("Are you sure? pressing yes will sign you out and return to login page.");
             builder2.setTitle("Logout?");
             builder2.setCancelable(false);
 
             builder2.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog2, which2) -> {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(Home.this, Login.class));
+                startActivity(new Intent(HomeUser.this, Login.class));
                 finish();
             });
 
@@ -236,7 +232,7 @@ public class Home extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search:
-                startActivity(new Intent(Home.this, Search.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(HomeUser.this, Search.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 return true;
         }
         return false;
