@@ -36,23 +36,23 @@ public class SplashActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        uid = firebaseUser.getUid();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference userTypeReference = reference.child("Users").child(uid).child("usertype");
-
-        userTypeReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userType = snapshot.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                userType = "customer";
-            }
-        });
-
+        
         if (firebaseUser != null){
+            uid = firebaseUser.getUid();
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference userTypeReference = reference.child("Users").child(uid).child("usertype");
+
+            userTypeReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    userType = snapshot.getValue(String.class);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    userType = "customer";
+                }
+            });
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

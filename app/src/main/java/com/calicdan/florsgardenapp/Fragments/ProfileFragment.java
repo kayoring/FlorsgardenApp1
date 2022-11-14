@@ -33,6 +33,7 @@ import com.calicdan.florsgardenapp.ChatbotActivity;
 import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
 import com.calicdan.florsgardenapp.ForumActivity;
 import com.calicdan.florsgardenapp.Home;
+import com.calicdan.florsgardenapp.HomeUser;
 import com.calicdan.florsgardenapp.ImageRecognitionHome;
 import com.calicdan.florsgardenapp.Login;
 import com.calicdan.florsgardenapp.Model.User;
@@ -315,7 +316,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.homebtn:
-                startActivity(new Intent(getActivity(), Home.class));
+                startActivity(new Intent(getActivity(), HomeUser.class));
                 break;
             case R.id.forumbtn:
                 startActivity(new Intent(getActivity(), ForumActivity.class));
