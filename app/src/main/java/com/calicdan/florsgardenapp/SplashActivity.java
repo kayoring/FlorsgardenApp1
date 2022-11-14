@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        
+
         if (firebaseUser != null){
             uid = firebaseUser.getUid();
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference();

@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.calicdan.florsgardenapp.AdminPurchasesView;
 import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
 import com.calicdan.florsgardenapp.PurchasesView;
 import com.calicdan.florsgardenapp.R;
@@ -66,7 +67,7 @@ public class AdminPurchasesAdapter extends RecyclerView.Adapter<AdminPurchasesAd
         holder.purchasesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(holder.itemView.getContext(), PurchasesView.class);
+                Intent intent = new Intent(holder.itemView.getContext(), AdminPurchasesView.class);
                 intent.putExtra("object", purchasesDomains.get(position));
                 holder.itemView.getContext().startActivity(intent);
             }

@@ -1,5 +1,8 @@
 package com.calicdan.florsgardenapp.Adapter;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +48,7 @@ public class AdminPurchasesViewAdapter extends RecyclerView.Adapter<AdminPurchas
         holder.userID.setText(foodDomain.get(position).getUid());
         holder.order_status.setText(foodDomain.get(position).getStatus());
         DatabaseReference orderStatusRef = ordersRef.child(foodDomain.get(position).getUid()).child("status");
-
+        Log.i(TAG,"-----------------------------------adminpurchasesviewadapter" + foodDomain.get(position).getStatus());
         switch(foodDomain.get(position).getStatus()){
             case "Pending":
                 holder.purchasesButton.setText("Accept Order");

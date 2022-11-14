@@ -204,7 +204,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     email.setText("Email: " + user.getEmail());
                     contact.setText("Contact #: " + user.getContact());
                     //password.setText("Password: " + ch[0]+ch[1]+"******");
-
                     if (user.getAddress() == null) {
                         address.setText("Address: " + "N/A");
                     } else {

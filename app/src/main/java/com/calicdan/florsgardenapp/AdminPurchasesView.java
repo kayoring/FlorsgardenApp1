@@ -86,10 +86,9 @@ public class AdminPurchasesView extends AppCompatActivity {
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     FoodDomain foodDomain = postSnapshot.getValue(FoodDomain.class);
                     Log.i(TAG, "--------------------ADDED TO PURCHASES---------------------" + postSnapshot.child("uid").getValue());
-                    if (((postSnapshot.child("uid").getValue()).toString()).equals(uid)) {
-                        purchasesList.add(foodDomain);
-                        Log.i(TAG, "---------------------ADDED TO THE FUCKING VIEW-----------------------");
-                    }
+                    purchasesList.add(foodDomain);
+                    Log.i(TAG, "---------------------ADDED TO THE FUCKING VIEW-----------------------");
+
                 }
                 adapter.notifyDataSetChanged();
             }
