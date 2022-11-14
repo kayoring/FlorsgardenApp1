@@ -73,7 +73,7 @@ public class AdminPurchasesViewAdapter extends RecyclerView.Adapter<AdminPurchas
                 break;
             case "Shipped":
                 holder.purchasesButton.setText("Confirm shipment");
-                changeStat="ToRecieve";
+                changeStat="ToReceive";
                 holder.purchasesButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
