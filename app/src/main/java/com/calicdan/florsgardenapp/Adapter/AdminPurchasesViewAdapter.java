@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.calicdan.florsgardenapp.R;
 import com.google.firebase.database.DatabaseReference;
@@ -16,7 +17,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class PurchasesViewAdapter extends RecyclerView.Adapter<PurchasesViewAdapter.ViewHolder> {
+public class AdminPurchasesViewAdapter extends RecyclerView.Adapter<AdminPurchasesViewAdapter.ViewHolder> {
 
     ArrayList<FoodDomain> foodDomain;
     String temp,retProductName,changeStat;
@@ -28,17 +29,17 @@ public class PurchasesViewAdapter extends RecyclerView.Adapter<PurchasesViewAdap
     DatabaseReference ordersRef = fdb.getReference("Orders");
 
 
-    public PurchasesViewAdapter(ArrayList<FoodDomain> foodDomains) { this.foodDomain = foodDomains;}
+    public AdminPurchasesViewAdapter(ArrayList<FoodDomain> foodDomains) { this.foodDomain = foodDomains;}
 
     @NonNull
     @Override
-    public PurchasesViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdminPurchasesViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_purchasesview,parent,false);
         return new ViewHolder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PurchasesViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdminPurchasesViewAdapter.ViewHolder holder, int position) {
         holder.titleTxt.setText(foodDomain.get(position).getDate());
         holder.totalFee.setText(Double.toString((foodDomain.get(position).getTotal())));
         holder.userID.setText(foodDomain.get(position).getUid());
@@ -46,10 +47,19 @@ public class PurchasesViewAdapter extends RecyclerView.Adapter<PurchasesViewAdap
         DatabaseReference orderStatusRef = ordersRef.child(foodDomain.get(position).getUid()).child("status");
 
         switch(foodDomain.get(position).getStatus()){
-
-            case "ToPay":
-                holder.purchasesButton.setText("Pay for Order");
-                changeStat="Paid";
+            case "Pending":
+                holder.purchasesButton.setText("Accept Order");
+                changeStat="ToPay";
+                holder.purchasesButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        orderStatusRef.setValue(changeStat);
+                    }
+                });
+                break;
+            case "Paid":
+                holder.purchasesButton.setText("Ship Order");
+                changeStat="ToShip";
                 holder.purchasesButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -58,20 +68,9 @@ public class PurchasesViewAdapter extends RecyclerView.Adapter<PurchasesViewAdap
                     }
                 });
                 break;
-            case "ToShip":
-                holder.purchasesButton.setText("Confirm Shipment");
-                changeStat="Shipped";
-                holder.purchasesButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        orderStatusRef.setValue(changeStat);
-                    }
-                });
-                break;
-            case "ToReceive":
-                holder.purchasesButton.setText("Received Order");
-                changeStat="Completed";
+            case "Shipped":
+                holder.purchasesButton.setText("Confirm shipment");
+                changeStat="ToRecieve";
                 holder.purchasesButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -84,6 +83,7 @@ public class PurchasesViewAdapter extends RecyclerView.Adapter<PurchasesViewAdap
                 holder.purchasesButton.setText("Completed Order");
 
                 break;
+
             default:
                 holder.purchasesButton.setText("");
                 break;

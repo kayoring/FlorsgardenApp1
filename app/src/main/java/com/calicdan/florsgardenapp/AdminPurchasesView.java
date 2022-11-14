@@ -4,30 +4,21 @@ import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.calicdan.florsgardenapp.Adapter.PurchasesAdapter;
-import com.calicdan.florsgardenapp.Adapter.PurchasesViewAdapter;
-import com.calicdan.florsgardenapp.Domain.FoodDomain;
-import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.calicdan.florsgardenapp.databinding.ActivityPurchasesViewBinding;
+import com.calicdan.florsgardenapp.Adapter.AdminPurchasesViewAdapter;
+import com.calicdan.florsgardenapp.Adapter.PurchasesViewAdapter;
+import com.calicdan.florsgardenapp.Domain.FoodDomain;
+import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class PurchasesView extends AppCompatActivity {
+public class AdminPurchasesView extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewList;
     TextView totalFeeTxt, taxTxt, totalTxt,emptyTxt,purchasesViewTitle;
@@ -80,7 +71,7 @@ public class PurchasesView extends AppCompatActivity {
         recyclerViewList = findViewById(R.id.cartView);
         recyclerViewList.setLayoutManager(linearLayoutManager);
         ArrayList<FoodDomain> purchasesList = new ArrayList<>();
-        adapter = new PurchasesViewAdapter(purchasesList);
+        adapter = new AdminPurchasesViewAdapter(purchasesList);
         recyclerViewList.setAdapter(adapter);
         object = (PurchasesDomain) getIntent().getSerializableExtra("object");
         view = (object.getTitle()).replace(" ","");
@@ -122,38 +113,38 @@ public class PurchasesView extends AppCompatActivity {
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PurchasesView.this, Home.class));
+                startActivity(new Intent(AdminPurchasesView.this, Home.class));
             }
         });
         forumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PurchasesView.this, StoreActivity.class));
+                startActivity(new Intent(AdminPurchasesView.this, StoreActivity.class));
             }
         });
         storebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PurchasesView.this, StoreActivity.class));
+                startActivity(new Intent(AdminPurchasesView.this, StoreActivity.class));
             }
         });
         imageRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PurchasesView.this, ImageRecognitionOrganicWaste.class));
+                startActivity(new Intent(AdminPurchasesView.this, ImageRecognitionOrganicWaste.class));
             }
         });
         notificationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PurchasesView.this, StoreActivity.class));
+                startActivity(new Intent(AdminPurchasesView.this, StoreActivity.class));
 
             }
         });
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PurchasesView.this, ProfileActivity.class));
+                startActivity(new Intent(AdminPurchasesView.this, ProfileActivity.class));
 
             }
         });

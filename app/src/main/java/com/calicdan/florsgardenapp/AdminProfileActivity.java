@@ -2,12 +2,8 @@ package com.calicdan.florsgardenapp;
 
 import static android.content.ContentValues.TAG;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,25 +13,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
-import com.calicdan.florsgardenapp.Adapter.CategoryAdaptor;
-import com.calicdan.florsgardenapp.Adapter.PurchasesAdapter;
-import com.calicdan.florsgardenapp.Domain.CategoryDomain;
-import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
-import com.calicdan.florsgardenapp.Fragments.ChatsFragment;
+import com.calicdan.florsgardenapp.Fragments.AdminProfileFragment;
+import com.calicdan.florsgardenapp.Fragments.AdminSettingsFragment;
 import com.calicdan.florsgardenapp.Fragments.ProfileFragment;
 import com.calicdan.florsgardenapp.Fragments.SettingsFragment;
-import com.calicdan.florsgardenapp.Fragments.UsersFragment;
-import com.calicdan.florsgardenapp.Model.Chat;
-import com.calicdan.florsgardenapp.Model.User;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,11 +27,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileActivity extends AppCompatActivity {
+public class AdminProfileActivity extends AppCompatActivity {
 
     CircleImageView profile_image;
     TextView username;
@@ -71,7 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         userType = getIntent().getStringExtra("userType");
         Log.i(TAG,"--------------------------------"+userType);
-        ProfileFragment fragment = new ProfileFragment();
+        AdminProfileFragment fragment = new AdminProfileFragment();
         Bundle bundle = new Bundle();
         bundle.putString("userType1", userType);
         fragment.setArguments(bundle);
@@ -80,10 +63,10 @@ public class ProfileActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ProfileActivity.ViewPagerAdapter viewPagerAdapter = new ProfileActivity.ViewPagerAdapter(getSupportFragmentManager());
+                AdminProfileActivity.ViewPagerAdapter viewPagerAdapter = new AdminProfileActivity.ViewPagerAdapter(getSupportFragmentManager());
 
                 viewPagerAdapter.addFragment(fragment, "User Details");
-                viewPagerAdapter.addFragment(new SettingsFragment(), "Settings");
+                viewPagerAdapter.addFragment(new AdminSettingsFragment(), "Settings");
 
                 viewPager.setAdapter(viewPagerAdapter);
 

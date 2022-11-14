@@ -187,7 +187,7 @@ public class Home extends AppCompatActivity {
         imageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+                Intent i = new Intent(getApplicationContext(), AdminProfileActivity.class);
                 i.putExtra("userType",userType);
                 Log.i(TAG,"--------------------------------------" + userType);
                 startActivity(i);

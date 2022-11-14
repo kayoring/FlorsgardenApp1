@@ -1,7 +1,6 @@
 package com.calicdan.florsgardenapp.Fragments;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.ContentValues.TAG;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -9,15 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +16,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+import com.calicdan.florsgardenapp.Adapter.AdminPurchasesAdapter;
 import com.calicdan.florsgardenapp.Adapter.PurchasesAdapter;
-import com.calicdan.florsgardenapp.ChatActivity;
 import com.calicdan.florsgardenapp.ChatbotActivity;
 import com.calicdan.florsgardenapp.Domain.PurchasesDomain;
 import com.calicdan.florsgardenapp.ForumActivity;
@@ -38,7 +34,6 @@ import com.calicdan.florsgardenapp.Login;
 import com.calicdan.florsgardenapp.Model.User;
 import com.calicdan.florsgardenapp.ProfileActivity;
 import com.calicdan.florsgardenapp.R;
-import com.calicdan.florsgardenapp.RegisterUser;
 import com.calicdan.florsgardenapp.StoreActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -62,7 +57,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener{
+public class AdminProfileFragment extends Fragment implements View.OnClickListener{
 
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
     FloatingActionButton imageRecog;
@@ -156,13 +151,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         String userType = getArguments().getString("userType1");
 
         ArrayList<PurchasesDomain> purchase = new ArrayList<>();
-            purchase.add(new PurchasesDomain("To Pay", "pay"));
-            purchase.add(new PurchasesDomain("To Ship", "ship"));
-            purchase.add(new PurchasesDomain("To Receive", "receive"));
+            purchase.add(new PurchasesDomain("Pending", "pay"));
+            purchase.add(new PurchasesDomain("Paid", "ship"));
+            purchase.add(new PurchasesDomain("Shipped", "receive"));
             purchase.add(new PurchasesDomain("Completed", "finished"));
 
-
-        adapter=new PurchasesAdapter(purchase);
+        adapter=new AdminPurchasesAdapter(purchase);
         recyclerViewPurchasesList.setAdapter(adapter);
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
