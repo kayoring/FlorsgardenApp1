@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -94,42 +95,20 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this, Home.class));
-
             }
         });
 
         forumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (userType.equals("admin")) {
                     startActivity(new Intent(Home.this, AdminForumActivity.class));
-                }
-                if (userType.equals("customer")) {
-                    startActivity(new Intent(Home.this, ForumActivity.class));
-                }
             }
         });
 
         storebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (userType.equals("admin")) {
                     startActivity(new Intent(Home.this, AdminStoreActivity.class));
-                }
-                if (userType.equals("customer")) {
-                    startActivity(new Intent(Home.this, StoreActivity.class));
-                }
-
-                /*
-                if (userType.equals("admin")) {
-                    startActivity(new Intent(Home.this, AdminStoreActivity.class));
-                }
-                if (userType.equals("customer")) {
-                    startActivity(new Intent(Home.this, StoreActivity.class));
-                }
-                 */
-
             }
         });
 
@@ -142,19 +121,13 @@ public class Home extends AppCompatActivity {
         chatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (userType.equals("admin")) {
                     startActivity(new Intent(Home.this, AdminChatbotActivity.class));
-                }
-                if (userType.equals("customer")) {
-                    startActivity(new Intent(Home.this, ChatbotActivity.class));
-                }
             }
         });
         notificationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, StoreActivity.class));
-
+                Toast.makeText(Home.this, "Not yet available!", Toast.LENGTH_SHORT).show();
             }
         });
 

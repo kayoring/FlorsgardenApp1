@@ -57,7 +57,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdminProfileFragment extends Fragment implements View.OnClickListener{
+public class AdminProfileFragment extends Fragment{
 
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
     FloatingActionButton imageRecog;
@@ -82,6 +82,7 @@ public class AdminProfileFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+/*
         homebtn = view.findViewById(R.id.homebtn);
         forumbtn = view.findViewById(R.id.forumbtn);
         storebtn = view.findViewById(R.id.storebtn);
@@ -97,6 +98,8 @@ public class AdminProfileFragment extends Fragment implements View.OnClickListen
         chatbtn.setOnClickListener(this);
         imageViewProfile.setOnClickListener(this);
         imageRecog.setOnClickListener(this);
+
+ */
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         ref = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -119,7 +122,7 @@ public class AdminProfileFragment extends Fragment implements View.OnClickListen
             }
         });
 
-        logoutBtn = view.findViewById(R.id.logoutBtn);
+        //logoutBtn = view.findViewById(R.id.logoutBtn);
         //logoutBtn.setOnClickListener((View.OnClickListener) getActivity());
         profile_image = view.findViewById(R.id.profile_image);
         //image_profile.setOnClickListener((View.OnClickListener) getActivity());
@@ -158,29 +161,6 @@ public class AdminProfileFragment extends Fragment implements View.OnClickListen
 
         adapter=new AdminPurchasesAdapter(purchase);
         recyclerViewPurchasesList.setAdapter(adapter);
-
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("Are you sure you want to log out?");
-                builder.setTitle("Logout");
-                builder.setCancelable(false);
-
-                builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(getActivity(), Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                    getActivity().finish();
-                });
-
-                builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
-                    dialog.cancel();
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-
-            }
-        });
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -304,7 +284,7 @@ public class AdminProfileFragment extends Fragment implements View.OnClickListen
             }
         }
     }
-
+/*
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -331,4 +311,6 @@ public class AdminProfileFragment extends Fragment implements View.OnClickListen
                 break;
         }
     }
+
+ */
 }

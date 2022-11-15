@@ -88,6 +88,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        /*
         homebtn = view.findViewById(R.id.homebtn);
         forumbtn = view.findViewById(R.id.forumbtn);
         storebtn = view.findViewById(R.id.storebtn);
@@ -103,6 +104,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         chatbtn.setOnClickListener(this);
         imageViewProfile.setOnClickListener(this);
         imageRecog.setOnClickListener(this);
+
+         */
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         ref = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -165,29 +168,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         adapter=new PurchasesAdapter(purchase);
         recyclerViewPurchasesList.setAdapter(adapter);
-
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("Are you sure you want to log out?");
-                builder.setTitle("Logout");
-                builder.setCancelable(false);
-
-                builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(getActivity(), Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                    getActivity().finish();
-                });
-
-                builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
-                    dialog.cancel();
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-
-            }
-        });
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

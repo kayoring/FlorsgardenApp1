@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -90,7 +91,7 @@ public class HomeUser extends AppCompatActivity {
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeUser.this, Home.class));
+                startActivity(new Intent(HomeUser.this, HomeUser.class));
 
             }
         });
@@ -106,23 +107,7 @@ public class HomeUser extends AppCompatActivity {
         storebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (userType.equals("admin")) {
-                    startActivity(new Intent(HomeUser.this, AdminStoreActivity.class));
-                }
-                if (userType.equals("customer")) {
                     startActivity(new Intent(HomeUser.this, StoreActivity.class));
-                }
-
-                /*
-                if (userType.equals("admin")) {
-                    startActivity(new Intent(Home.this, AdminStoreActivity.class));
-                }
-                if (userType.equals("customer")) {
-                    startActivity(new Intent(Home.this, StoreActivity.class));
-                }
-                 */
-
             }
         });
 
@@ -135,18 +120,13 @@ public class HomeUser extends AppCompatActivity {
         chatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (userType.equals("admin")) {
-                    startActivity(new Intent(HomeUser.this, AdminChatbotActivity.class));
-                }
-                if (userType.equals("customer")) {
                     startActivity(new Intent(HomeUser.this, ChatbotActivity.class));
-                }
             }
         });
         notificationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeUser.this, StoreActivity.class));
+                Toast.makeText(HomeUser.this, "Not yet available!", Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,7 +48,10 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+
+    View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
+    FloatingActionButton imageRecog;
 
     CircleImageView profile_image;
     TextView username;
@@ -61,6 +65,22 @@ public class ProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Profile");
         String userType = "";
+
+        homebtn = findViewById(R.id.homebtn);
+        forumbtn = findViewById(R.id.forumbtn);
+        storebtn = findViewById(R.id.storebtn);
+        notificationbtn = findViewById(R.id.notificationbtn);
+        chatbtn = findViewById(R.id.chatbtn);
+        imageViewProfile = findViewById(R.id.imageViewProfile);
+        imageRecog = findViewById(R.id.imageRecog);
+
+        homebtn.setOnClickListener(this);
+        forumbtn.setOnClickListener(this);
+        storebtn.setOnClickListener(this);
+        notificationbtn.setOnClickListener(this);
+        chatbtn.setOnClickListener(this);
+        imageViewProfile.setOnClickListener(this);
+        imageRecog.setOnClickListener(this);
 
         //buttons();
         profile_image = findViewById(R.id.profile_image);
@@ -96,6 +116,34 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.homebtn:
+                startActivity(new Intent(ProfileActivity.this, HomeUser.class));
+                break;
+            case R.id.forumbtn:
+                startActivity(new Intent(ProfileActivity.this, ForumActivity.class));
+                break;
+            case R.id.storebtn:
+                startActivity(new Intent(ProfileActivity.this, StoreActivity.class));
+                break;
+            case R.id.notificationbtn:
+                Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.chatbtn:
+                startActivity(new Intent(ProfileActivity.this, ChatbotActivity.class));
+                break;
+            case R.id.imageViewProfile:
+                startActivity(new Intent(ProfileActivity.this, ProfileActivity.class));
+                break;
+            case R.id.imageRecog:
+                startActivity(new Intent(ProfileActivity.this, ImageRecognitionHome.class));
+                break;
+        }
+    }
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private ArrayList<Fragment> fragments;

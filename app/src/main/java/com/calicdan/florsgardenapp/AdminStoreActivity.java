@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.calicdan.florsgardenapp.Adapter.AdminProductsAdapter;
 import com.calicdan.florsgardenapp.Domain.Product;
@@ -52,16 +53,22 @@ public class AdminStoreActivity extends AppCompatActivity {
                 startActivity(new Intent(AdminStoreActivity.this, Home.class));
             }
         });
+        chatbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminStoreActivity.this, AdminChatbotActivity.class));
+            }
+        });
         forumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminStoreActivity.this, StoreActivity.class));
+                startActivity(new Intent(AdminStoreActivity.this, AdminForumActivity.class));
             }
         });
         storebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminStoreActivity.this, StoreActivity.class));
+                startActivity(new Intent(AdminStoreActivity.this, AdminStoreActivity.class));
             }
         });
         imageRecog.setOnClickListener(new View.OnClickListener() {
@@ -73,14 +80,13 @@ public class AdminStoreActivity extends AppCompatActivity {
         notificationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminStoreActivity.this, StoreActivity.class));
-
+                Toast.makeText(AdminStoreActivity.this, "Not yet available!", Toast.LENGTH_SHORT).show();
             }
         });
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminStoreActivity.this, ProfileActivity.class));
+                startActivity(new Intent(AdminStoreActivity.this, AdminProfileActivity.class));
 
             }
         });

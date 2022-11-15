@@ -15,7 +15,6 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/lrLa"
             android:layout_width="match_parent"
             android:layout_margin="10dp"
             android:layout_marginEnd="10dp"
@@ -139,6 +138,21 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="4dp"
+                    android:padding="5dp"
+                    android:background="@drawable/shape4"
+                    android:id="@+id/addAdmin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:clickable="true"
+                    android:text="Create an admin account"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
         <!--
@@ -225,7 +239,6 @@
             </LinearLayout>
         </LinearLayout>
         -->
-
         <Button
             android:layout_below="@+id/lrLa"
             android:id="@+id/logoutBtn"

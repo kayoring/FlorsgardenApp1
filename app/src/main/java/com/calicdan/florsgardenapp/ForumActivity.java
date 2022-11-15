@@ -58,7 +58,7 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ForumActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(ForumActivity.this, HomeUser.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
             }
         });
@@ -89,7 +89,7 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.homebtn:
-                startActivity(new Intent(ForumActivity.this, Home.class));
+                startActivity(new Intent(ForumActivity.this, HomeUser.class));
                 break;
             case R.id.forumbtn:
                 startActivity(new Intent(ForumActivity.this, ForumActivity.class));
@@ -98,7 +98,7 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(ForumActivity.this, StoreActivity.class));
                 break;
             case R.id.notificationbtn:
-                startActivity(new Intent(ForumActivity.this, StoreActivity.class));
+                Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.chatbtn:
                     startActivity(new Intent(ForumActivity.this, ChatbotActivity.class));
@@ -122,14 +122,14 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case  R.id.home:
-                startActivity(new Intent(ForumActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(ForumActivity.this, HomeUser.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
                 return true;
             case  R.id.addQuestion:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp,new AddInquiryActivity()).commit();
                 break;
             case  R.id.search:
-                Toast.makeText(this, "Nothing...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
         }
 
         return false;

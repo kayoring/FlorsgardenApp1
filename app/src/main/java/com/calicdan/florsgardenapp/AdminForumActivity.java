@@ -18,6 +18,7 @@ public class AdminForumActivity extends AppCompatActivity implements View.OnClic
 
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
     FloatingActionButton imageRecog;
+
     String userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,6 @@ public class AdminForumActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-
         homebtn = findViewById(R.id.homebtn);
         forumbtn = findViewById(R.id.forumbtn);
         storebtn = findViewById(R.id.storebtn);
@@ -82,19 +82,19 @@ public class AdminForumActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(AdminForumActivity.this, Home.class));
                 break;
             case R.id.forumbtn:
-                startActivity(new Intent(AdminForumActivity.this, ForumActivity.class));
+                startActivity(new Intent(AdminForumActivity.this, AdminForumActivity.class));
                 break;
             case R.id.storebtn:
-                startActivity(new Intent(AdminForumActivity.this, StoreActivity.class));
+                startActivity(new Intent(AdminForumActivity.this, AdminStoreActivity.class));
                 break;
             case R.id.notificationbtn:
-                startActivity(new Intent(AdminForumActivity.this, StoreActivity.class));
+                Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.chatbtn:
-                startActivity(new Intent(AdminForumActivity.this, ChatbotActivity.class));
+                startActivity(new Intent(AdminForumActivity.this, AdminChatbotActivity.class));
                 break;
             case R.id.imageViewProfile:
-                startActivity(new Intent(AdminForumActivity.this, ProfileActivity.class));
+                startActivity(new Intent(AdminForumActivity.this, AdminProfileActivity.class));
                 break;
             case R.id.imageRecog:
                 startActivity(new Intent(AdminForumActivity.this, ImageRecognitionHome.class));
@@ -119,7 +119,7 @@ public class AdminForumActivity extends AppCompatActivity implements View.OnClic
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp,new AddInquiryActivity()).commit();
                 break;
             case  R.id.search:
-                Toast.makeText(this, "Nothing...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
         }
 
         return false;

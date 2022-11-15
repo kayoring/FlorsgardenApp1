@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.calicdan.florsgardenapp.Model.Chat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -33,13 +35,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class StoreActivity extends AppCompatActivity {
+public class StoreActivity extends AppCompatActivity implements View.OnClickListener{
+
+    View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
+    FloatingActionButton imageRecog;
+
     private RecyclerView.Adapter adapter,adapter1;
     private RecyclerView recyclerViewCategoryList,recyclerViewProductsList;
     TextView introUser;
     ScrollView storeScrollView;
     String name, email;
-    String userType = "customer";
+    //String userType = "customer";
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String uid = user.getUid();
@@ -50,6 +56,22 @@ public class StoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
+        homebtn = findViewById(R.id.homebtn);
+        forumbtn = findViewById(R.id.forumbtn);
+        storebtn = findViewById(R.id.storebtn);
+        notificationbtn = findViewById(R.id.notificationbtn);
+        chatbtn = findViewById(R.id.chatbtn);
+        imageViewProfile = findViewById(R.id.imageViewProfile);
+        imageRecog = findViewById(R.id.imageRecog);
+
+        homebtn.setOnClickListener(this);
+        forumbtn.setOnClickListener(this);
+        storebtn.setOnClickListener(this);
+        notificationbtn.setOnClickListener(this);
+        chatbtn.setOnClickListener(this);
+        imageViewProfile.setOnClickListener(this);
+        imageRecog.setOnClickListener(this);
+/*
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userTypeReference = reference.child("Users").child(uid).child("usertype");
         userTypeReference.addValueEventListener(new ValueEventListener() {
@@ -63,6 +85,9 @@ public class StoreActivity extends AppCompatActivity {
                 userType = "customer";
             }
         });
+
+ */
+
         if(user != null){
             name = user.getDisplayName();
             email = user.getEmail();
@@ -74,67 +99,8 @@ public class StoreActivity extends AppCompatActivity {
         recyclerViewCategory();
         recyclerViewProducts();
         navigation();
-        buttons();
     }
-    private void buttons() {
 
-        View homebtn = findViewById(R.id.homebtn);
-        View forumbtn = findViewById(R.id.forumbtn);
-        View storebtn = findViewById(R.id.storebtn);
-
-        FloatingActionButton imageRecog = (FloatingActionButton) findViewById(R.id.imageRecog);
-        View notificationbtn = findViewById(R.id.notificationbtn);
-        View chatbtn = findViewById(R.id.chatbtn);
-        View profilebtn = findViewById(R.id.profilebtn);
-
-        homebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(StoreActivity.this, Home.class));
-            }
-        });
-        forumbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(StoreActivity.this, StoreActivity.class));
-            }
-        });
-        storebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(StoreActivity.this, StoreActivity.class));
-            }
-        });
-        imageRecog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(StoreActivity.this, ImageRecognitionOrganicWaste.class));
-
-                if(userType.equals("admin")){
-                    startActivity(new Intent(StoreActivity.this, AdminStoreActivity.class));
-                }
-                if(userType.equals("customer")){
-                    startActivity(new Intent(StoreActivity.this, StoreActivity.class));
-                }
-
-            }
-        });
-        notificationbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(StoreActivity.this, StoreActivity.class));
-
-            }
-        });
-        profilebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(StoreActivity.this, ProfileActivity.class));
-
-            }
-        });
-    }
     private void navigation(){
         View cartbtn = findViewById(R.id.cartBtn);
         cartbtn.setOnClickListener(new View.OnClickListener() {
@@ -204,5 +170,32 @@ public class StoreActivity extends AppCompatActivity {
                 startActivity(new Intent(StoreActivity.this, ImageRecognitionOrganicWaste.class));
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.homebtn:
+                startActivity(new Intent(StoreActivity.this, HomeUser.class));
+                break;
+            case R.id.forumbtn:
+                startActivity(new Intent(StoreActivity.this, ForumActivity.class));
+                break;
+            case R.id.storebtn:
+                startActivity(new Intent(StoreActivity.this, StoreActivity.class));
+                break;
+            case R.id.notificationbtn:
+                Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.chatbtn:
+                startActivity(new Intent(StoreActivity.this, ChatbotActivity.class));
+                break;
+            case R.id.imageViewProfile:
+                startActivity(new Intent(StoreActivity.this, ProfileActivity.class));
+                break;
+            case R.id.imageRecog:
+                startActivity(new Intent(StoreActivity.this, ImageRecognitionHome.class));
+                break;
+        }
     }
 }
