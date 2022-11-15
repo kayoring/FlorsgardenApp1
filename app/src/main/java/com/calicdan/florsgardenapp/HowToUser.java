@@ -20,14 +20,14 @@ public class HowToUser extends AppCompatActivity {
     RecyclerView recyclerView;
     HowToAdapterUser wormsAdapter;
     //Button btnAdd;
-    ImageView imgViewBack4;
+    ImageView imgViewBack4, imageRecog, imageViewHome, imageViewForum, imageViewStore, imageViewChat, imageViewProfile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_user);
 
-        imgViewBack4 = findViewById(R.id.imgViewBack4);
         recyclerView = (RecyclerView)findViewById(R.id.recycleViewWorms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -41,12 +41,56 @@ public class HowToUser extends AppCompatActivity {
 
         //btnAdd = findViewById(R.id.btnAdd);
 
-        imgViewBack4.setOnClickListener(new View.OnClickListener() {
+        imgViewBack4 = findViewById(R.id.imgViewBack4);
+        imageRecog = findViewById(R.id.imageRecog);
+        imageViewHome = findViewById(R.id.imageViewHome);
+        imageViewForum = findViewById(R.id.imageViewForum);
+        imageViewStore = findViewById(R.id.imageViewStore);
+        imageViewChat = findViewById(R.id.imageViewChat);
+        imageViewProfile = findViewById(R.id.imageViewProfile);
+
+        imageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HowToUser.this, Home.class));
+                startActivity(new Intent(HowToUser.this, ProfileActivity.class));
             }
         });
+
+        imageViewChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HowToUser.this, ChatbotActivity.class));
+            }
+        });
+
+        imageViewStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HowToUser.this, StoreActivity.class));
+            }
+        });
+
+        imageViewForum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HowToUser.this, ForumActivity.class));
+            }
+        });
+
+        imageViewHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HowToUser.this, HomeUser.class));
+            }
+        });
+
+        imageRecog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HowToUser.this, ImageRecognitionHome.class));
+            }
+        });
+
         /*
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

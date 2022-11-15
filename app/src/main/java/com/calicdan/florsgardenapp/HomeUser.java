@@ -2,10 +2,7 @@ package com.calicdan.florsgardenapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -31,7 +28,7 @@ public class HomeUser extends AppCompatActivity {
     View homebtn, forumbtn, storebtn, notificationbtn, chatbtn, imageViewProfile;
     FloatingActionButton imageRecog;
     Button btnVermiculture;
-    ImageButton btnWorms, btnOrganic, btnVids, btnHow;
+    ImageButton btnWorms,btnOrganic, btnVids, btnHow;
     DatabaseReference reference;
     FirebaseUser fuser;
 
@@ -49,9 +46,9 @@ public class HomeUser extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
+        btnOrganic = findViewById(R.id.btnOrganic);
         btnHow = findViewById(R.id.btnHow);
         btnVids = findViewById(R.id.btnVids);
-        btnOrganic = findViewById(R.id.btnOrganic);
         homebtn = findViewById(R.id.homebtn);
         forumbtn = findViewById(R.id.forumbtn);
         storebtn = findViewById(R.id.storebtn);
@@ -81,6 +78,12 @@ public class HomeUser extends AppCompatActivity {
             }
         });
 
+        btnOrganic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeUser.this, OrganicWasteUser.class));
+            }
+        });
         txtSeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,12 +141,7 @@ public class HomeUser extends AppCompatActivity {
             }
         });
 
-        btnOrganic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HomeUser.this, OrganicWasteUser.class));
-            }
-        });
+
         btnVids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -202,27 +200,6 @@ public class HomeUser extends AppCompatActivity {
         return;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.search:
-                startActivity(new Intent(HomeUser.this, Search.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                return true;
-        }
-        return false;
-    }
-
-    public void clicked_button(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        startActivity(intent);
-    }
 
 
 }

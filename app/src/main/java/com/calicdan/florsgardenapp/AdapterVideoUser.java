@@ -103,10 +103,7 @@ public class AdapterVideoUser extends RecyclerView.Adapter<AdapterVideoUser.Hold
             @Override
             public boolean onInfo(MediaPlayer mp, int what, int extra) {
                 switch(what){
-                    case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START:{
-                        holder.progressBar.setVisibility(View.VISIBLE);
-                        return true;
-                    }
+
                     case MediaPlayer.MEDIA_INFO_BUFFERING_START:{
                         holder.progressBar.setVisibility(View.VISIBLE);
                         return true;

@@ -19,7 +19,7 @@ public class OrganicWasteUser extends AppCompatActivity  {
     RecyclerView recyclerView;
     OrganicWasteAdapterUser organicWasteAdapter;
             //Button btnAdd;
-            ImageView imgViewBack4;
+            ImageView imgViewBack4, imageRecog, imageViewHome, imageViewForum, imageViewStore, imageViewChat, imageViewProfile;
 
 
     @Override
@@ -34,13 +34,54 @@ public class OrganicWasteUser extends AppCompatActivity  {
         //btnAdd = findViewById(R.id.btnAdd);
 
         imgViewBack4 = findViewById(R.id.imgViewBack4);
-        /*btnAdd.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        startActivity(new Intent(getApplicationContext(), AddGuidesOrganicWaste.class));
-        }
+        imageRecog = findViewById(R.id.imageRecog);
+        imageViewHome = findViewById(R.id.imageViewHome);
+        imageViewForum = findViewById(R.id.imageViewForum);
+        imageViewStore = findViewById(R.id.imageViewStore);
+        imageViewChat = findViewById(R.id.imageViewChat);
+        imageViewProfile = findViewById(R.id.imageViewProfile);
+
+        imageViewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OrganicWasteUser.this, ProfileActivity.class));
+            }
         });
-*/
+
+        imageViewChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OrganicWasteUser.this, ChatbotActivity.class));
+            }
+        });
+
+        imageViewStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OrganicWasteUser.this, StoreActivity.class));
+            }
+        });
+
+        imageViewForum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OrganicWasteUser.this, ForumActivity.class));
+            }
+        });
+
+        imageViewHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OrganicWasteUser.this, HomeUser.class));
+            }
+        });
+
+        imageRecog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OrganicWasteUser.this, ImageRecognitionHome.class));
+            }
+        });
         imgViewBack4.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {

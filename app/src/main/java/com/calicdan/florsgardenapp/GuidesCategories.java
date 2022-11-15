@@ -29,39 +29,39 @@ public class GuidesCategories extends AppCompatActivity {
         txtVids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GuidesCategories.this, VideosActivity.class));
+                startActivity(new Intent(GuidesCategories.this, VideosActivityUser.class));
             }
         });
 
         txtHow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GuidesCategories.this, HowTo.class));
+                startActivity(new Intent(GuidesCategories.this, HowToUser.class));
             }
         });
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GuidesCategories.this, Home.class));
+                startActivity(new Intent(GuidesCategories.this, HomeUser.class));
 
             }
         });
         txtVermi.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                startActivity(new Intent(GuidesCategories.this, Vermiculture.class));
+                startActivity(new Intent(GuidesCategories.this, VermicultureUser.class));
             }
         });
         txtWorm.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                startActivity(new Intent(GuidesCategories.this, Worms.class));
+                startActivity(new Intent(GuidesCategories.this, WormsUser.class));
             }
         });
         txtOrganic.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                startActivity(new Intent(GuidesCategories.this, OrganicWaste.class));
+                startActivity(new Intent(GuidesCategories.this, OrganicWasteUser.class));
             }
         });
 

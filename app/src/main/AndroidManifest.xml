@@ -223,6 +223,8 @@
         <activity
             android:name=".HowTo"
             android:exported="true" />
+        <activity android:name=".VermicultureUser"
+            android:exported="true"/>
         <activity
             android:name=".HomeUser"
             android:exported="true" />
