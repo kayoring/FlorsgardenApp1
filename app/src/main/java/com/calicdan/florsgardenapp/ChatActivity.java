@@ -148,7 +148,7 @@ public class ChatActivity extends AppCompatActivity {
                 alertDialog.show();
                 return true;
             case  R.id.home:
-                    startActivity(new Intent(ChatActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(ChatActivity.this, HomeUser.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
                 return true;
         }
