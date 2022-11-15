@@ -52,6 +52,7 @@ public class Home extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
+
         btnHow = findViewById(R.id.btnHow);
         btnVids = findViewById(R.id.btnVids);
         btnOrganic = findViewById(R.id.btnOrganic);

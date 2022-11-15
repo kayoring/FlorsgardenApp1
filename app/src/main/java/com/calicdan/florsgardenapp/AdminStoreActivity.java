@@ -21,7 +21,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AdminStoreActivity extends AppCompatActivity {
+public class AdminStoreActivity extends AppCompatActivity implements View.OnClickListener {
+
+    View homebtn, forumbtn, storebtn, notificationbtn, chatbtn, imageViewProfile;
+    FloatingActionButton imageRecog;
+
     private RecyclerView.Adapter adapter;
     private RecyclerView adminProductsView;
     View addProductBtn;
@@ -32,64 +36,24 @@ public class AdminStoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_store_activity);
 
-        buttons();
+        homebtn = findViewById(R.id.homebtn);
+        forumbtn = findViewById(R.id.forumbtn);
+        storebtn = findViewById(R.id.storebtn);
+        notificationbtn = findViewById(R.id.notificationbtn);
+        chatbtn = findViewById(R.id.chatbtn);
+        imageViewProfile = findViewById(R.id.imageViewProfile);
+        imageRecog = findViewById(R.id.imageRecog);
+
+        homebtn.setOnClickListener(this);
+        forumbtn.setOnClickListener(this);
+        storebtn.setOnClickListener(this);
+        notificationbtn.setOnClickListener(this);
+        chatbtn.setOnClickListener(this);
+        imageViewProfile.setOnClickListener(this);
+        imageRecog.setOnClickListener(this);
         initView();
         initList();
         AdminProductsView();
-    }
-    private void buttons() {
-        View homebtn = findViewById(R.id.homebtn);
-        View forumbtn = findViewById(R.id.forumbtn);
-        View storebtn = findViewById(R.id.storebtn);
-
-        FloatingActionButton imageRecog = (FloatingActionButton) findViewById(R.id.imageRecog);
-        View notificationbtn = findViewById(R.id.notificationbtn);
-        View chatbtn = findViewById(R.id.chatbtn);
-        View profilebtn = findViewById(R.id.profilebtn);
-
-        homebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AdminStoreActivity.this, Home.class));
-            }
-        });
-        chatbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AdminStoreActivity.this, AdminChatbotActivity.class));
-            }
-        });
-        forumbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AdminStoreActivity.this, AdminForumActivity.class));
-            }
-        });
-        storebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AdminStoreActivity.this, AdminStoreActivity.class));
-            }
-        });
-        imageRecog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AdminStoreActivity.this, ImageRecognitionHome.class));
-            }
-        });
-        notificationbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(AdminStoreActivity.this, "Not yet available!", Toast.LENGTH_SHORT).show();
-            }
-        });
-        profilebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AdminStoreActivity.this, AdminProfileActivity.class));
-
-            }
-        });
     }
     private void initView(){
         addProductBtn = findViewById(R.id.addProductBtn);
@@ -127,5 +91,32 @@ public class AdminStoreActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.homebtn:
+                startActivity(new Intent(AdminStoreActivity.this, Home.class));
+                break;
+            case R.id.forumbtn:
+                startActivity(new Intent(AdminStoreActivity.this, AdminForumActivity.class));
+                break;
+            case R.id.storebtn:
+                startActivity(new Intent(AdminStoreActivity.this, AdminStoreActivity.class));
+                break;
+            case R.id.notificationbtn:
+                Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.chatbtn:
+                startActivity(new Intent(AdminStoreActivity.this, AdminChatbotActivity.class));
+                break;
+            case R.id.imageViewProfile:
+                startActivity(new Intent(AdminStoreActivity.this, AdminProfileActivity.class));
+                break;
+            case R.id.imageRecog:
+                startActivity(new Intent(AdminStoreActivity.this, ImageRecognitionHome.class));
+                break;
+        }
     }
 }

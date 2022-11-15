@@ -151,25 +151,6 @@ public class StoreActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-
-        ImageView imageViewHome = (ImageView) findViewById(R.id. imageViewHome);
-        imageViewHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(StoreActivity.this, Home.class));
-
-            }
-        });
-
-        FloatingActionButton imageRecog = (FloatingActionButton)findViewById(R.id.imageRecog);
-
-        imageRecog.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(StoreActivity.this, ImageRecognitionOrganicWaste.class));
-            }
-        });
     }
 
     @Override
