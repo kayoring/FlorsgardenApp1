@@ -39,7 +39,7 @@ public class Home extends AppCompatActivity {
     String uid = user.getUid();
     String userType = "customer";
 
-    private static int SPLASH_TIMER = 400000000;
+    private static int SPLASH_TIMER = 4000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

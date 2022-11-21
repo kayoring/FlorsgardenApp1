@@ -12,7 +12,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.calicdan.florsgardenapp.ChangeAddressActivity;
 import com.calicdan.florsgardenapp.ChangeEmailActivity;
+import com.calicdan.florsgardenapp.ChangeUsernameActivity;
+import com.calicdan.florsgardenapp.ContactNoActivity;
 import com.calicdan.florsgardenapp.Login;
 import com.calicdan.florsgardenapp.R;
 import com.calicdan.florsgardenapp.RegisterAdminActivity;
@@ -31,10 +34,11 @@ public class AdminSettingsFragment extends Fragment implements View.OnClickListe
         cPass = view.findViewById(R.id.cPass);
         addAdmin = view.findViewById(R.id.addAdmin);
         cEmail = view.findViewById(R.id.cEmail);
-        /*
+
         cUser = view.findViewById(R.id.cUser);
         cContact = view.findViewById(R.id.cContact);
         cAddress = view.findViewById(R.id.cAddress);
+               /*
         notifs = view.findViewById(R.id.cNotifs);
         allowNotifs = view.findViewById(R.id.cAllowNotifs);
          */
@@ -65,10 +69,11 @@ public class AdminSettingsFragment extends Fragment implements View.OnClickListe
         cPass.setOnClickListener(this);
         addAdmin.setOnClickListener(this);
         cEmail.setOnClickListener(this);
-        /*
+
         cUser.setOnClickListener(this);
         cContact.setOnClickListener(this);
         cAddress.setOnClickListener(this);
+        /*
         notifs.setOnClickListener(this);
         allowNotifs.setOnClickListener(this);
        */
@@ -90,19 +95,19 @@ public class AdminSettingsFragment extends Fragment implements View.OnClickListe
             case R.id.addAdmin:
                 startActivity(new Intent(getActivity(), RegisterAdminActivity.class));
                 break;
-/*
+
             case R.id.cUser:
-                startActivity(new Intent(getActivity(), Home.class));
+                startActivity(new Intent(getActivity(), ChangeUsernameActivity.class));
                 break;
 
             case R.id.cContact:
-                startActivity(new Intent(getActivity(), Home.class));
+                startActivity(new Intent(getActivity(), ContactNoActivity.class));
                 break;
 
             case R.id.cAddress:
-                startActivity(new Intent(getActivity(), Home.class));
+                startActivity(new Intent(getActivity(), ChangeAddressActivity.class));
                 break;
-
+/*
 
             case R.id.cNotifs:
                 startActivity(new Intent(getActivity(), Home.class));

@@ -130,6 +130,7 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case  R.id.search:
                 Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
+                break;
         }
 
         return false;

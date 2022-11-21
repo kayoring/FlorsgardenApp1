@@ -82,24 +82,6 @@ public class AdminProfileFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-/*
-        homebtn = view.findViewById(R.id.homebtn);
-        forumbtn = view.findViewById(R.id.forumbtn);
-        storebtn = view.findViewById(R.id.storebtn);
-        notificationbtn = view.findViewById(R.id.notificationbtn);
-        chatbtn = view.findViewById(R.id.chatbtn);
-        imageViewProfile = view.findViewById(R.id.imageViewProfile);
-        imageRecog = view.findViewById(R.id.imageRecog);
-
-        homebtn.setOnClickListener(this);
-        forumbtn.setOnClickListener(this);
-        storebtn.setOnClickListener(this);
-        notificationbtn.setOnClickListener(this);
-        chatbtn.setOnClickListener(this);
-        imageViewProfile.setOnClickListener(this);
-        imageRecog.setOnClickListener(this);
-
- */
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         ref = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -121,11 +103,7 @@ public class AdminProfileFragment extends Fragment{
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
-        //logoutBtn = view.findViewById(R.id.logoutBtn);
-        //logoutBtn.setOnClickListener((View.OnClickListener) getActivity());
         profile_image = view.findViewById(R.id.profile_image);
-        //image_profile.setOnClickListener((View.OnClickListener) getActivity());
         username = view.findViewById(R.id.username);
         email = view.findViewById(R.id.email);
         contact = view.findViewById(R.id.contact);
@@ -138,19 +116,7 @@ public class AdminProfileFragment extends Fragment{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         recyclerViewPurchasesList=view.findViewById(R.id.recycleViewPurchases);
         recyclerViewPurchasesList.setLayoutManager(linearLayoutManager);
-        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("usertype");
-        /*ref1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userType = dataSnapshot.getValue(String.class);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-*/
         String userType = getArguments().getString("userType1");
 
         ArrayList<PurchasesDomain> purchase = new ArrayList<>();
@@ -173,15 +139,15 @@ public class AdminProfileFragment extends Fragment{
                         ch[i] = pass.charAt(i);
                     }
 
-                    username.setText("Username: " + user.getFullName());
-                    email.setText("Email: " + user.getEmail());
-                    contact.setText("Contact #: " + user.getContact());
+                    username.setText(user.getFullName());
+                    email.setText(user.getEmail());
+                    contact.setText(user.getContact());
                     //password.setText("Password: " + ch[0]+ch[1]+"******");
 
                     if (user.getAddress() == null) {
-                        address.setText("Address: " + "N/A");
+                        address.setText("N/A");
                     } else {
-                        address.setText("Address: " + user.getAddress());
+                        address.setText(user.getAddress());
                     }
 
                     if (user.getImageURL().equals("default")) {

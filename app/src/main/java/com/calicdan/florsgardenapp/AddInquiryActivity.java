@@ -17,9 +17,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.calicdan.florsgardenapp.Fragments.ForumFragment;
+import com.calicdan.florsgardenapp.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,56 +36,145 @@ import java.util.HashMap;
 public class AddInquiryActivity extends Fragment {
 
     EditText question;
-    Button addBtn;
-    FirebaseAuth mAuth;
-    String currentUserID;
-
-    DatabaseReference UsersReference;
-    DatabaseReference UsersRef;
-
-    String selectedDept;
-    String selectedSubject;
+    Button addBtn, backBtn;
+    FirebaseUser fuser;
+    DatabaseReference UsersReference,UsersRef,refs;
+    String username, profileImage,userType,currentUserID;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_add_inquiry, container, false);
-        mAuth= FirebaseAuth.getInstance();
 
-        if(getActivity()!=null) {
-            Intent intent = getActivity().getIntent();
-        }
-
-        UsersRef= FirebaseDatabase.getInstance().getReference().child("Users");
-        currentUserID = mAuth.getCurrentUser().getUid();
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        UsersRef=FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid());
 
         question=view.findViewById(R.id.add_question_txt);
         addBtn=view.findViewById(R.id.add_question_btn);
+        backBtn=view.findViewById(R.id.backBtn);
 
-        addBtn.setOnClickListener(new View.OnClickListener() {
+        FirebaseUser fusers = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(fusers.getUid());
+
+        ref.child("username").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
+            public void onDataChange(@NonNull DataSnapshot sn1) {
+                username = sn1.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("imageURL").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot sn2) {
+                profileImage = sn2.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("usertype").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot sn3) {
+                userType = sn3.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("id").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot sn4) {
+                currentUserID = sn4.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                fuser = FirebaseAuth.getInstance().getCurrentUser();
+                refs = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("usertype");
+
+                refs.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        userType = dataSnapshot.getValue(String.class);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
                 new AlertDialog.Builder(getActivity())
-                        .setMessage("Are you sure you want to Upload this Question?")
+                        .setTitle("Forums")
+                        .setMessage("Go back to forums section?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                addNewQuestion(selectedSubject,selectedDept);
+                                question.setText("");
+                                if (userType.equals("admin")) {
+                                    startActivity(new Intent(getContext(), AdminForumActivity.class));
+                                } else {
+                                    startActivity(new Intent(getContext(), ForumActivity.class));
+                                }
+                            }
+                        })
+                        .setNegativeButton("No",null)
+                        .show();
+            }
+        });
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                fuser = FirebaseAuth.getInstance().getCurrentUser();
+                refs = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("usertype");
+
+                refs.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        userType = dataSnapshot.getValue(String.class);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+
+                new AlertDialog.Builder(getActivity())
+                        //.setTitle("Forums")
+                        .setMessage("Are you sure you want to upload this discussion?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                addNewQuestion();
                                 question.setText("");
                             }
                         })
                         .setNegativeButton("No",null)
                         .show();
-
             }
+
         });
 
         return view;
     }
 
-    public void addNewQuestion(final String selectedSubject, final String selectedDept) {
 
+    public void addNewQuestion() {
         final String userQuestion=question.getText().toString();
 
         if(TextUtils.isEmpty(userQuestion)){
@@ -90,53 +182,43 @@ public class AddInquiryActivity extends Fragment {
             return;
         }
 
-        UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMM-yy");
+        final String saveCurrentDate = currentDate.format(calForDate.getTime());
+        Calendar calForTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+        final String  saveCurrentTime = currentTime.format(calForDate.getTime());
+        final FirebaseDatabase database=FirebaseDatabase.getInstance();
+        UsersReference=database.getReference().child("Forums").child("Questions");
+        String pushID = UsersReference.push().getKey();
+
+        HashMap userMap=new HashMap();
+        userMap.put("id",currentUserID);
+        userMap.put("username",username);
+        userMap.put("question",userQuestion);
+        userMap.put("date",saveCurrentDate);
+        userMap.put("time",saveCurrentTime);
+        userMap.put("imageURL",profileImage);
+        userMap.put("userType",userType);
+
+        UsersReference.child(pushID).updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    String username=dataSnapshot.child("username").getValue().toString();
-                    Calendar calForDate = Calendar.getInstance();
-                    SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMM-yy");
-                    final String saveCurrentDate = currentDate.format(calForDate.getTime());
-
-                    Calendar calForTime = Calendar.getInstance();
-                    SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
-                    final String  saveCurrentTime = currentTime.format(calForDate.getTime());
-
-                    final FirebaseDatabase database=FirebaseDatabase.getInstance();
-                    UsersReference=database.getReference().child("Forums").child("Questions");
-                    String pushID=UsersReference.push().getKey();
-
-                    HashMap userMap=new HashMap();
-                    userMap.put("id",currentUserID);
-                    userMap.put("username",username);
-                    userMap.put("question",userQuestion);
-                    userMap.put("date",saveCurrentDate);
-                    userMap.put("time",saveCurrentTime);
-                    UsersReference.child(pushID).updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
-                        @Override
-                        public void onComplete(@NonNull Task task) {
-                            if(task.isSuccessful())
-                            {
-                                Toast.makeText(getActivity(),"Question added successfully",Toast.LENGTH_LONG).show();
-                                return;
-                            }
-                            else {
-                                Toast.makeText(getActivity(),task.getException().toString(),Toast.LENGTH_LONG).show();
-                                return;
-                            }
-                        }
-                    });
-
+            public void onComplete(@NonNull Task task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(getActivity(),"Question added successfully",Toast.LENGTH_LONG).show();
+                    if (userType.equals("admin")) {
+                        startActivity(new Intent(getContext(), AdminForumActivity.class));
+                    } else {
+                        startActivity(new Intent(getContext(), ForumActivity.class));
+                    }
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                else {
+                    Toast.makeText(getActivity(),task.getException().toString(),Toast.LENGTH_LONG).show();
+                }
             }
         });
 
-
     }
+
 }

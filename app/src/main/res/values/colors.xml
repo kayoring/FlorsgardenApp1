@@ -19,6 +19,8 @@
     <color name="fab_color">#6B6AFF</color>
     <color name="trans">#00FF5222</color>
 
+    <color name="red">#00FF0000</color>
+
     <color name="colorPrimary">#008577</color>
     <color name="bgcolor1">#fff5f0</color>
     <color name="colorPrimaryDark">#000000</color>

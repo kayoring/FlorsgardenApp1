@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change email address"
+        android:text="Change address"
         android:textSize="26dp"
         android:layout_marginTop="50dp"
         android:textStyle="bold"
@@ -31,7 +31,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:background="@drawable/email_address"/>
+        android:background="@drawable/address"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter new email address"
+        android:text="Enter new address"
         android:textSize="18dp"
         android:layout_marginTop="50dp"
         android:textStyle="italic"
@@ -79,15 +79,14 @@
         android:padding="8dp"
         android:background="@drawable/edit_text_border"
         android:layout_marginTop="30dp"
-        android:id="@+id/change"
+        android:id="@+id/nAddress"
         android:layout_width="270dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:hint="New email address"
-        android:inputType="textEmailAddress"/>
+        android:hint="Enter address"/>
 
     <Button
-        android:id="@+id/changeemail"
+        android:id="@+id/changeAddress"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"

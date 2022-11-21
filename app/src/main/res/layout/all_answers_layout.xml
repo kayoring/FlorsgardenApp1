@@ -11,7 +11,7 @@
         android:layout_marginTop="7dp"
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="7dp"
-        android:background="@drawable/forumbg"
+        android:background="@drawable/edit_text_border2"
         android:orientation="vertical">
 
         <LinearLayout
@@ -47,10 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/settings_current_password"
-
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="#50FFFFFF" />
+            android:background="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,8 +63,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:text="Answers"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -80,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ans_username"
                     android:layout_marginLeft="3dp"
-                    android:text="answered on "
+                    android:text="date replied: "
                     android:textColor="@color/grey"
                     android:textSize="14sp"
                     android:textStyle="bold" />

@@ -53,6 +53,42 @@ public class AnswersActivity extends AppCompatActivity {
     private DatabaseReference fuser,Questionref;
     FirebaseRecyclerAdapter<Answers, AnswersViewHolder> answersAdapter;
 
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseRecyclerOptions answerOptions = new FirebaseRecyclerOptions.Builder<Answers>().setQuery(Questionref, Answers.class).build();
+
+        answersAdapter = new FirebaseRecyclerAdapter<Answers, AnswersViewHolder>(answerOptions) {
+
+            @NonNull
+            @Override
+            public AnswersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_answers_layout, parent, false);
+                return new AnswersViewHolder(view);
+
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull AnswersViewHolder answersViewHolder, @SuppressLint("RecyclerView") int position, @NonNull Answers answers) {
+
+                answersViewHolder.setUsername(answers.getUsername());
+                answersViewHolder.setProfileimage(getApplicationContext(),answers.getProfileimage());
+                answersViewHolder.setAnswer(answers.getAnswer());
+                answersViewHolder.setDate(answers.getDate());
+                answersViewHolder.setTime(answers.getTime());
+
+            }
+        };
+        AnsList.setAdapter(answersAdapter);
+
+        super.onStart();
+        answersAdapter.startListening();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +125,6 @@ public class AnswersActivity extends AppCompatActivity {
         AnswerInputText = (EditText) findViewById(R.id.answersInput);
         PostAnsButton = (ImageButton) findViewById(R.id.post_ans_button);
 
-
         PostAnsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +135,6 @@ public class AnswersActivity extends AppCompatActivity {
                             String userName = dataSnapshot.child("username").getValue().toString();
                             String profileImg = dataSnapshot.child("imageURL").getValue().toString();
                             ValidateAnswer(userName,profileImg);
-
                             AnswerInputText.setText("");
                         }
                     }
@@ -116,60 +150,6 @@ public class AnswersActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        FirebaseRecyclerOptions answerOptions = new FirebaseRecyclerOptions.Builder<Answers>().setQuery(Questionref, Answers.class).build();
-
-        answersAdapter = new FirebaseRecyclerAdapter<Answers, AnswersViewHolder>(answerOptions) {
-
-            @NonNull
-            @Override
-            public AnswersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_answers_layout, parent, false);
-                return new AnswersViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(@NonNull AnswersViewHolder answersViewHolder, @SuppressLint("RecyclerView") int position, @NonNull Answers answers) {
-                answersViewHolder.setUsername(answers.getUsername());
-                answersViewHolder.setProfileimage(getApplicationContext(),answers.getProfileimage());
-                answersViewHolder.setAnswer(answers.getAnswer());
-                answersViewHolder.setDate(answers.getDate());
-                answersViewHolder.setTime(answers.getTime());
-
-
-                /*
-                answersViewHolder.delBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new android.app.AlertDialog.Builder(answersViewHolder.itemView.getContext())
-                                .setTitle("Delete Content")
-                                .setMessage("Would you like to delete this answer/reply?")
-                                .setCancelable(false)
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        answersAdapter.getRef(position).removeValue();
-                                        Toast.makeText(AnswersActivity.this, "Answer/reply removed successfully", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .setNegativeButton("No",null)
-                                .show();
-                    }
-                });
-
-                 */
-            }
-        };
-        AnsList.setAdapter(answersAdapter);
-
-        super.onStart();
-        answersAdapter.startListening();
-    }
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -179,7 +159,6 @@ public class AnswersActivity extends AppCompatActivity {
     public static class AnswersViewHolder extends RecyclerView.ViewHolder{
         View mView;
         ImageButton delBtn;
-
 
         public AnswersViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -211,6 +190,9 @@ public class AnswersActivity extends AppCompatActivity {
 
     private void ValidateAnswer(String userName,String profileImg) {
         String answerText = AnswerInputText.getText().toString();
+
+        String key = Questionref.getKey();
+
         if (TextUtils.isEmpty(answerText)){
             Toast.makeText(this,"Please Write answer to post!",Toast.LENGTH_SHORT).show();
         }
@@ -222,29 +204,42 @@ public class AnswersActivity extends AppCompatActivity {
 
             Calendar calForTime = Calendar.getInstance();
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
-            final String  saveCurrentTime = currentTime.format(calForDate.getTime());
+            final String  saveCurrentTime = currentTime.format(calForTime.getTime());
 
             final String RandomKey = current_user_id + saveCurrentDate + saveCurrentTime;
 
             HashMap answersMap = new HashMap();
-            answersMap.put("uid",current_user_id);
+            answersMap.put("uid", current_user_id);
             answersMap.put("answer",answerText);
             answersMap.put("date",saveCurrentDate);
             answersMap.put("time",saveCurrentTime);
             answersMap.put("username",userName);
             answersMap.put("profileimage",profileImg);
 
-            Questionref.child(RandomKey).updateChildren(answersMap).addOnCompleteListener(new OnCompleteListener() {
+            Questionref.child(key).addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onComplete(@NonNull Task task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(AnswersActivity.this, "Your answer submitted Successfully!", Toast.LENGTH_SHORT).show();
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.exists()) {
+                        Questionref.push().updateChildren(answersMap).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(AnswersActivity.this, "Your answer submitted Successfully!", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Toast.makeText(AnswersActivity.this, "Error occured, try again....", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
-                    else{
-                        Toast.makeText(AnswersActivity.this, "Error occured, try again....", Toast.LENGTH_SHORT).show();
-                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 }
             });
         }
+
     }
 }

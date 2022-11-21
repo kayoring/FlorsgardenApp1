@@ -58,7 +58,7 @@ public class AdminAnswersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_answers);
         Post_Key = getIntent().getExtras().get("Postkey").toString();
         mAuth = FirebaseAuth.getInstance();
-        current_user_id =  mAuth.getCurrentUser().getUid();
+        current_user_id = mAuth.getCurrentUser().getUid();
 
         fuser = FirebaseDatabase.getInstance().getReference().child("Users");
         Questionref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Questions").child(Post_Key).child("answers");
@@ -84,6 +84,7 @@ public class AdminAnswersActivity extends AppCompatActivity {
         AnsList.setLayoutManager(linearLayoutManager);
 
 
+
         AnswerInputText = (EditText) findViewById(R.id.answersInput);
         PostAnsButton = (ImageButton) findViewById(R.id.post_ans_button);
 
@@ -98,7 +99,6 @@ public class AdminAnswersActivity extends AppCompatActivity {
                             String userName = dataSnapshot.child("username").getValue().toString();
                             String profileImg = dataSnapshot.child("imageURL").getValue().toString();
                             ValidateAnswer(userName,profileImg);
-
                             AnswerInputText.setText("");
                         }
                     }
@@ -205,40 +205,55 @@ public class AdminAnswersActivity extends AppCompatActivity {
 
     private void ValidateAnswer(String userName,String profileImg) {
         String answerText = AnswerInputText.getText().toString();
+
+        String key = Questionref.getKey();
+
         if (TextUtils.isEmpty(answerText)){
             Toast.makeText(this,"Please Write answer to post!",Toast.LENGTH_SHORT).show();
         }
 
-        else{
+        else {
             Calendar calForDate = Calendar.getInstance();
             SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMM-yy");
             final String saveCurrentDate = currentDate.format(calForDate.getTime());
 
             Calendar calForTime = Calendar.getInstance();
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
-            final String  saveCurrentTime = currentTime.format(calForDate.getTime());
+            final String saveCurrentTime = currentTime.format(calForDate.getTime());
 
             final String RandomKey = current_user_id + saveCurrentDate + saveCurrentTime;
 
             HashMap answersMap = new HashMap();
-            answersMap.put("uid",current_user_id);
-            answersMap.put("answer",answerText);
-            answersMap.put("date",saveCurrentDate);
-            answersMap.put("time",saveCurrentTime);
-            answersMap.put("username",userName);
-            answersMap.put("profileimage",profileImg);
+            answersMap.put("uid", current_user_id);
+            answersMap.put("answer", answerText);
+            answersMap.put("date", saveCurrentDate);
+            answersMap.put("time", saveCurrentTime);
+            answersMap.put("username", userName);
+            answersMap.put("profileimage", profileImg);
 
-            Questionref.child(RandomKey).updateChildren(answersMap).addOnCompleteListener(new OnCompleteListener() {
+            Questionref.child(key).addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onComplete(@NonNull Task task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(AdminAnswersActivity.this, "Your answer submitted Successfully!", Toast.LENGTH_SHORT).show();
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.exists()) {
+                        Questionref.push().updateChildren(answersMap).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(AdminAnswersActivity.this, "Your answer submitted Successfully!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(AdminAnswersActivity.this, "Error occured, try again....", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
-                    else{
-                        Toast.makeText(AdminAnswersActivity.this, "Error occured, try again....", Toast.LENGTH_SHORT).show();
-                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 }
             });
         }
+
     }
 }

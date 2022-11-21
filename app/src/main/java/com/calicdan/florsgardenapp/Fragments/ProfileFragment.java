@@ -128,7 +128,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-        logoutBtn = view.findViewById(R.id.logoutBtn);
+        //logoutBtn = view.findViewById(R.id.logoutBtn);
         //logoutBtn.setOnClickListener((View.OnClickListener) getActivity());
         profile_image = view.findViewById(R.id.profile_image);
         //image_profile.setOnClickListener((View.OnClickListener) getActivity());
@@ -180,14 +180,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                         ch[i] = pass.charAt(i);
                     }
 
-                    username.setText("Username: " + user.getFullName());
-                    email.setText("Email: " + user.getEmail());
-                    contact.setText("Contact #: " + user.getContact());
+                    username.setText(user.getFullName());
+                    email.setText(user.getEmail());
+                    contact.setText(user.getContact());
                     //password.setText("Password: " + ch[0]+ch[1]+"******");
                     if (user.getAddress() == null) {
-                        address.setText("Address: " + "N/A");
+                        address.setText("N/A");
                     } else {
-                        address.setText("Address: " + user.getAddress());
+                        address.setText(user.getAddress());
                     }
 
                     if (user.getImageURL().equals("default")) {

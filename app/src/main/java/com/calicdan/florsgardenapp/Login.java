@@ -22,6 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
@@ -32,10 +37,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
+    FirebaseUser fuser;
+    DatabaseReference ref;
 
     @Override
     protected void onStart() {
         super.onStart();
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         //check if user is null
@@ -43,6 +51,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             Intent intent = new Intent(Login.this, SplashActivity.class);
             startActivity(intent);
         }
+
     }
 
     @Override
@@ -108,7 +117,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     Toast.makeText(Login.this, "Please provide valid email!", Toast.LENGTH_SHORT).show();
                 } else {
-                    userLogin(email, password);
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()){
+                                Intent intent = new Intent(Login.this, SplashActivity.class);
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(com.calicdan.florsgardenapp.Login.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
                 }
                 break;
         }
@@ -120,20 +140,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void userLogin(final String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    // redirect to user profile
-                    Intent intent = new Intent(Login.this, HomeUser.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    Toast.makeText(com.calicdan.florsgardenapp.Login.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
     }
 }

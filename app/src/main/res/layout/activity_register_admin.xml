@@ -23,25 +23,43 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="50dp"
             android:text="Create Admin Account"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="50dp"/>
+            android:textStyle="bold"/>
 
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/create_admin"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter login credentials"
+            android:textSize="18dp"
+            android:layout_marginBottom="18dp"
+            android:layout_marginTop="30dp"
+            android:textStyle="italic"
+            android:layout_gravity="center"
+            android:textColor="@color/black"/>
         <EditText
             android:id="@+id/name"
+            android:padding="8dp"
+            android:background="@drawable/edit_text_border"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="User Name"
             android:inputType="textPersonName" />
-
         <EditText
+            android:padding="8dp"
+            android:background="@drawable/edit_text_border"
             android:id="@+id/contacNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,6 +70,8 @@
             android:inputType="number" />
 
         <EditText
+            android:padding="8dp"
+            android:background="@drawable/edit_text_border"
             android:id="@+id/emailA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,6 +82,8 @@
             android:inputType="textEmailAddress" />
 
         <EditText
+            android:padding="8dp"
+            android:background="@drawable/edit_text_border"
             android:id="@+id/passwordA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,6 +94,8 @@
             android:inputType="textPassword" />
 
         <EditText
+            android:padding="8dp"
+            android:background="@drawable/edit_text_border"
             android:id="@+id/confirmPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

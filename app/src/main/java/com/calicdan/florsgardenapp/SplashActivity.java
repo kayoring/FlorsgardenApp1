@@ -23,14 +23,17 @@ import com.google.firebase.database.ValueEventListener;
 public class SplashActivity extends AppCompatActivity {
 
     private static int SPLASH_TIMER1 = 1000;
-    private static int SPLASH_TIMER = 4000;
+    private static int SPLASH_TIMER = 3000;
+    private static int SPLASH_TIMER0 = 0000;
     ImageView imgSplash;
     TextView txtSplash;
     Animation sideAnim, bottomAnim;
     private FirebaseUser firebaseUser;
     String uid;
-    String userType= "customer";
 
+    FirebaseUser fuser;
+    DatabaseReference ref;
+    String userType= "";
 
     @Override
     protected void onStart() {
@@ -39,10 +42,11 @@ public class SplashActivity extends AppCompatActivity {
 
         if (firebaseUser != null){
             uid = firebaseUser.getUid();
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-            DatabaseReference userTypeReference = reference.child("Users").child(uid).child("usertype");
 
-            userTypeReference.addValueEventListener(new ValueEventListener() {
+            fuser = FirebaseAuth.getInstance().getCurrentUser();
+            ref = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("usertype");
+
+            ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     userType = snapshot.getValue(String.class);
@@ -50,9 +54,10 @@ public class SplashActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    userType = "customer";
+                    Toast.makeText(SplashActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -76,7 +81,23 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
             }, SPLASH_TIMER);
-        } else {
+        } else if (firebaseUser == null){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(userType.equals("admin")){
+                        Intent intent = new Intent(getApplicationContext(),Home.class);
+                        startActivity(intent);
+                        finish();
+                    }else if(userType.equals("customer")){
+                        Intent intent = new Intent(getApplicationContext(),HomeUser.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            }, SPLASH_TIMER0);
+        }
+        else {
             Toast.makeText(this, "Something went wrong! try again...", Toast.LENGTH_SHORT).show();
         }
     }

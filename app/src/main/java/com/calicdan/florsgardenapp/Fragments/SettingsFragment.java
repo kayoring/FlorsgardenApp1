@@ -1,5 +1,6 @@
 package com.calicdan.florsgardenapp.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.calicdan.florsgardenapp.ChangeAddressActivity;
 import com.calicdan.florsgardenapp.ChangeEmailActivity;
+import com.calicdan.florsgardenapp.ChangeUsernameActivity;
+import com.calicdan.florsgardenapp.ContactNoActivity;
 import com.calicdan.florsgardenapp.ForumActivity;
 import com.calicdan.florsgardenapp.Home;
 import com.calicdan.florsgardenapp.Login;
@@ -32,12 +36,12 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         cPass = view.findViewById(R.id.cPass);
-        //addAdmin = view.findViewById(R.id.addAdmin);
         cEmail = view.findViewById(R.id.cEmail);
-        /*
         cUser = view.findViewById(R.id.cUser);
         cContact = view.findViewById(R.id.cContact);
         cAddress = view.findViewById(R.id.cAddress);
+
+          /*
         notifs = view.findViewById(R.id.cNotifs);
         allowNotifs = view.findViewById(R.id.cAllowNotifs);
          */
@@ -68,10 +72,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         cPass.setOnClickListener(this);
         //addAdmin.setOnClickListener(this);
         cEmail.setOnClickListener(this);
-        /*
+
         cUser.setOnClickListener(this);
         cContact.setOnClickListener(this);
         cAddress.setOnClickListener(this);
+           /*
         notifs.setOnClickListener(this);
         allowNotifs.setOnClickListener(this);
        */
@@ -91,29 +96,29 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                 startActivity(new Intent(getActivity(), ChangeEmailActivity.class));
                 break;
 
-             /*
-            case R.id.addAdmin:
-                startActivity(new Intent(getActivity(), RegisterAdminActivity.class));
-                break;
+
             case R.id.cUser:
-                startActivity(new Intent(getActivity(), Home.class));
+                startActivity(new Intent(getActivity(), ChangeUsernameActivity.class));
                 break;
 
             case R.id.cContact:
-                startActivity(new Intent(getActivity(), Home.class));
+                startActivity(new Intent(getActivity(), ContactNoActivity.class));
                 break;
 
             case R.id.cAddress:
-                startActivity(new Intent(getActivity(), Home.class));
+                startActivity(new Intent(getActivity(), ChangeAddressActivity.class));
                 break;
 
-
+             /*
             case R.id.cNotifs:
                 startActivity(new Intent(getActivity(), Home.class));
                 break;
 
             case R.id.cAllowNotifs:
                 startActivity(new Intent(getActivity(), Home.class));
+                break;
+            case R.id.addAdmin:
+                startActivity(new Intent(getActivity(), RegisterAdminActivity.class));
                 break;
 
  */

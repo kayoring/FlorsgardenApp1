@@ -97,6 +97,7 @@ public class AdminForumFragment extends Fragment {
                 inquiriesViewHolder.setUsernamee(inquiries.getUsernamee());
                 inquiriesViewHolder.setTime(inquiries.getTime());
                 inquiriesViewHolder.setDate(inquiries.getDate());
+                inquiriesViewHolder.setUserType(inquiries.getUserType());
 
                 inquiriesViewHolder.setLikeButtonStatus(PostKey);
 
@@ -239,6 +240,11 @@ public class AdminForumFragment extends Fragment {
         public void setDate(String date) {
             TextView pdate = (TextView) mView.findViewById(R.id.post_date);
             pdate.setText("  " + date);
+        }
+
+        public void setUserType(String type) {
+            TextView usertype = (TextView) mView.findViewById(R.id.userclass);
+            usertype.setText(type);
         }
     }
 }

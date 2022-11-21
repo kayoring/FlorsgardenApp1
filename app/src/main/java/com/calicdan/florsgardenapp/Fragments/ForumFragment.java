@@ -101,33 +101,12 @@ public class ForumFragment extends Fragment {
                 inquiriesViewHolder.getItemViewType();
                 inquiriesViewHolder.setQuestion(inquiries.getQuestion());
                 inquiriesViewHolder.setProfileImage(getContext(), inquiries.getImageURL());
-                inquiriesViewHolder.setUsernamee(inquiries.getUsernamee());
                 inquiriesViewHolder.setTime(inquiries.getTime());
                 inquiriesViewHolder.setDate(inquiries.getDate());
+                inquiriesViewHolder.setUsernamee(inquiries.getUsernamee());
+                inquiriesViewHolder.setUserType(inquiries.getUserType());
 
                 inquiriesViewHolder.setLikeButtonStatus(PostKey);
-/*
-                inquiriesViewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        new android.app.AlertDialog.Builder(inquiriesViewHolder.itemView.getContext())
-                                .setTitle("Delete Content")
-                                .setMessage("Would you like to delete this inquiry?")
-                                .setCancelable(false)
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        InquiriesAdapter.getRef(position).removeValue();
-                                        Toast.makeText(getActivity(), "Inquiry removed successfully", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .setNegativeButton("No",null)
-                                .show();
-                    }
-                });
-
- */
 
                 inquiriesViewHolder.CommentPostButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -191,7 +170,6 @@ public class ForumFragment extends Fragment {
             super(itemView);
 
             mView = itemView;
-
             LikePostButton = (ImageButton) mView.findViewById(R.id.like_button);
             CommentPostButton = (ImageButton) mView.findViewById(R.id.comment_button);
             DisplaynoOfLikes = (TextView) mView.findViewById(R.id.no_likes);
@@ -223,9 +201,9 @@ public class ForumFragment extends Fragment {
             });
         }
 
-        public void setUsernamee(String usernamee) {
+        public void setUsernamee(String username) {
             TextView u = (TextView) mView.findViewById(R.id.post_que_user_name);
-            u.setText(usernamee);
+            u.setText(username);
         }
 
         public void setProfileImage(Context ctx, String profileImage) {
@@ -246,6 +224,11 @@ public class ForumFragment extends Fragment {
         public void setDate(String date) {
             TextView pdate = (TextView) mView.findViewById(R.id.post_date);
             pdate.setText("  " + date);
+        }
+
+        public void setUserType(String type) {
+            TextView usertype = (TextView) mView.findViewById(R.id.userclass);
+            usertype.setText(type);
         }
     }
 }

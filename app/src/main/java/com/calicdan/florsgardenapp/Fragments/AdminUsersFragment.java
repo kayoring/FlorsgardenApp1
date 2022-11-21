@@ -85,10 +85,11 @@ public class AdminUsersFragment extends Fragment {
                 mUsers.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     User user = snapshot.getValue(User.class);
+                    String usertype = user.getUsertype();
 
                     assert user != null;
                     assert fuser != null;
-                    if (!user.getId().equals(fuser.getUid())){
+                    if (!user.getId().equals(fuser.getUid()) && usertype.equals("customer")){
                         mUsers.add(user);
                     }
                 }

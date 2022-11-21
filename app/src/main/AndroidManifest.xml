@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+
         android:allowBackup="true"
         android:icon="@drawable/logo_flors"
         android:label="@string/app_name"
@@ -17,6 +18,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ChangeAddressActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ContactNoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ChangeUsernameActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".RegisterAdminActivity"
             android:exported="false">
@@ -147,8 +169,7 @@
             android:exported="true" />
         <activity
             android:name=".AddVideoActivity"
-            android:exported="true"
-           />/ android:theme="@style/AppTheme.NoActionBar"/>
+            android:exported="true" />
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="false"
@@ -192,13 +213,11 @@
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ImageRecognitionOrganicWaste"
             android:exported="true" />
@@ -223,22 +242,24 @@
         <activity
             android:name=".HowTo"
             android:exported="true" />
-        <activity android:name=".VermicultureUser"
-            android:exported="true"/>
+        <activity
+            android:name=".VermicultureUser"
+            android:exported="true" />
         <activity
             android:name=".HomeUser"
             android:exported="true" />
-        <activity android:name=".OrganicWasteUser"
-            android:exported="true"/>
-
-        <activity android:name=".WormsUser"
-            android:exported="true"/>
-        <activity android:name=".VideosActivityUser"
-            android:exported="true"/>
-
-        <activity android:name=".HowToUser"
-            android:exported="true"/>
-
+        <activity
+            android:name=".OrganicWasteUser"
+            android:exported="true" />
+        <activity
+            android:name=".WormsUser"
+            android:exported="true" />
+        <activity
+            android:name=".VideosActivityUser"
+            android:exported="true" />
+        <activity
+            android:name=".HowToUser"
+            android:exported="true" />
     </application>
 
 </manifest>
