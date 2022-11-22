@@ -104,7 +104,6 @@ public class AdminForumFragment extends Fragment {
                 inquiriesViewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         new android.app.AlertDialog.Builder(inquiriesViewHolder.itemView.getContext())
                                 .setTitle("Delete Content")
                                 .setMessage("Would you like to delete this inquiry?")
@@ -112,7 +111,8 @@ public class AdminForumFragment extends Fragment {
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        InquiriesAdapter.getRef(position).removeValue();
+                                        int pos = inquiriesViewHolder.getAdapterPosition();
+                                        InquiriesAdapter.getRef(pos).removeValue();
                                         Toast.makeText(getActivity(), "Inquiry removed successfully", Toast.LENGTH_SHORT).show();
                                     }
                                 })

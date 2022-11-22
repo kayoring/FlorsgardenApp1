@@ -84,7 +84,6 @@ public class AdminAnswersActivity extends AppCompatActivity {
         AnsList.setLayoutManager(linearLayoutManager);
 
 
-
         AnswerInputText = (EditText) findViewById(R.id.answersInput);
         PostAnsButton = (ImageButton) findViewById(R.id.post_ans_button);
 
@@ -148,7 +147,8 @@ public class AdminAnswersActivity extends AppCompatActivity {
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        answersAdapter.getRef(position).removeValue();
+                                        int pos = answersViewHolder.getAdapterPosition();
+                                        answersAdapter.getRef(pos).removeValue();
                                         Toast.makeText(AdminAnswersActivity.this, "Answer/reply removed successfully", Toast.LENGTH_SHORT).show();
                                     }
                                 })

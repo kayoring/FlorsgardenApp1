@@ -20,7 +20,6 @@
             android:layout_margin="10dp"
             android:orientation="horizontal">
 
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/post_ans_img"
                 android:layout_width="30dp"
@@ -28,10 +27,9 @@
                 android:layout_marginLeft="4dp"
                 android:src="@drawable/ic_default_profile" />
 
-
             <TextView
                 android:id="@+id/ans_username"
-                android:layout_width="wrap_content"
+                android:layout_width="315dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="3dp"
@@ -39,6 +37,16 @@
                 android:textColor="#000000"
                 android:textSize="17sp"
                 android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/deleteBtn"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:background="@color/trans"
+                android:baselineAlignBottom="false"
+                android:src="@drawable/delete" />
 
         </LinearLayout>
 
