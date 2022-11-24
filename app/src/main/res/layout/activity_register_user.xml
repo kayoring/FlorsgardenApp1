@@ -42,31 +42,31 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="User Name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/contacNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:maxLines="1"
             android:ems="10"
             android:hint="Contact Number"
-            android:inputType="number" />
+            android:inputType="number"
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/emailA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:maxLines="1"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/passwordA"
@@ -74,19 +74,27 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:ems="10"
-            android:maxLines="1"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/confirmPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:maxLines="1"
             android:ems="10"
             android:hint="Confirm password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+        <CheckBox
+            android:id="@+id/check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/register"
+            android:layout_centerHorizontal="true"
+            android:text="I agree to the privacy policy" />
 
         <Button
             android:id="@+id/register"

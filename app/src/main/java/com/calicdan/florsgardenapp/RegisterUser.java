@@ -2,10 +2,10 @@ package com.calicdan.florsgardenapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
-import java.util.Locale;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +30,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private EditText editTextFullName, editTextEmail, editContactNumber, editTextPassword, editTextConfirmPass;
     private DatabaseReference reference;
     private FirebaseAuth mAuth;
+    private CheckBox check_box;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setTitle("Register");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mAuth = FirebaseAuth.getInstance();
+                mAuth = FirebaseAuth.getInstance();
 
         banner = (TextView) findViewById(R.id.textView6);
         banner.setOnClickListener(this);
@@ -55,6 +55,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editContactNumber = (EditText) findViewById(R.id.contacNo);
         editTextPassword = (EditText) findViewById(R.id.passwordA);
         editTextConfirmPass = (EditText) findViewById(R.id.confirmPass);
+        check_box = findViewById(R.id.check_box);
     }
 
     @Override
@@ -65,6 +66,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.register:
+
                 String email= editTextEmail.getText().toString().trim();
                 String password= editTextPassword.getText().toString().trim();
                 String fullName= editTextFullName.getText().toString().trim();
@@ -91,7 +93,12 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 } else if (!confirmPass.equals(password)){
                     Toast.makeText(RegisterUser.this, "Password do not match!", Toast.LENGTH_SHORT).show();
                 } else {
-                    registerUser(fullName, email, password, contact);
+                    if(check_box.isChecked()) {
+                        registerUser(fullName, email, password, contact);
+                    }else {
+                        Toast.makeText(RegisterUser.this, "Please agree to the Privacy Policy", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
                 break;
         }
