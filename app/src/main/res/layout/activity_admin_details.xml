@@ -224,7 +224,7 @@
         android:paddingTop="8dp"
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
-        android:text="Confirm"
+        android:text="Delete"
         android:textAlignment="center"
         android:textColor="#EFE7E7"
         android:textSize="24sp"
