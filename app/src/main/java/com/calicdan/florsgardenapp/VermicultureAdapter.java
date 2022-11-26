@@ -65,8 +65,6 @@ public class VermicultureAdapter extends FirebaseRecyclerAdapter<HomeModel,Vermi
                         .setExpanded(true,1500)
                         .create();
 
-
-
                 View view = dialogPlus.getHolderView();
 
                 EditText name = view.findViewById(R.id.txtName);

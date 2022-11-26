@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Flors Garden"
+            android:text="Flor's Garden"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="24sp"
@@ -88,13 +88,28 @@
             android:inputType="textPassword"
             android:maxLines="1" />
 
-        <CheckBox
-            android:id="@+id/check_box"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/register"
-            android:layout_centerHorizontal="true"
-            android:text="I agree to the privacy policy" />
+        <LinearLayout
+            android:layout_width="228dp"
+            android:layout_height="38dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/register"
+                android:layout_centerHorizontal="true"
+                android:text="I agree to the " />
+
+            <TextView
+                android:id="@+id/txtPrivacy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Privacy Policy"
+                android:textColor="#FA3232"
+                android:textStyle="italic" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/register"
@@ -113,5 +128,6 @@
             android:textColor="#F9A825"
             android:textSize="14sp"
             android:textStyle="bold" />
+
     </LinearLayout>
 </RelativeLayout>

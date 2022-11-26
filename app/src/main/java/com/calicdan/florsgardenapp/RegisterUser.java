@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView banner, registerUser;
+    private TextView banner, registerUser, txtPrivacy;
     private EditText editTextFullName, editTextEmail, editContactNumber, editTextPassword, editTextConfirmPass;
     private DatabaseReference reference;
     private FirebaseAuth mAuth;
@@ -56,9 +56,10 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextPassword = (EditText) findViewById(R.id.passwordA);
         editTextConfirmPass = (EditText) findViewById(R.id.confirmPass);
         check_box = findViewById(R.id.check_box);
+        txtPrivacy = findViewById(R.id.txtPrivacy);
     }
 
-    @Override
+            @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginA:

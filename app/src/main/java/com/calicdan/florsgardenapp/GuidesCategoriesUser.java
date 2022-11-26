@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GuidesCategories extends AppCompatActivity {
+public class GuidesCategoriesUser extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,39 +29,39 @@ public class GuidesCategories extends AppCompatActivity {
         txtVids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GuidesCategories.this, VideosActivity.class));
+                startActivity(new Intent(GuidesCategoriesUser.this, VideosActivityUser.class));
             }
         });
 
         txtHow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GuidesCategories.this, HowTo.class));
+                startActivity(new Intent(GuidesCategoriesUser.this, HowToUser.class));
             }
         });
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GuidesCategories.this, Home.class));
+                startActivity(new Intent(GuidesCategoriesUser.this, HomeUser.class));
 
             }
         });
         txtVermi.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                startActivity(new Intent(GuidesCategories.this, Vermiculture.class));
+                startActivity(new Intent(GuidesCategoriesUser.this, VermicultureUser.class));
             }
         });
         txtWorm.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                startActivity(new Intent(GuidesCategories.this, Worms.class));
+                startActivity(new Intent(GuidesCategoriesUser.this, WormsUser.class));
             }
         });
         txtOrganic.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                startActivity(new Intent(GuidesCategories.this, OrganicWaste.class));
+                startActivity(new Intent(GuidesCategoriesUser.this, OrganicWasteUser.class));
             }
         });
 

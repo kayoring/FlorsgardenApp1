@@ -87,7 +87,7 @@ public class HomeUser extends AppCompatActivity {
         txtSeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeUser.this, GuidesCategories.class));
+                startActivity(new Intent(HomeUser.this, GuidesCategoriesUser.class));
 
             }
         });

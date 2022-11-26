@@ -260,6 +260,8 @@
         <activity
             android:name=".HowToUser"
             android:exported="true" />
+        <activity android:name=".GuidesCategoriesUser"
+            android:exported="true"/>
     </application>
 
 </manifest>
