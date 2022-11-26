@@ -1,10 +1,13 @@
 package com.calicdan.florsgardenapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,7 +38,7 @@ import java.util.UUID;
 
 public class AdminDetailsActivity extends AppCompatActivity {
     EditText inpProductName,inpProductPrice,inpProductDescription,inpProductQuantity;
-    TextView editProductDbBTN;
+    TextView editProductDbBTN,deleteDbBTN;
     ImageView editProductPhoto;
     Uri imageUri;
     String productName, productDescription,dbproductname,dbproductdescription, retProductName,retProductName1,temp,productPic;
@@ -66,6 +69,7 @@ public class AdminDetailsActivity extends AppCompatActivity {
         inpProductQuantity = findViewById(R.id.inpProductQuantity);
         editProductDbBTN = findViewById(R.id.editProductDbBTN);
         editProductPhoto = findViewById(R.id.editProductPhoto);
+        deleteDbBTN = findViewById(R.id.deleteProductDbBTN);
 
     }
 
@@ -76,7 +80,7 @@ public class AdminDetailsActivity extends AppCompatActivity {
         retProductName1 = "products/" + temp;
         DatabaseReference productsref = ref.child(retProductName);
         DatabaseReference productnameref = productsref.child("productName");
-
+        Log.i(TAG,"DBPRODUCTINFORMATION-----------------------------------");
         productnameref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -101,7 +105,7 @@ public class AdminDetailsActivity extends AppCompatActivity {
             }
         });
         DatabaseReference productpriceref = productsref.child("productPrice");
-        productpriceref.addValueEventListener(new ValueEventListener() {
+        productpriceref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dbproductprice = dataSnapshot.getValue(Float.class);
@@ -113,7 +117,7 @@ public class AdminDetailsActivity extends AppCompatActivity {
             }
         });
         DatabaseReference productquantityref = productsref.child("productQuantity");
-        productquantityref.addValueEventListener(new ValueEventListener() {
+        productquantityref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dbproductquantity = dataSnapshot.getValue(Integer.class);
@@ -167,6 +171,31 @@ public class AdminDetailsActivity extends AppCompatActivity {
                 ref.child(productName).setValue(prod);
                 Toast.makeText(getApplicationContext(),productName + " edited!",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(AdminDetailsActivity.this,AdminStoreActivity.class));
+
+            }
+        });
+
+        deleteDbBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                productName = inpProductName.getText().toString();
+                DatabaseReference ref1 = ref.child(productName);
+                ref1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot data: dataSnapshot.getChildren()){
+                            data.getRef().removeValue();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                Toast.makeText(getApplicationContext(),productName + "Deleted!",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AdminDetailsActivity.this,AdminStoreActivity.class));
+                Log.i(TAG,"DELETEPRODUCT-----------------------------------");
 
             }
         });
