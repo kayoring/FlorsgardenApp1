@@ -4,16 +4,18 @@
     <item
         android:id="@+id/bot"
         android:title="Chat Bot"
-        android:icon="@drawable/wrmbot"
-        app:showAsAction="never"/>
+        android:icon="@drawable/ic_chatbot"
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/home"
         android:icon="@drawable/white_home"
         android:title="Home"
         app:showAsAction="never"/>
+<!--
     <item
         android:id="@+id/edit"
         android:icon="@drawable/users"
         android:title="Remove/delete users"
         app:showAsAction="ifRoom"/>
+        -->
 </menu>

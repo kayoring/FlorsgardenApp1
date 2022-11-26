@@ -13,7 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.calicdan.florsgardenapp.Fragments.EditFragment;
 import com.calicdan.florsgardenapp.Fragments.ForumFragment;
+import com.calicdan.florsgardenapp.Fragments.RepliesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,28 +30,11 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
 
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
     FloatingActionButton imageRecog;
-    String userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum);
-/*
-        FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference userTypeReference = reference.child("Users").child(fuser.getUid()).child("usertype");
-        userTypeReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userType = snapshot.getValue(String.class);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
- */
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Discussion Board");
@@ -128,8 +113,11 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
             case  R.id.addQuestion:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp,new AddInquiryActivity()).commit();
                 break;
-            case  R.id.search:
-                Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
+            case  R.id.editPost:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp, new EditFragment()).commit();
+                break;
+            case  R.id.editRep:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp, new RepliesFragment()).commit();
                 break;
         }
 
@@ -139,9 +127,7 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         invalidateOptionsMenu();
-        menu.findItem(R.id.home).setVisible(true);
-        menu.findItem(R.id.addQuestion).setVisible(true);
-        menu.findItem(R.id.search).setVisible(true);
+        menu.findItem(R.id.forums).setVisible(false);
         return super.onPrepareOptionsMenu(menu);
     }
 }

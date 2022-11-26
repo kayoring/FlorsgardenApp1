@@ -26,6 +26,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -209,7 +210,7 @@ public class AdminAnswersActivity extends AppCompatActivity {
         String key = Questionref.getKey();
 
         if (TextUtils.isEmpty(answerText)){
-            Toast.makeText(this,"Please Write answer to post!",Toast.LENGTH_SHORT).show();
+
         }
 
         else {
@@ -238,9 +239,17 @@ public class AdminAnswersActivity extends AppCompatActivity {
                         Questionref.push().updateChildren(answersMap).addOnCompleteListener(new OnCompleteListener() {
                             @Override
                             public void onComplete(@NonNull Task task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(AdminAnswersActivity.this, "Your answer submitted Successfully!", Toast.LENGTH_SHORT).show();
-                                } else {
+                                if(task.isSuccessful()){
+                                    FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+                                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid()).child("Replies");
+                                    ref.push().updateChildren(answersMap).addOnCompleteListener(new OnCompleteListener() {
+                                        @Override
+                                        public void onComplete(@NonNull Task task) {
+                                            Toast.makeText(AdminAnswersActivity.this, "Your answer submitted Successfully!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                                else{
                                     Toast.makeText(AdminAnswersActivity.this, "Error occured, try again....", Toast.LENGTH_SHORT).show();
                                 }
                             }

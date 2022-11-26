@@ -13,7 +13,26 @@
         android:title="Add question"/>
 
     <item
+        android:id="@+id/editPost"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:title="Edit posts"/>
+
+    <item
+        android:id="@+id/forums"
+        app:showAsAction="never"
+        android:icon="@drawable/edits"
+        android:title="Forums"/>
+
+    <item
+        android:id="@+id/editRep"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:title="Edit replies"/>
+<!--
+    <item
         android:id="@+id/search"
         app:showAsAction="never"
         android:title="Search"/>
+        -->
 </menu>

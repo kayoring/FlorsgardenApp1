@@ -145,6 +145,8 @@ public class AdminChatActivity extends AppCompatActivity {
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
                 return true;
+
+                /*
             case  R.id.edit:
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(AdminChatActivity.this);
                 builder1.setMessage("Would you like to remove or edit user accounts?");
@@ -161,6 +163,7 @@ public class AdminChatActivity extends AppCompatActivity {
                 AlertDialog alertDialog1 = builder1.create();
                 alertDialog1.show();
                 return true;
+                 */
 
             case  R.id.home:
                 startActivity(new Intent(AdminChatActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));

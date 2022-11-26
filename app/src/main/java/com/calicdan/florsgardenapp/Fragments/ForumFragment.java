@@ -22,6 +22,7 @@ import com.calicdan.florsgardenapp.AnswersActivity;
 import com.calicdan.florsgardenapp.HomeModel;
 import com.calicdan.florsgardenapp.MessageActivity;
 import com.calicdan.florsgardenapp.Model.Answers;
+import com.calicdan.florsgardenapp.Model.Chat;
 import com.calicdan.florsgardenapp.Model.Inquiries;
 import com.calicdan.florsgardenapp.Model.User;
 import com.calicdan.florsgardenapp.R;
@@ -36,6 +37,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -56,19 +59,14 @@ public class ForumFragment extends Fragment {
 
         queList = (RecyclerView) rootview.findViewById(R.id.all_que_list);
 
-        queList.setHasFixedSize(true);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
+        queList.setHasFixedSize(true);
         queList.setLayoutManager(linearLayoutManager);
 
         Questionref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Questions");
         Likesref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Likes");
-
-        queList.hasFixedSize();
-        queList.setLayoutManager(linearLayoutManager);
-        //queList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         DisplayAllQuestion();
 
@@ -109,54 +107,25 @@ public class ForumFragment extends Fragment {
                     inquiriesViewHolder.setProfileImage(getContext(), inquiries.getImageURL());
                 }
 
-/*
-                FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
-
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Forums").child("Questions");
-                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                inquiriesViewHolder.deleteBtn.setOnClickListener(new View   .OnClickListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String id = snapshot.child("id").getValue().toString();
-                            String usertype = snapshot.child("userType").getValue().toString();
-
-                            if (id.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-
-                                inquiriesViewHolder.deleteBtn.setVisibility(View.VISIBLE);
-                                inquiriesViewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        new android.app.AlertDialog.Builder(inquiriesViewHolder.itemView.getContext())
+                                .setTitle("Delete Content")
+                                .setMessage("Would you like to delete this inquiry?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(View view) {
-                                        new android.app.AlertDialog.Builder(inquiriesViewHolder.itemView.getContext())
-                                                .setTitle("Delete Content")
-                                                .setMessage("Would you like to delete this inquiry?")
-                                                .setCancelable(false)
-                                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        int pos = inquiriesViewHolder.getAdapterPosition();
-                                                        InquiriesAdapter.getRef(pos).removeValue();
-                                                        Toast.makeText(getActivity(), "Inquiry removed successfully", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                })
-                                                .setNegativeButton("No",null)
-                                                .show();
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        int pos = inquiriesViewHolder.getAdapterPosition();
+                                        InquiriesAdapter.getRef(pos).removeValue();
+                                        Toast.makeText(getActivity(), "Inquiry removed successfully", Toast.LENGTH_SHORT).show();
                                     }
-                                });
-
-                            } else if (!id.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()) && !usertype.equals("customer")) {
-                                inquiriesViewHolder.deleteBtn.setVisibility(View.GONE);
-                            }
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                })
+                                .setNegativeButton("No",null)
+                                .show();
                     }
                 });
-
- */
 
                 inquiriesViewHolder.CommentPostButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -192,7 +161,8 @@ public class ForumFragment extends Fragment {
                         });
                     }
                 });
-            }};
+            }
+        };
         queList.setAdapter(InquiriesAdapter);
     }
 

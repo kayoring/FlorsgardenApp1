@@ -99,6 +99,13 @@ public class AdminForumFragment extends Fragment {
                 inquiriesViewHolder.setDate(inquiries.getDate());
                 inquiriesViewHolder.setUserType(inquiries.getUserType());
 
+                if (inquiries.getImageURL().equals("default")){
+                    inquiriesViewHolder.post_que_user_image.setImageResource(R.drawable.profile);
+                } else {
+                    inquiriesViewHolder.setProfileImage(getContext(), inquiries.getImageURL());
+                }
+
+
                 inquiriesViewHolder.setLikeButtonStatus(PostKey);
 
                 inquiriesViewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +186,7 @@ public class AdminForumFragment extends Fragment {
         int countLikes;
         String currentUserId;
         DatabaseReference Likesref;
-
+        CircleImageView post_que_user_image;
         public InquiriesViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -189,7 +196,7 @@ public class AdminForumFragment extends Fragment {
             CommentPostButton = (ImageButton) mView.findViewById(R.id.comment_button);
             deleteBtn = (ImageButton) mView.findViewById(R.id.deleteBtn);
             DisplaynoOfLikes = (TextView) mView.findViewById(R.id.no_likes);
-
+            post_que_user_image = (CircleImageView) mView.findViewById(R.id.post_que_user_image);
             Likesref = FirebaseDatabase.getInstance().getReference().child("Forums").child("Likes");
             currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }

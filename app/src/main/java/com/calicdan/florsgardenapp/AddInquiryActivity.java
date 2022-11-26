@@ -154,7 +154,7 @@ public class AddInquiryActivity extends Fragment {
 
 
                 new AlertDialog.Builder(getActivity())
-                        //.setTitle("Forums")
+                        .setTitle("Forums")
                         .setMessage("Are you sure you want to upload this discussion?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -190,6 +190,9 @@ public class AddInquiryActivity extends Fragment {
         final String  saveCurrentTime = currentTime.format(calForDate.getTime());
         final FirebaseDatabase database=FirebaseDatabase.getInstance();
         UsersReference=database.getReference().child("Forums").child("Questions");
+
+        refs = database.getReference().child("Users").child(fuser.getUid()).child("Posts");
+
         String pushID = UsersReference.push().getKey();
 
         HashMap userMap=new HashMap();
@@ -206,19 +209,24 @@ public class AddInquiryActivity extends Fragment {
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful())
                 {
-                    Toast.makeText(getActivity(),"Question added successfully",Toast.LENGTH_LONG).show();
-                    if (userType.equals("admin")) {
-                        startActivity(new Intent(getContext(), AdminForumActivity.class));
-                    } else {
-                        startActivity(new Intent(getContext(), ForumActivity.class));
-                    }
+                    refs.push().updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
+                        @Override
+                        public void onComplete(@NonNull Task task) {
+                            if(task.isSuccessful()) {
+                                Toast.makeText(getActivity(),"Question added successfully",Toast.LENGTH_LONG).show();
+                                if (userType.equals("admin")) {
+                                    startActivity(new Intent(getContext(), AdminForumActivity.class));
+                                } else {
+                                    startActivity(new Intent(getContext(), ForumActivity.class));
+                                }
+                            }
+                        }
+                    });
                 }
                 else {
                     Toast.makeText(getActivity(),task.getException().toString(),Toast.LENGTH_LONG).show();
                 }
             }
         });
-
     }
-
 }

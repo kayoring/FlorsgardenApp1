@@ -28,6 +28,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,7 +53,6 @@ public class AnswersActivity extends AppCompatActivity {
 
     private DatabaseReference fuser,Questionref;
     FirebaseRecyclerAdapter<Answers, AnswersViewHolder> answersAdapter;
-
 
 
     @Override
@@ -92,7 +92,6 @@ public class AnswersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_answers);
         Post_Key = getIntent().getExtras().get("Postkey").toString();
         mAuth = FirebaseAuth.getInstance();
@@ -193,10 +192,9 @@ public class AnswersActivity extends AppCompatActivity {
 
         String key = Questionref.getKey();
 
-        if (TextUtils.isEmpty(answerText)){
-            Toast.makeText(this,"Please Write answer to post!",Toast.LENGTH_SHORT).show();
-        }
+        if (answerText.isEmpty()){
 
+        }
         else{
             Calendar calForDate = Calendar.getInstance();
             SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMM-yy");
@@ -224,7 +222,14 @@ public class AnswersActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task task) {
                                 if(task.isSuccessful()){
-                                    Toast.makeText(AnswersActivity.this, "Your answer submitted Successfully!", Toast.LENGTH_SHORT).show();
+                                    FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+                                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid()).child("Replies");
+                                    ref.push().updateChildren(answersMap).addOnCompleteListener(new OnCompleteListener() {
+                                        @Override
+                                        public void onComplete(@NonNull Task task) {
+                                            Toast.makeText(AnswersActivity.this, "Your answer submitted Successfully!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
                                 else{
                                     Toast.makeText(AnswersActivity.this, "Error occured, try again....", Toast.LENGTH_SHORT).show();

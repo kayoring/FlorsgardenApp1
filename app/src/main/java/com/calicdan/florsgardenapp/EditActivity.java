@@ -11,14 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.calicdan.florsgardenapp.Fragments.AdminEditFragment;
-import com.calicdan.florsgardenapp.Fragments.AdminEditRepliesFragment;
 import com.calicdan.florsgardenapp.Fragments.EditFragment;
 import com.calicdan.florsgardenapp.Fragments.ForumFragment;
 import com.calicdan.florsgardenapp.Fragments.RepliesFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class AdminForumActivity extends AppCompatActivity implements View.OnClickListener {
+public class EditActivity extends AppCompatActivity implements View.OnClickListener {
 
     View homebtn,forumbtn,storebtn,notificationbtn,chatbtn,imageViewProfile;
     FloatingActionButton imageRecog;
@@ -26,17 +24,17 @@ public class AdminForumActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forum);
+        setContentView(R.layout.activity_edit);
 
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Discussion Board");
+        getSupportActionBar().setTitle("Edit");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminForumActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(EditActivity.this, ForumActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
             }
         });
@@ -58,33 +56,34 @@ public class AdminForumActivity extends AppCompatActivity implements View.OnClic
         imageRecog.setOnClickListener(this);
 
         if(savedInstanceState==null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp, new AdminForumFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp, new EditFragment()).commit();
         }
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.homebtn:
-                startActivity(new Intent(AdminForumActivity.this, Home.class));
+                startActivity(new Intent(EditActivity.this, HomeUser.class));
                 break;
             case R.id.forumbtn:
-                startActivity(new Intent(AdminForumActivity.this, AdminForumActivity.class));
+                startActivity(new Intent(EditActivity.this, ForumActivity.class));
                 break;
             case R.id.storebtn:
-                startActivity(new Intent(AdminForumActivity.this, AdminStoreActivity.class));
+                startActivity(new Intent(EditActivity.this, StoreActivity.class));
                 break;
             case R.id.notificationbtn:
                 Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.chatbtn:
-                startActivity(new Intent(AdminForumActivity.this, AdminChatbotActivity.class));
+                startActivity(new Intent(EditActivity.this, ChatbotActivity.class));
                 break;
             case R.id.imageViewProfile:
-                startActivity(new Intent(AdminForumActivity.this, AdminProfileActivity.class));
+                startActivity(new Intent(EditActivity.this, ProfileActivity.class));
                 break;
             case R.id.imageRecog:
-                startActivity(new Intent(AdminForumActivity.this, ImageRecognitionHome.class));
+                startActivity(new Intent(EditActivity.this, ImageRecognitionHome.class));
                 break;
         }
     }
@@ -99,18 +98,26 @@ public class AdminForumActivity extends AppCompatActivity implements View.OnClic
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case  R.id.home:
-                startActivity(new Intent(AdminForumActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(EditActivity.this, HomeUser.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
                 return true;
             case  R.id.addQuestion:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp,new AddInquiryActivity()).commit();
                 break;
+            case  R.id.forums:
+                startActivity(new Intent(EditActivity.this, ForumActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
+                break;
+            /*
             case  R.id.editPost:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp, new EditFragment()).commit();
+                startActivity(new Intent(EditActivity.this, EditActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
                 break;
-            case  R.id.editRep:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp, new RepliesFragment()).commit();
+            case  R.id.search:
+                Toast.makeText(this, "Not yet available!", Toast.LENGTH_SHORT).show();
                 break;
+
+             */
         }
 
         return false;
@@ -119,7 +126,12 @@ public class AdminForumActivity extends AppCompatActivity implements View.OnClic
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         invalidateOptionsMenu();
-        menu.findItem(R.id.forums).setVisible(false);
+        menu.findItem(R.id.home).setVisible(true);
+        menu.findItem(R.id.addQuestion).setVisible(true);
+        menu.findItem(R.id.editPost).setVisible(false);
+        menu.findItem(R.id.editRep).setVisible(false);
+        //menu.findItem(R.id.search).setVisible(true);
         return super.onPrepareOptionsMenu(menu);
     }
+
 }

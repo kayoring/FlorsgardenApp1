@@ -57,6 +57,7 @@ public class ChangeUsernameActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 userType = dataSnapshot.getValue(String.class);
             }
 
