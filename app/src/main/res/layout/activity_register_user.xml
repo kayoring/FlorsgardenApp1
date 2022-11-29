@@ -108,7 +108,8 @@
                 android:layout_weight="1"
                 android:text="Privacy Policy"
                 android:textColor="#FA3232"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:clickable="true"/>
         </LinearLayout>
 
         <Button

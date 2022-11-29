@@ -1,9 +1,11 @@
 package com.calicdan.florsgardenapp;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -56,8 +58,25 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextPassword = (EditText) findViewById(R.id.passwordA);
         editTextConfirmPass = (EditText) findViewById(R.id.confirmPass);
         check_box = findViewById(R.id.check_box);
-        txtPrivacy = findViewById(R.id.txtPrivacy);
+        txtPrivacy =(TextView) findViewById(R.id.txtPrivacy);
+
+        Dialog dialog = new Dialog(RegisterUser.this);
+        txtPrivacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.setContentView(R.layout.privacy_policy_popup);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.setCancelable(true);
+                dialog.getWindow().getAttributes();
+
+                dialog.show();
+
+            }
+        });
     }
+
+
 
             @Override
     public void onClick(View v) {
