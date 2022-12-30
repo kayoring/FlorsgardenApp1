@@ -72,6 +72,8 @@ public class AdminPurchasesAdapter extends RecyclerView.Adapter<AdminPurchasesAd
                 holder.itemView.getContext().startActivity(intent);
             }
         });
+
+
     }
 
     @Override

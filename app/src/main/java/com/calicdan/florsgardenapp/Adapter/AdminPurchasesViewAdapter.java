@@ -2,6 +2,7 @@ package com.calicdan.florsgardenapp.Adapter;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.calicdan.florsgardenapp.AdminPurchasesDetails;
+import com.calicdan.florsgardenapp.AdminPurchasesView;
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.calicdan.florsgardenapp.R;
+import com.calicdan.florsgardenapp.WormsCategory;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -91,6 +96,14 @@ public class AdminPurchasesViewAdapter extends RecyclerView.Adapter<AdminPurchas
                 holder.purchasesButton.setText("");
                 break;
         }
+
+        holder.purchasesView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), AdminPurchasesDetails.class);
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
 
     }
 

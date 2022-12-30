@@ -1,11 +1,14 @@
 package com.calicdan.florsgardenapp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +35,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
     StorageReference storageReference = storage.getReference();
     StorageReference imageref;
     FirebaseDatabase fdb = FirebaseDatabase.getInstance();
+    double itemTotal;
 
 
     @Override
@@ -92,7 +96,11 @@ public class ShowDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 object.setNumberInCart(numberOrder);
+                itemTotal = numberOrder * object.getProductPrice();
+                object.setItemTotal(itemTotal);
+
                 managementCart.insertProduct(object);
+                Log.i(TAG,"--------------------------------------------------------------");
                 startActivity(new Intent(ShowDetailsActivity.this, StoreActivity.class));
             }
         });

@@ -18,6 +18,9 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AdminPurchasesDetails"
+            android:exported="false" />
+        <activity
             android:name=".EditActivity"
             android:exported="false">
             <meta-data
@@ -266,8 +269,9 @@
         <activity
             android:name=".HowToUser"
             android:exported="true" />
-        <activity android:name=".GuidesCategoriesUser"
-            android:exported="true"/>
+        <activity
+            android:name=".GuidesCategoriesUser"
+            android:exported="true" />
     </application>
 
 </manifest>

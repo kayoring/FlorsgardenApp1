@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,7 @@ public class AdminPurchasesView extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewList;
     TextView totalFeeTxt, taxTxt, totalTxt,emptyTxt,purchasesViewTitle;
+    ConstraintLayout purchasesView;
     private ScrollView scrollView;
     String uid,email;
     private PurchasesDomain object;
@@ -64,6 +66,7 @@ public class AdminPurchasesView extends AppCompatActivity {
         scrollView = findViewById(R.id.scrollView3);
         recyclerViewList = findViewById(R.id.cartView);
         purchasesViewTitle = findViewById(R.id.purchasesViewTitle);
+        purchasesView = findViewById(R.id.purchasesView);
     }
 
     private void initList(){
@@ -82,12 +85,9 @@ public class AdminPurchasesView extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 purchasesList.clear();
-                Log.i(TAG, "--------------------ADDED TO PURCHASESzxczcz---------------------" + uid);
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     FoodDomain foodDomain = postSnapshot.getValue(FoodDomain.class);
-                    Log.i(TAG, "--------------------ADDED TO PURCHASES---------------------" + postSnapshot.child("uid").getValue());
                     purchasesList.add(foodDomain);
-                    Log.i(TAG, "---------------------ADDED TO THE FUCKING VIEW-----------------------");
 
                 }
                 adapter.notifyDataSetChanged();
@@ -97,6 +97,8 @@ public class AdminPurchasesView extends AppCompatActivity {
 
             }
         });
+
+
 
     }
     private void buttons() {
