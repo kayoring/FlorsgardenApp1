@@ -268,6 +268,103 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:elevation="3dp">
+
+                <ImageView
+                    android:id="@+id/picCart"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/worms1" />
+
+                <TextView
+                    android:id="@+id/titleTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Red Wigglers"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/picCart"
+                    app:layout_constraintTop_toTopOf="@+id/picCart"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/numberProductTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/titleTxt"
+                    app:layout_constraintHorizontal_bias="0.102"
+                    app:layout_constraintStart_toStartOf="@+id/titleTxt"
+                    app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
+
+                <TextView
+                    android:id="@+id/totalFee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="599.0"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/titleTxt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/titleTxt" />
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="₱"
+                    android:textColor="#006400"
+                    app:layout_constraintBottom_toBottomOf="@+id/totalFee"
+                    app:layout_constraintEnd_toStartOf="@+id/totalFee"
+                    app:layout_constraintTop_toTopOf="@+id/totalFee" />
+
+                <TextView
+                    android:id="@+id/totalEachProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1797.0"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/numberProductTxt"
+                    app:layout_constraintEnd_toEndOf="@+id/totalFee"
+                    app:layout_constraintTop_toTopOf="@+id/numberProductTxt" />
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₱"
+                    android:textColor="#006400"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/totalEachProduct"
+                    app:layout_constraintEnd_toStartOf="@+id/totalEachProduct"
+                    app:layout_constraintTop_toTopOf="@+id/totalEachProduct" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/purchasesViewDetails"
                 android:layout_width="match_parent"
@@ -296,7 +393,7 @@
                     android:id="@+id/totalFeeTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="₱0"
+                    android:text="₱1797.0"
                     android:textColor="#000000"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -324,7 +421,7 @@
                     android:id="@+id/taxTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="₱0"
+                    android:text="₱215.0"
                     android:textColor="#000000"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -352,7 +449,7 @@
                     android:id="@+id/totalTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="₱0"
+                    android:text="₱2012.0"
                     android:textColor="#000000"
                     android:textStyle="bold" />
             </LinearLayout>

@@ -101,7 +101,10 @@ public class AdminPurchasesViewAdapter extends RecyclerView.Adapter<AdminPurchas
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(holder.itemView.getContext(), AdminPurchasesDetails.class);
+                intent.putExtra("STATUS", foodDomain.get(position).getStatus());
+                intent.putExtra("UID",foodDomain.get(position).getUid());
                 holder.itemView.getContext().startActivity(intent);
+
             }
         });
 
