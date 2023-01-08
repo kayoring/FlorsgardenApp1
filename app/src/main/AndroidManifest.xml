@@ -18,6 +18,13 @@
         android:theme="@style/Theme.FlorsgardenApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".InstructionHowToPay"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AdminPurchasesDetails"
             android:exported="false" />
         <activity

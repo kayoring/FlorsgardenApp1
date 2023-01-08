@@ -18,8 +18,11 @@ import com.calicdan.florsgardenapp.AdminPurchasesView;
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
 import com.calicdan.florsgardenapp.R;
 import com.calicdan.florsgardenapp.WormsCategory;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -28,7 +31,7 @@ import java.util.ArrayList;
 public class AdminPurchasesViewAdapter extends RecyclerView.Adapter<AdminPurchasesViewAdapter.ViewHolder> {
 
     ArrayList<FoodDomain> foodDomain;
-    String temp,retProductName,changeStat;
+    String temp,retProductName,changeStat,userAddress,UID,username;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference = storage.getReference();
     StorageReference imageref;
@@ -48,12 +51,40 @@ public class AdminPurchasesViewAdapter extends RecyclerView.Adapter<AdminPurchas
 
     @Override
     public void onBindViewHolder(@NonNull AdminPurchasesViewAdapter.ViewHolder holder, int position) {
-        holder.titleTxt.setText(foodDomain.get(position).getDate());
+
         holder.totalFee.setText(Double.toString((foodDomain.get(position).getTotal())));
-        holder.userID.setText(foodDomain.get(position).getUid());
         holder.order_status.setText(foodDomain.get(position).getStatus());
         DatabaseReference orderStatusRef = ordersRef.child(foodDomain.get(position).getUid()).child("status");
-        Log.i(TAG,"-----------------------------------adminpurchasesviewadapter" + foodDomain.get(position).getStatus());
+        UID = foodDomain.get(position).getUid();
+        DatabaseReference addressREF = fdb.getReference("Users").child(UID).child("address");
+        addressREF.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userAddress = dataSnapshot.getValue(String.class);
+                holder.userID.setText(userAddress);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            Log.i(TAG,"------------------------DID NOT GET ADDRESS");
+            }
+        });
+        Log.i(TAG,"hello-----------------" + userAddress);
+
+        DatabaseReference usernameREF = fdb.getReference("Users").child(UID).child("username");
+        usernameREF.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                username = dataSnapshot.getValue(String.class);
+                holder.titleTxt.setText(username);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         switch(foodDomain.get(position).getStatus()){
             case "Pending":
                 holder.purchasesButton.setText("Accept Order");

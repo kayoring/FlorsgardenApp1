@@ -41,7 +41,7 @@ import java.util.ArrayList;
 public class PurchasesView extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewList;
-    TextView totalFeeTxt, taxTxt, totalTxt,emptyTxt,purchasesViewTitle;
+    TextView totalFeeTxt, taxTxt, totalTxt,emptyTxt,purchasesViewTitle,instructionsBtn;
     private ScrollView scrollView;
     String uid,email;
     private PurchasesDomain object;
@@ -71,6 +71,7 @@ public class PurchasesView extends AppCompatActivity {
         totalTxt = findViewById(R.id.totalTxt);
         emptyTxt = findViewById(R.id.emptyTxt);
         scrollView = findViewById(R.id.scrollView3);
+        instructionsBtn = findViewById(R.id.instructionsBtn);
         recyclerViewList = findViewById(R.id.cartView);
         purchasesViewTitle = findViewById(R.id.purchasesViewTitle);
     }
@@ -87,6 +88,13 @@ public class PurchasesView extends AppCompatActivity {
         Log.i(TAG,"-----------------------------" + view);
         purchasesViewTitle.setText(object.getTitle());
 
+        instructionsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(PurchasesView.this, InstructionHowToPay.class);
+                startActivity(i);
+            }
+        });
         fdb.orderByChild("status").equalTo(view).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
