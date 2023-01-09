@@ -306,7 +306,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/green_button"
             android:padding="10dp"
-            android:text="INSTRUCTIONS HOW TO PAY"
+            android:text="ORDERING INSTRUCTIONS"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"

@@ -76,5 +76,15 @@ public class InstructionHowToPay extends AppCompatActivity {
         textView2.setText(ss3);
         textView2.setMovementMethod(LinkMovementMethod.getInstance());
         textView2.setHighlightColor(Color.TRANSPARENT);
+
+        //
+
+        SpannableString ss4 = new SpannableString("Step 4. Use tracking number given by the admin to track your order at https://www.ordertracker.com/couriers/lalamove.");
+
+        ss4.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 71, 117, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        TextView textView3 = (TextView) findViewById(R.id.step4);
+        textView3.setText(ss4);
+        textView3.setMovementMethod(LinkMovementMethod.getInstance());
+        textView3.setHighlightColor(Color.TRANSPARENT);
     }
 }
