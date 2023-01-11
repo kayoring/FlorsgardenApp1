@@ -15,6 +15,7 @@ import com.calicdan.florsgardenapp.Fragments.AdminEditFragment;
 import com.calicdan.florsgardenapp.Fragments.AdminEditRepliesFragment;
 import com.calicdan.florsgardenapp.Fragments.EditFragment;
 import com.calicdan.florsgardenapp.Fragments.ForumFragment;
+import com.calicdan.florsgardenapp.Fragments.PostReqFragment;
 import com.calicdan.florsgardenapp.Fragments.RepliesFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -110,6 +111,9 @@ public class AdminForumActivity extends AppCompatActivity implements View.OnClic
                 break;
             case  R.id.editRep:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp, new RepliesFragment()).commit();
+                break;
+            case  R.id.postRequest:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp,new PostReqFragment()).commit();
                 break;
         }
 

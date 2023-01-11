@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.calicdan.florsgardenapp.Fragments.ForumFragment;
+import com.calicdan.florsgardenapp.Fragments.PostReqFragment;
 import com.calicdan.florsgardenapp.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +39,7 @@ public class AddInquiryActivity extends Fragment {
     EditText question;
     Button addBtn, backBtn;
     FirebaseUser fuser;
-    DatabaseReference UsersReference,UsersRef,refs;
+    DatabaseReference UsersReference,UsersRef,refs,PostReqReference;
     String username, profileImage,userType,currentUserID;
 
     @Nullable
@@ -53,49 +54,8 @@ public class AddInquiryActivity extends Fragment {
         addBtn=view.findViewById(R.id.add_question_btn);
         backBtn=view.findViewById(R.id.backBtn);
 
-        FirebaseUser fusers = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(fusers.getUid());
+        init();
 
-        ref.child("username").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot sn1) {
-                username = sn1.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-        ref.child("imageURL").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot sn2) {
-                profileImage = sn2.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-        ref.child("usertype").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot sn3) {
-                userType = sn3.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-        ref.child("id").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot sn4) {
-                currentUserID = sn4.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,6 +133,54 @@ public class AddInquiryActivity extends Fragment {
         return view;
     }
 
+    public void init() {
+
+        FirebaseUser fusers = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(fusers.getUid());
+
+        ref.child("username").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot sn1) {
+                username = sn1.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("imageURL").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot sn2) {
+                profileImage = sn2.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("usertype").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot sn3) {
+                userType = sn3.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+        ref.child("id").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot sn4) {
+                currentUserID = sn4.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+    }
 
     public void addNewQuestion() {
         final String userQuestion=question.getText().toString();
@@ -189,11 +197,14 @@ public class AddInquiryActivity extends Fragment {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
         final String  saveCurrentTime = currentTime.format(calForDate.getTime());
         final FirebaseDatabase database=FirebaseDatabase.getInstance();
-        UsersReference=database.getReference().child("Forums").child("Questions");
 
-        refs = database.getReference().child("Users").child(fuser.getUid()).child("Posts");
+        //UsersReference=database.getReference().child("Forums").child("Questions");
 
-        String pushID = UsersReference.push().getKey();
+        PostReqReference = database.getReference().child("Forums").child("Post Requests");
+
+        //refs = database.getReference().child("Users").child(fuser.getUid()).child("Posts");
+
+        String pushID = PostReqReference.push().getKey();
 
         HashMap userMap=new HashMap();
         userMap.put("id",currentUserID);
@@ -204,7 +215,28 @@ public class AddInquiryActivity extends Fragment {
         userMap.put("imageURL",profileImage);
         userMap.put("userType",userType);
 
-        UsersReference.child(pushID).updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
+        PostReqReference.child(pushID).updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(getActivity(),"Inquiry processed. Wait for the admin to approve your inquiry.",Toast.LENGTH_LONG).show();
+                    if (userType.equals("admin")) {
+                        Intent intent = new Intent(getContext(), AdminForumActivity.class);
+                        //intent.putExtra("ids", currentUserID);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getContext(), ForumActivity.class);
+                        //intent.putExtra("ids", currentUserID);
+                        startActivity(intent);
+                    }
+                }else {
+                    Toast.makeText(getActivity(),task.getException().toString(),Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        /*UsersReference.child(pushID).updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful())
@@ -213,7 +245,8 @@ public class AddInquiryActivity extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task task) {
                             if(task.isSuccessful()) {
-                                Toast.makeText(getActivity(),"Question added successfully",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(),"Inquiry processed. Wait for the admin to approve your inquiry.",Toast.LENGTH_LONG).show();
+
                                 if (userType.equals("admin")) {
                                     startActivity(new Intent(getContext(), AdminForumActivity.class));
                                 } else {
@@ -228,5 +261,7 @@ public class AddInquiryActivity extends Fragment {
                 }
             }
         });
+
+         */
     }
 }

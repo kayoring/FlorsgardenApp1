@@ -120,7 +120,6 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragDisp, new RepliesFragment()).commit();
                 break;
         }
-
         return false;
     }
 
@@ -128,6 +127,7 @@ public class ForumActivity extends AppCompatActivity implements View.OnClickList
     public boolean onPrepareOptionsMenu(Menu menu) {
         invalidateOptionsMenu();
         menu.findItem(R.id.forums).setVisible(false);
+        menu.findItem(R.id.postRequest).setVisible(false);
         return super.onPrepareOptionsMenu(menu);
     }
 }

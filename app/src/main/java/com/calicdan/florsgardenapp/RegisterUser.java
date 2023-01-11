@@ -3,6 +3,7 @@ package com.calicdan.florsgardenapp;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ import java.util.HashMap;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView banner, registerUser, txtPrivacy;
+    private TextView banner, registerUser, txtPrivacy, loginA;
     private EditText editTextFullName, editTextEmail, editContactNumber, editTextPassword, editTextConfirmPass;
     private DatabaseReference reference;
     private FirebaseAuth mAuth;
@@ -44,11 +45,12 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setTitle("Register");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-                mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         banner = (TextView) findViewById(R.id.textView6);
         banner.setOnClickListener(this);
-
+        loginA = (TextView) findViewById(R.id.loginA);
+        loginA.setOnClickListener(this);
         registerUser = (Button) findViewById(R.id.register);
         registerUser.setOnClickListener(this);
 
@@ -58,7 +60,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextPassword = (EditText) findViewById(R.id.passwordA);
         editTextConfirmPass = (EditText) findViewById(R.id.confirmPass);
         check_box = findViewById(R.id.check_box);
-        txtPrivacy =(TextView) findViewById(R.id.txtPrivacy);
+        txtPrivacy = (TextView) findViewById(R.id.txtPrivacy);
 
         Dialog dialog = new Dialog(RegisterUser.this);
         txtPrivacy.setOnClickListener(new View.OnClickListener() {
@@ -77,23 +79,20 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-            @Override
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginA:
                 startActivity(new Intent(this, Login.class));
                 break;
-
             case R.id.register:
+                String email = editTextEmail.getText().toString().trim();
+                String password = editTextPassword.getText().toString().trim();
+                String fullName = editTextFullName.getText().toString().trim();
+                String contact = editContactNumber.getText().toString().trim();
+                String confirmPass = editTextConfirmPass.getText().toString().trim();
 
-                String email= editTextEmail.getText().toString().trim();
-                String password= editTextPassword.getText().toString().trim();
-                String fullName= editTextFullName.getText().toString().trim();
-                String contact= editContactNumber.getText().toString().trim();
-                String confirmPass= editTextConfirmPass.getText().toString().trim();
-
-                if (fullName.isEmpty() || contact.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPass.isEmpty()){
+                if (fullName.isEmpty() || contact.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPass.isEmpty()) {
                     if (fullName.isEmpty()) {
                         editTextFullName.requestFocus();
                     } else if (contact.isEmpty()) {
@@ -106,16 +105,16 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         editTextConfirmPass.requestFocus();
                     }
                     Toast.makeText(RegisterUser.this, "All fields are required!", Toast.LENGTH_SHORT).show();
-                } else if (password.length() < 6 ){
+                } else if (password.length() < 6) {
                     Toast.makeText(RegisterUser.this, "Minimum password length is 6 characters!", Toast.LENGTH_SHORT).show();
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     Toast.makeText(RegisterUser.this, "Please provide valid email!", Toast.LENGTH_SHORT).show();
-                } else if (!confirmPass.equals(password)){
+                } else if (!confirmPass.equals(password)) {
                     Toast.makeText(RegisterUser.this, "Password do not match!", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(check_box.isChecked()) {
+                    if (check_box.isChecked()) {
                         registerUser(fullName, email, password, contact);
-                    }else {
+                    } else {
                         Toast.makeText(RegisterUser.this, "Please agree to the Privacy Policy", Toast.LENGTH_SHORT).show();
 
                     }
@@ -129,7 +128,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             //User user = new User(fullName, contact, email);
                             assert firebaseUser != null;
@@ -151,15 +150,12 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Intent intent = new Intent(RegisterUser.this, Login.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    finish();
-                                    Toast.makeText(RegisterUser.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(RegisterUser.this, "User has been registered successfully!, Check email to verify your account then proceed to login", Toast.LENGTH_LONG).show();
+                                    firebaseUser.sendEmailVerification();
                                 }
                             });
                         } else {
-                            Toast.makeText(RegisterUser.this,"Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterUser.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

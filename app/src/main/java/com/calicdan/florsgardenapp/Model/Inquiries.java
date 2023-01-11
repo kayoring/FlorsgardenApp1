@@ -66,6 +66,7 @@ public class Inquiries
     public void setUsernamee(String usernamee) {
         this.username = usernamee;
     }
+
     public String getImageURL() {
         return imageURL;
     }

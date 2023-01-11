@@ -47,11 +47,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         //check if user is null
-        if (firebaseUser != null){
-            Intent intent = new Intent(Login.this, SplashActivity.class);
-            startActivity(intent);
-        }
 
+
+        if (firebaseUser != null){
+            if (firebaseUser.isEmailVerified()) {
+                Intent intent = new Intent(Login.this, SplashActivity.class);
+                startActivity(intent);
+            }else {
+                Toast.makeText(this, "Check email to verify your account.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -121,8 +126,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                if (user.isEmailVerified()) {
                                 Intent intent = new Intent(Login.this, SplashActivity.class);
                                 startActivity(intent);
+                                } else {
+                                    user.sendEmailVerification();
+                                    Toast.makeText(Login.this, "Check your email to verify your account and proceed to login.", Toast.LENGTH_LONG).show();
+                                }
                             }else{
                                 Toast.makeText(com.calicdan.florsgardenapp.Login.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
                             }

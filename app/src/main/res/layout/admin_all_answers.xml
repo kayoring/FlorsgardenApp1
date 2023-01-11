@@ -29,7 +29,7 @@
 
             <TextView
                 android:id="@+id/ans_username"
-                android:layout_width="315dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="3dp"

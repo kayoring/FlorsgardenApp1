@@ -7,6 +7,12 @@
         android:title="Home"/>
 
     <item
+        android:id="@+id/postRequest"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/approve"
+        android:title="check post request"/>
+
+    <item
         android:id="@+id/addQuestion"
         app:showAsAction="ifRoom"
         android:icon="@drawable/add_quest"
