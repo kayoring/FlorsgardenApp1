@@ -3,13 +3,13 @@ package com.calicdan.florsgardenapp;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,15 +19,19 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
-public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
+public class SmsRegister extends AppCompatActivity implements View.OnClickListener {
 
     private TextView banner, registerUser, txtPrivacy, loginA, smsReg;
     private EditText editTextFullName, editTextEmail, editTextPassword, editTextConfirmPass;
@@ -38,7 +42,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_user);
+        setContentView(R.layout.activity_sms_register_);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -47,14 +51,66 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
+        final EditText inputMobile = findViewById(R.id.contacNo);
+        final Button buttonGetOtp = findViewById(R.id.btnsendotp);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+
+        buttonGetOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (inputMobile.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(SmsRegister.this, "Enter Mobile", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (check_box.isChecked()) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    buttonGetOtp.setVisibility(View.INVISIBLE);
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                            "+63" + inputMobile.getText().toString(),
+                            60,
+                            TimeUnit.SECONDS,
+                            SmsRegister.this,
+                            new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+                                @Override
+                                public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                                    progressBar.setVisibility(View.GONE);
+                                    buttonGetOtp.setVisibility(View.VISIBLE);
+                                }
+
+                                @Override
+                                public void onVerificationFailed(@NonNull FirebaseException e) {
+                                    progressBar.setVisibility(View.GONE);
+                                    buttonGetOtp.setVisibility(View.VISIBLE);
+                                    Toast.makeText(SmsRegister.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                    progressBar.setVisibility(View.GONE);
+                                    buttonGetOtp.setVisibility(View.VISIBLE);
+
+                                    Intent intent = new Intent(getApplicationContext(), VerifyOtp.class);
+                                    intent.putExtra("mobile", inputMobile.getText().toString());
+                                    intent.putExtra("verificationId", verificationId);
+                                    startActivity(intent);
+
+                                }
+                            }
+                    );
+                } else {
+                    Toast.makeText(SmsRegister.this, "Please agree to the privacy policy", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
         banner = (TextView) findViewById(R.id.textView6);
         banner.setOnClickListener(this);
         loginA = (TextView) findViewById(R.id.loginA);
         loginA.setOnClickListener(this);
         smsReg = (TextView) findViewById(R.id.smsReg);
         smsReg.setOnClickListener(this);
-        registerUser = (Button) findViewById(R.id.register);
-        registerUser.setOnClickListener(this);
 
         editTextFullName = (EditText) findViewById(R.id.name);
         editTextEmail = (EditText) findViewById(R.id.emailA);
@@ -63,7 +119,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         check_box = findViewById(R.id.check_box);
         txtPrivacy = (TextView) findViewById(R.id.txtPrivacy);
 
-        Dialog dialog = new Dialog(RegisterUser.this);
+        Dialog dialog = new Dialog(SmsRegister.this);
         txtPrivacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +129,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 dialog.setCancelable(true);
                 dialog.getWindow().getAttributes();
                 dialog.show();
-
             }
         });
     }
@@ -86,39 +141,10 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, Login.class));
                 break;
             case R.id.smsReg:
-                startActivity(new Intent(this, SmsRegister.class));
+                startActivity(new Intent(this, RegisterUser.class));
                 break;
             case R.id.register:
-                String email = editTextEmail.getText().toString().trim();
-                String password = editTextPassword.getText().toString().trim();
-                String fullName = editTextFullName.getText().toString().trim();
-                String confirmPass = editTextConfirmPass.getText().toString().trim();
-
-                if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPass.isEmpty()) {
-                    if (fullName.isEmpty()) {
-                        editTextFullName.requestFocus();
-                    }  else if (email.isEmpty()) {
-                        editTextEmail.requestFocus();
-                    } else if (password.isEmpty()) {
-                        editTextPassword.requestFocus();
-                    } else if (confirmPass.isEmpty()) {
-                        editTextConfirmPass.requestFocus();
-                    }
-                    Toast.makeText(RegisterUser.this, "All fields are required!", Toast.LENGTH_SHORT).show();
-                } else if (password.length() < 6) {
-                    Toast.makeText(RegisterUser.this, "Minimum password length is 6 characters!", Toast.LENGTH_SHORT).show();
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    Toast.makeText(RegisterUser.this, "Please provide valid email!", Toast.LENGTH_SHORT).show();
-                } else if (!confirmPass.equals(password)) {
-                    Toast.makeText(RegisterUser.this, "Password do not match!", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (check_box.isChecked()) {
-                        registerUser(fullName, email, password);
-                    } else {
-                        Toast.makeText(RegisterUser.this, "Please agree to the Privacy Policy", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(this, "OTP sent", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -150,12 +176,12 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(RegisterUser.this, "User has been registered successfully!, Check email to verify your account then proceed to login", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SmsRegister.this, "User has been registered successfully!, Check email to verify your account then proceed to login", Toast.LENGTH_LONG).show();
                                     firebaseUser.sendEmailVerification();
                                 }
                             });
                         } else {
-                            Toast.makeText(RegisterUser.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SmsRegister.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

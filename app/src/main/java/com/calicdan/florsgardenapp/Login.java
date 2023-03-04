@@ -48,7 +48,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         //check if user is null
 
-
         if (firebaseUser != null){
             if (firebaseUser.isEmailVerified()) {
                 Intent intent = new Intent(Login.this, SplashActivity.class);

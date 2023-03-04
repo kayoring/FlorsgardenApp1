@@ -38,45 +38,45 @@
             app:srcCompat="@drawable/logo_flors"
             tools:layout_editor_absoluteY="37dp" />
 
-        <EditText
-            android:id="@+id/name"
+        <TextView
+            android:id="@+id/txt1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:layout_marginTop="20dp"
-            android:ems="10"
-            android:hint="User Name"
-            android:inputType="textPersonName"
-            android:maxLines="1" />
+            android:text="A one time password will be \n sent on this contact number"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/emailA"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:maxLines="1" />
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp">
+            <TextView
+                android:id="@+id/txtview"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:layout_marginRight="5dp"
+                android:text="+63"/>
 
-        <EditText
-            android:id="@+id/passwordA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:maxLines="1" />
-
-        <EditText
-            android:id="@+id/confirmPass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="Confirm password"
-            android:inputType="textPassword"
-            android:maxLines="1" />
+            <EditText
+                android:id="@+id/contacNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="999 999 9999"
+                android:textSize="24sp"
+                android:inputType="number"
+                android:maxLines="1" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="228dp"
@@ -102,20 +102,42 @@
                 android:clickable="true"/>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/register"
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnsendotp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:text="Get OTP" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <View
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="Register" />
+            android:layout_height="2dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="70dp"
+            android:background="@color/grey"
+            android:layout_marginBottom="20dp"/>
+
 
         <TextView
             android:id="@+id/smsReg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:text="Register using contact number?"
+            android:text="Register using email?"
             android:layout_marginBottom="10dp"
             android:textColor="#F9A825"
             android:textSize="14sp"

@@ -1,5 +1,6 @@
 package com.calicdan.florsgardenapp.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,8 +8,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.calicdan.florsgardenapp.AdminForumActivity;
+import com.calicdan.florsgardenapp.AdminProfileActivity;
+import com.calicdan.florsgardenapp.AdminStoreActivity;
+import com.calicdan.florsgardenapp.ChatActivity;
 import com.calicdan.florsgardenapp.Domain.FoodDomain;
+import com.calicdan.florsgardenapp.InstructionHowToPay;
+import com.calicdan.florsgardenapp.PurchasesView;
 import com.calicdan.florsgardenapp.R;
+import com.calicdan.florsgardenapp.StoreActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -82,8 +91,9 @@ public class PurchasesViewAdapter extends RecyclerView.Adapter<PurchasesViewAdap
                 holder.purchasesButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         orderStatusRef.setValue(changeStat);
+                        Intent intent = new Intent(holder.purchasesButton.getContext(), ChatActivity.class);
+                        holder.purchasesButton.getContext().startActivity(intent);
                     }
                 });
                 break;
