@@ -107,7 +107,7 @@ public class AdminPurchasesViewAdapter extends RecyclerView.Adapter<AdminPurchas
                     }
                 });
                 break;
-            case "Shipped":
+            case "ToShip":
                 holder.purchasesButton.setText("Confirm shipment");
                 changeStat="ToReceive";
                 holder.purchasesButton.setOnClickListener(new View.OnClickListener() {

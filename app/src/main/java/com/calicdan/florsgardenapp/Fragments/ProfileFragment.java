@@ -160,10 +160,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         String userType = getArguments().getString("userType1");
 
         ArrayList<PurchasesDomain> purchase = new ArrayList<>();
-            purchase.add(new PurchasesDomain("To Pay", "pay"));
-            purchase.add(new PurchasesDomain("To Ship", "ship"));
-            purchase.add(new PurchasesDomain("To Receive", "receive"));
-            purchase.add(new PurchasesDomain("Completed", "finished"));
+            purchase.add(new PurchasesDomain("Orders", "orders"));
 
 
         adapter=new PurchasesAdapter(purchase);

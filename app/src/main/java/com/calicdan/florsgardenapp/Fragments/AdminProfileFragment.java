@@ -122,7 +122,7 @@ public class AdminProfileFragment extends Fragment{
         ArrayList<PurchasesDomain> purchase = new ArrayList<>();
             purchase.add(new PurchasesDomain("Pending", "pay"));
             purchase.add(new PurchasesDomain("Paid", "ship"));
-            purchase.add(new PurchasesDomain("Shipped", "receive"));
+            purchase.add(new PurchasesDomain("To Ship", "receive"));
             purchase.add(new PurchasesDomain("Completed", "finished"));
 
         adapter=new AdminPurchasesAdapter(purchase);

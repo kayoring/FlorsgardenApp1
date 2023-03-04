@@ -89,17 +89,9 @@ public class PurchasesViewAdapter extends RecyclerView.Adapter<PurchasesViewAdap
                 break;
             case "ToShip":
                 holder.purchasesButton.setText("Confirm Shipment");
-                changeStat="Shipped";
-                holder.purchasesButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        orderStatusRef.setValue(changeStat);
-                    }
-                });
                 break;
             case "ToReceive":
-                holder.purchasesButton.setText("Received Order");
+                holder.purchasesButton.setText("Order Received");
                 changeStat="Completed";
                 holder.purchasesButton.setOnClickListener(new View.OnClickListener() {
                     @Override

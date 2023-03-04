@@ -48,7 +48,7 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
                 break;
             }
             case 2:{
-                picUrl="receive";
+                picUrl="orders";
                 holder.purchasesLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.purchasesbg));
                 break;
             }

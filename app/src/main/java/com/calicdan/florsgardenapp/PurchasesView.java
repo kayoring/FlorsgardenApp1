@@ -95,27 +95,45 @@ public class PurchasesView extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        fdb.orderByChild("status").equalTo(view).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                purchasesList.clear();
-                Log.i(TAG, "--------------------ADDED TO PURCHASESzxczcz---------------------" + uid);
-                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    FoodDomain foodDomain = postSnapshot.getValue(FoodDomain.class);
-                    Log.i(TAG, "--------------------ADDED TO PURCHASES---------------------" + postSnapshot.child("uid").getValue());
-                    if (((postSnapshot.child("uid").getValue()).toString()).equals(uid)) {
-                        purchasesList.add(foodDomain);
-                        Log.i(TAG, "---------------------ADDED TO THE FUCKING VIEW-----------------------");
+        if(view == "ToPay") {
+            fdb.orderByChild("status").equalTo(view).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    purchasesList.clear();
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        FoodDomain foodDomain = postSnapshot.getValue(FoodDomain.class);
+                        if (((postSnapshot.child("uid").getValue()).toString()).equals(uid)) {
+                            purchasesList.add(foodDomain);
+                        }
                     }
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                }
+            });
+        }else{
+            fdb.orderByChild("status").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    purchasesList.clear();
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        FoodDomain foodDomain = postSnapshot.getValue(FoodDomain.class);
+                        if (((postSnapshot.child("uid").getValue()).toString()).equals(uid)) {
+                            purchasesList.add(foodDomain);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
     private void buttons() {
         View homebtn = findViewById(R.id.homebtn);
