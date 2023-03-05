@@ -99,6 +99,7 @@ public class PurchasesViewAdapter extends RecyclerView.Adapter<PurchasesViewAdap
                 break;
             case "ToShip":
                 holder.purchasesButton.setText("Confirm Shipment");
+                changeStat="ToReceive";
                 break;
             case "ToReceive":
                 holder.purchasesButton.setText("Order Received");
