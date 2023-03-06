@@ -31,6 +31,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/infoBtn"
+                    android:layout_width="51dp"
+                    android:layout_height="46dp"
+                    android:layout_marginEnd="84dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/introUser"
+                    app:srcCompat="@drawable/info_icon" />
+
                 <TextView
                     android:id="@+id/introUser"
                     android:layout_width="wrap_content"
@@ -39,7 +49,7 @@
                     android:layout_marginTop="24dp"
                     android:text="Hi Miguel"
                     android:textColor="#013220"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

@@ -103,11 +103,19 @@ public class StoreActivity extends AppCompatActivity implements View.OnClickList
 
     private void navigation(){
         View cartbtn = findViewById(R.id.cartBtn);
+        View infoBtn = findViewById(R.id.infoBtn);
         cartbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(StoreActivity.this,CartListActivity.class));
+            }
+        });
 
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(StoreActivity.this, InstructionHowToPay.class);
+                startActivity(i);
             }
         });
 
